@@ -490,6 +490,7 @@ export const figureUnits = {
   mW: 'mW',
   W: 'W',
   mA: 'mA',
+  pJ: 'pJ',
   bit: 'bit',
   dB: 'dB',
   LSB: 'LSB',
@@ -498,6 +499,7 @@ export const figureUnits = {
   um: 'µm',
   ps: 'ps',
   count: 'count',
+  USD: '$',
 } as const
 
 export const documentFormats = {

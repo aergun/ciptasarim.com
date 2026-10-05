@@ -114,14 +114,16 @@ export type FigureUnit =
   | 'mW'
   | 'W'
   | 'mA'
+  | 'pJ' // picojoules — energy per cycle
   | 'bit'
   | 'dB'
   | 'LSB'
   | 'percent'
   | 'nm' // feature size
-  | 'um' // interconnect length
+  | 'um' // interconnect length, or a square edge
   | 'ps'
   | 'count'
+  | 'USD'
 
 /**
  * A single engineering figure, and the reason it is the only way to hold a number.

@@ -518,6 +518,7 @@ export const figureUnits: Record<FigureUnit, string> = {
   mW: 'mW',
   W: 'W',
   mA: 'mA',
+  pJ: 'pJ',
   bit: 'bit',
   dB: 'dB',
   LSB: 'LSB',
@@ -526,6 +527,7 @@ export const figureUnits: Record<FigureUnit, string> = {
   um: 'µm',
   ps: 'ps',
   count: 'adet',
+  USD: '$',
 }
 
 /** Delivery file formats. Also symbols and extensions, for the same reason. */
