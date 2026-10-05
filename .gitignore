@@ -1,0 +1,32 @@
+.mcp.json
+.claude/
+*.key
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Secrets. `.env.example` is the committed template; `.env` never is.
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------------------
+# Runtime state
+# ---------------------------------------------------------------------------
+
+# The SQLite database. Transactions only — the catalogue itself lives in
+# content/*.ts and is not here.
+data/
+
+# Licence deliveries. RTL source, gate-level netlists, SDF, Liberty, GDSII and
+# the porting kits. These are the purchasable product: they are licensed to one
+# buyer and must never be reachable by guessing a URL, so they sit outside
+# public/ and are streamed only through an entitlement check.
+#
+# ⚠️ This line is easy to forget and was once missing in the reference project,
+# where the first real sale would have committed a customer's paid IP to a
+# public repository. Ignored here for the same reason.
+server/files/
+
+# Generated block diagrams and floorplan previews are SVG data URIs, so unlike
+# the reference project there is no render directory and no image provider.

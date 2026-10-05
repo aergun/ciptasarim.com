@@ -1,0 +1,50 @@
+<!doctype html>
+<!--
+  `lang` is "tr" because Turkish is the primary market and this is the
+  unprefixed root of the Turkish tree. The English tree lives under /en.
+
+  A locale switcher sets document.documentElement.lang on every route change
+  (src/context/LocaleContext.tsx), so this is the correct value only for the
+  initial paint of the Turkish tree. Leaving it as the wrong language here is
+  not a cosmetic error: screen readers pick a voice from it, and crawlers use
+  it to decide which locale tree a URL belongs to.
+-->
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#EDEFF2" />
+    <title>Cip Tasarım — Yarı İletken IP Çekirdekleri</title>
+    <meta
+      name="description"
+      content="Tasarım doğrulamalı yarı iletken IP çekirdekleri: RTL, standart hücre makroları, analog ve doğrulama kolateralı. Lisanslama, teslim paketleri ve mühendislik hesaplayıcıları."
+    />
+
+    <!--
+      Reciprocal language annotation. Without these, a Turkish page and an
+      English page are competing for the same query in the same language, and
+      the crawler picks one. `en.ts` is the English hreflang alternate; the
+      English tree in index-2 mirrors it. Update both when the routes change.
+    -->
+    <link rel="alternate" hreflang="tr" href="/" />
+    <link rel="alternate" hreflang="en" href="/en" />
+    <link rel="alternate" hreflang="x-default" href="/" />
+
+    <!-- Fonts. Preconnect first so the handshake overlaps with HTML parse. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Inter and JetBrains Mono only. Both cover Latin Extended-A, so Turkish
+      glyphs — dotless ı, dotted İ, ş, ğ, ç — render without a fallback face
+      swapping in mid-line, which in a spec table is visually obvious.
+    -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

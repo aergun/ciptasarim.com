@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+   * Base type. Turkish is the source language, so the body copy is set for it first:
+   * `lang="tr"` on <html> gives the browser the right hyphenation and shaping rules,
+   * and the font stack needs no Turkish-specific face because Inter covers Latin
+   * Extended-A including dotless ı, dotted İ, ş, ğ and ç. A fallback face swapping in
+   * mid-line is visually obvious in a spec table.
+   */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  /*
+   * Numbers stay in a tabular monospace wherever they are compared vertically. In a
+   * spec table the figures are the content, and proportional digits make a column of
+   * them look like it might be sorted when it is not.
+   */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /*
+   * Turkish casing. A CSS `text-transform: uppercase` on Turkish text produces dotted
+   * İ where the reader expects I, and the dotted form is correct — but it is also the
+   * character that breaks naive search, so any place the site uppercases a term
+   * should go through `fold()` instead of relying on the transform.
+   */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-signal;
+  }
+
+  ::selection {
+    @apply bg-signal/20;
+  }
+}
+
+@layer components {
+  /*
+   * Provenance treatments. Three states, three colours, and the discipline that
+   * matters: `proven` is used for measured figures and for nothing else on the site,
+   * `flare` for modelled ones and the engineering caveat, `void` for the absence of a
+   * figure.
+   *
+   * `void` is deliberately not red. "We have not characterised this" is a fact, not an
+   * error, and colouring it like one makes a catalogue that is honest about its gaps
+   * read as though it were broken.
+   *
+   * ⚠️ Colour is a secondary cue only. Every figure also states its basis in text, and
+   * the smoke suite asserts both. A colour that is the *only* signal fails for a
+   * reader who cannot see it, and the reference project's lesson was that a figure
+   * which reads as more certain than it is will be taped out against.
+   */
+  .fig-measured {
+    @apply text-proven;
+  }
+
+  .fig-modelled {
+    @apply text-flare;
+  }
+
+  .fig-uncharacterised {
+    @apply text-void italic;
+  }
+}
