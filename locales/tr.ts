@@ -109,6 +109,7 @@ export const tr = {
     heroTitle: 'Tasarımınızın üzerine inşa edilecek doğrulanmış IP',
     heroBody:
       'Her çekirdek, kaynağı belirtilmiş ölçümler ve açıkça işaretlenmiş modellerle birlikte teslim edilir. Karakterize edilmemiş bir sayı hiçbir zaman tahmin edilerek doldurulmaz.',
+    heroHint: 'İmlecinizi gezdirin',
     browseCores: 'Çekirdeklere göz at',
     openTools: 'Hesaplayıcıları aç',
     statsCores: 'Çekirdek',
@@ -163,6 +164,43 @@ export const tr = {
     enquiry: 'Soru',
   },
 
+  /* -------------------------------------------------------- spec fields */
+  /**
+   * Per-kind specification field names, shared by the core detail's per-node
+   * table and the comparison view. They sit inside the mirrored bundle because
+   * both locales render them as table headers — unlike the taxonomy maps, which
+   * a machine reads too.
+   */
+  specFields: {
+    gateEquivalents: 'Kapı eşdeğeri',
+    maxFrequency: 'Maks. frekans',
+    power: 'Güç',
+    density: 'Yoğunluk',
+    macroArea: 'Makro alanı',
+    enob: 'ENOB',
+    sndr: 'SNDR',
+    sampleRate: 'Örnekleme hızı',
+    assertions: 'Assertion',
+    coverage: 'Kapsam',
+    inputRange: 'Giriş aralığı',
+  },
+
+  /* ------------------------------------------------- process columns */
+  /**
+   * The six figure columns of the process table (`content/processes.ts`), plus
+   * the provenance column. Keyed by the field name, so a field added to
+   * `Process` in `shared/types.ts` is a missing-label compile error here.
+   */
+  processColumns: {
+    cellArea: 'Hücre alanı (µm²/GE)',
+    defectDensity: 'Kusur yoğunluğu (cm⁻²)',
+    metalLayers: 'Metal katmanı',
+    vdd: 'Adi besleme gerilimi',
+    leakage: 'Kaçak akım / µm',
+    bondPitch: 'Bağ (bond) aralığı',
+    source: 'Kaynak',
+  },
+
   /* -------------------------------------------------------------- basis */
   basis: {
     measured: 'Ölçülen',
@@ -207,11 +245,36 @@ export const tr = {
     compareTiers: 'Türleri karşılaştırın',
   },
 
+  /* ----------------------------------------------------------- pricing */
+  /**
+   * The pricing page's copy.
+   *
+   * The page must stay in step with `corePricing` in `content/packages.ts`,
+   * which is deliberately empty: the tier and bundle structure is defined, the
+   * authored per-core prices are not, so every cell renders "on quote" instead
+   * of a number nobody chose. These keys describe that state — the day the
+   * table fills in, this section is the one copy that has to change with it.
+   */
+  pricing: {
+    title: 'Fiyatlandırma',
+    subtitle: 'Kademe ve teslim paketi yapısı tanımlıdır; çekirdek fiyatları teklif üzeredir.',
+    intro:
+      'Bu sitede bir fiyat, tahmin edilen bir sayı değil, yazılmış bir ticari karardır. Bu yüzden hiçbir çekirdek için önceden yazılmış bir fiyat yayımlanmamıştır: fiyat, dökümhane ve PDK revizyonuna ve teslim paketine göre teklif sırasında belirlenir.',
+    tableNote:
+      'Çekirdek fiyat tablosu (yazar fiyatlar) henüz doldurulmadı. Bu tablo doldurulana kadar her çekirdek, her kademe ve paket için teklif üzeredir — 0 değil, teklif üzerine.',
+    multiplierNote:
+      'Kademe çarpanları tanımlıdır: değerlendirme ×0,08, üretim ×1, çoklu kullanım ×2,6. Çarpanlar, yazar fiyat girildiği anda uygulanır.',
+    core: 'Çekirdek',
+  },
+
   /* -------------------------------------------------------------- cart */
   cart: {
     title: 'Sepet',
     empty: 'Sepetiniz boş.',
     emptyHint: 'Bir çekirdek seçtiğinizde lisansınızı burada göreceksiniz.',
+    add: 'Sepete ekle',
+    added: 'Sepete eklendi.',
+    viewCart: 'Sepete git',
     item: 'Ürün',
     licence: 'Lisans türü',
     unitPrice: 'Birim fiyat',
@@ -248,6 +311,10 @@ export const tr = {
     failed: 'Ödeme başarısız',
     failedBody: 'Ödeme sağlayıcısı işlemi reddetti. Kredi kartı bilgisi bu sitede saklanmaz.',
     tryAgain: 'Tekrar dene',
+    cancelled: 'İptal edildi',
+    cancelConfirm:
+      'Bu siparişi iptal etmek istediğinizden emin misiniz? Ödenmemiş bir sipariş geri alınamaz.',
+    cancelBlocked: 'Ödenmiş bir sipariş buradan iptal edilemez. İade için bizimle iletişime geçin.',
   },
 
   /* -------------------------------------------------------------- auth */
@@ -357,6 +424,14 @@ export const tr = {
     subtitle: 'Lisanslama, teslim ve teknik doğrulama.',
     stillHaveQuestions: 'Başka sorunuz mu var?',
     contactUs: 'İletişime geçin',
+    /** Filter-chip labels for the categories in `content/faqs.ts`. */
+    categoryNames: {
+      licenses: 'Lisanslama',
+      delivery: 'Teslim',
+      data: 'Veri ve kanıt',
+      payment: 'Ödeme',
+      custom: 'Özel işler',
+    },
   },
 
   /* ----------------------------------------------------------- articles */
@@ -519,12 +594,21 @@ export const figureUnits: Record<FigureUnit, string> = {
   W: 'W',
   mA: 'mA',
   pJ: 'pJ',
+  fF: 'fF',
+  V: 'V',
+  nA: 'nA',
+  ns: 'ns',
   bit: 'bit',
   dB: 'dB',
   LSB: 'LSB',
   percent: '%',
+  ratio: '×',
+  perCm2: 'cm⁻²',
+  ohm: 'Ω',
+  celsius: '°C',
   nm: 'nm',
   um: 'µm',
+  mm: 'mm',
   ps: 'ps',
   count: 'adet',
   USD: '$',

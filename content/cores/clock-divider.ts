@@ -9,15 +9,18 @@ import type { SoftRtlSpec } from '../../shared/types.ts'
 import { figureAt, uncharacterisedAtEveryNode } from './_placeholder.ts'
 
 const spec: SoftRtlSpec = {
-  gateEquivalents: uncharacterisedAtEveryNode(
-    'No synthesis has been run against a characterised library at any node for this core. A divider’s gate count is unusually sensitive to the architecture chosen for it — a shift-and-subtract divider and a reciprocal divider of the same ratio differ by an order of magnitude — so the count is meaningless without stating which one it is.',
-  ),
-  maxFrequency: uncharacterisedAtEveryNode(
-    'No timing closure has been performed on this core at any node. For a divider the interesting limit is usually the output frequency rather than the clock, and that figure depends on the divider architecture and the target ratio, neither of which is fixed for a configurable core.',
-  ),
-  power: uncharacterisedAtEveryNode(
-    'Divider power is dominated by the activity of the counter stages, which depends on the division ratio actually used. There is no single figure to publish without fixing both the architecture and a ratio, and neither is fixed here.',
-  ),
+  gateEquivalents: uncharacterisedAtEveryNode({
+    tr: 'Bu çekirdek için hiçbir düğümde karakterize edilmiş bir kütüphaneye karşı sentez çalışması yapılmadı. Bir bölümcünün kapı sayısı, seçilen mimariye alışılmadık kadar duyarlıdır — aynı orana sahip bir kaydır-çıkar bölümcü ile bir resiprok bölümcü tek büyüklük mertebesiyle ayrılır — bu yüzden sayı, hangi mimari olduğu belirtilmeden anlam taşımaz.',
+    en: 'No synthesis has been run against a characterised library at any node for this core. A divider’s gate count is unusually sensitive to the architecture chosen for it — a shift-and-subtract divider and a reciprocal divider of the same ratio differ by an order of magnitude — so the count is meaningless without stating which one it is.',
+  }),
+  maxFrequency: uncharacterisedAtEveryNode({
+    tr: 'Bu çekirdek için hiçbir düğümde zamanlama kapatması yapılmadı. Bir bölümcü için ilginç sınır genellikle saat değil çıkış frekansıdır ve bu sayı, bölüm mimarisine ve hedef orana bağlıdır; yapılandırılabilir bir çekirdek için ikisi de sabit değildir.',
+    en: 'No timing closure has been performed on this core at any node. For a divider the interesting limit is usually the output frequency rather than the clock, and that figure depends on the divider architecture and the target ratio, neither of which is fixed for a configurable core.',
+  }),
+  power: uncharacterisedAtEveryNode({
+    tr: 'Bölücü güç, sayaç kademelerinin etkinliğine hâkimdir; bu etkinlik, fiilen kullanılan bölme oranına bağlıdır. Mimari ve oran sabitlenmeden yayımlanacak tek bir sayı yoktur ve burada ikisi de sabitlenmemiştir.',
+    en: 'Divider power is dominated by the activity of the counter stages, which depends on the division ratio actually used. There is no single figure to publish without fixing both the architecture and a ratio, and neither is fixed here.',
+  }),
   ports: [
     {
       name: 'clk_in',

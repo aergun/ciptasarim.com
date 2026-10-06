@@ -70,4 +70,63 @@
   .fig-uncharacterised {
     @apply text-void italic;
   }
+
+  /*
+   * The small tracked label above a heading. `Eyebrow` renders this class rather
+   * than a utility string so it reads consistently in devtools across every page.
+   */
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.24em] text-flare;
+  }
+
+  /* The quiet horizontal separator; `Rule` renders it. */
+  .rule {
+    @apply border-0 border-t border-line;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Video hero entrance animations, ported from the standalone demo.            */
+/* -------------------------------------------------------------------------- */
+
+/* Entrance: fade + slide in, used by hero copy on load. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  opacity: 0; /* stays hidden until the animation starts (fill-mode both) */
+  animation: rise-in 0.8s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+}
+
+/* The cursor hint: slow, breathing attention cue. */
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+.nudge {
+  animation: nudge 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .nudge {
+    animation: none;
+  }
+  .rise {
+    opacity: 1;
+  }
 }

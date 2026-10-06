@@ -105,6 +105,29 @@ export function oneOf<V extends string>(value: unknown, allowed: readonly V[], f
 }
 
 /**
+ * A *lookup* against a closed set of identifiers, returning `null` rather than a 400.
+ *
+ * This is the deliberate counterpart to `oneOf()`, and the difference matters.
+ *
+ * `oneOf` guards a value the caller must get right — a form field — where an
+ * invalid one is a client bug worth a clear error. This guards a value that
+ * *identifies a thing that may not exist*: a slug in a URL, or an optional query
+ * parameter. There, "no such bundle" is a true and expected answer, and a 400 would
+ * be a lie about why.
+ *
+ * It exists as a named function because the alternative — `x as BundleKind` at each
+ * call site — is exactly the unchecked cast that turns a typo'd query parameter into
+ * a wrong answer. Narrowing through the actual list of valid ids is checkable, and
+ * `BUNDLE_KINDS` gains a member and this picks it up with no edit here.
+ *
+ * The one `as V` is the same one `oneOf` makes, and it is safe for the same reason:
+ * `includes` has just proved the value is a member of `allowed`.
+ */
+export function lookup<V extends string>(value: unknown, allowed: readonly V[]): V | null {
+  return typeof value === 'string' && (allowed as readonly string[]).includes(value) ? (value as V) : null
+}
+
+/**
  * The terminal error handler. Registered last in `app.ts`.
  *
  * `ApiError` carries a status chosen at the throw site and is therefore safe to

@@ -23,15 +23,18 @@ import type { AnalogSpec } from '../../shared/types.ts'
 import { figureAt, uncharacterisedAtEveryNode } from './_placeholder.ts'
 
 const spec: AnalogSpec = {
-  enob: uncharacterisedAtEveryNode(
-    'ENOB, bir sinüzoidal giriş ile ölçülen SNR’den türetilir ve giriş frekansıyla değişir. Kazanç, frekans ve referans gerilimi belirtilmeden verilen bir ENOB, hangi koşulda ölçüldüğü belli olmayan bir sayıdır.',
-  ),
-  sndr: uncharacterisedAtEveryNode(
-    'SNDR dönüştürücünün gürültü tabanını verir ve ENOB bunun türetilmesidir; ölçüm bandı, kazanç ve örnekleme hızı belirtilmeden yayımlanamaz.',
-  ),
-  sampleRate: uncharacterisedAtEveryNode(
-    'Örnekleme hızı dönüştürücünün mimarisinden gelir. Bu çekirdek için mimari belirlenmemiştir ve karar verildiğinde frekans, ENOB ile birlikte tek bir mimari tanımının parçası olarak verilmelidir.',
-  ),
+  enob: uncharacterisedAtEveryNode({
+    tr: 'ENOB, bir sinüzoidal giriş ile ölçülen SNR’den türetilir ve giriş frekansıyla değişir. Kazanç, frekans ve referans gerilimi belirtilmeden verilen bir ENOB, hangi koşulda ölçüldüğü belli olmayan bir sayıdır.',
+    en: 'ENOB is derived from the SNR measured on a sine input and varies with the input frequency. An ENOB stated without gain, frequency and reference voltage is a number whose measurement conditions are unknown.',
+  }),
+  sndr: uncharacterisedAtEveryNode({
+    tr: 'SNDR dönüştürücünün gürültü tabanını verir ve ENOB bunun türetilmesidir; ölçüm bandı, kazanç ve örnekleme hızı belirtilmeden yayımlanamaz.',
+    en: 'SNDR gives the converter’s noise floor and ENOB is derived from it; it cannot be published without the measurement band, the gain and the sample rate.',
+  }),
+  sampleRate: uncharacterisedAtEveryNode({
+    tr: 'Örnekleme hızı dönüştürücünün mimarisinden gelir. Bu çekirdek için mimari belirlenmemiştir ve karar verildiğinde frekans, ENOB ile birlikte tek bir mimari tanımının parçası olarak verilmelidir.',
+    en: 'The sample rate follows from the converter’s architecture. No architecture has been chosen for this core; when it is chosen, the rate must be published as part of a single architectural definition, together with ENOB.',
+  }),
   inputRange: {
     tr: 'Giriş aralığı, besleme gerilimiyle birlikte verilmelidir. Bu değerler henüz belirlenmemiştir ve yayımlanacak tek doğru biçim, aralığın iki ucunu ve beslemeyi tek bir cümlede göstermektir.',
     en: 'An input range must be stated together with the supply voltage. These values have not been determined, and the only correct form in which to publish them is a single sentence giving both ends of the range and the supply alongside it.',

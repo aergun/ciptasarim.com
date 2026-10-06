@@ -1,77 +1,138 @@
-/**
- * Placeholder shell, replaced in step 8 by the real router.
+/*
+ * The real router, replacing the placeholder shell.
  *
- * It exists for one reason worth recording: the locale switcher here is the first
- * thing to get right, because it sets `document.documentElement.lang` on every route
- * change, and the Turkish tree is unprefixed while the English tree lives under `/en`.
- * Getting that wrong means an English page announces itself with a Turkish screen
- * reader voice.
+ * ## The locale layer
  *
- * `BrowserRouter` rather than a data router, matching the reference project. The
- * `basename="/en"` handling is the one thing that is genuinely new.
+ * The route table is written **once**, unprefixed — Turkish is the site's default
+ * and the primary market's URL; English is served by the same table duplicated
+ * under `/en`. Every inward navigation goes through `LocaleLink`
+ * (`src/lib/site.tsx`), which carries the current locale into the target path,
+ * so an English reader stays on English pages without the pages knowing
+ * anything about it. Slugs are never translated — a core's URL is the same
+ * contract in both languages — so the prefix/strip in `useLocaleSwitch` is
+ * exact, not approximate.
+ *
+ * `<html lang>` and `<title>` are set in `Shell` on every route change, which is
+ * the portable fix for the reference's hardcoded `<html lang="en">`: no page
+ * ever sets document state itself.
  */
 
-import { useCallback, useEffect } from 'react'
-import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { LOCALE_TAGS, type Locale } from '../shared/i18n.ts'
 import { localeBundle } from '../locales/index.ts'
+import { localeFromPathname, localePrefix, useLocale } from './lib/site.tsx'
+import { Layout } from './components/Layout.tsx'
+import { AuthProvider, useAuth } from './context/AuthContext.tsx'
+import { CartProvider } from './context/CartContext.tsx'
+import { Loading } from './components/ui.tsx'
+
+import { Home } from './pages/Home.tsx'
+import { Cores } from './pages/Cores.tsx'
+import { CoreDetail } from './pages/CoreDetail.tsx'
+import { Compare } from './pages/Compare.tsx'
+import { Tools } from './pages/Tools.tsx'
+import { ToolPage } from './pages/ToolPage.tsx'
+import { ProcessPage } from './pages/Process.tsx'
+import { Licences } from './pages/Licences.tsx'
+import { Pricing } from './pages/Pricing.tsx'
+import { Faq } from './pages/Faq.tsx'
+import { Articles } from './pages/Articles.tsx'
+import { ArticlePage } from './pages/ArticlePage.tsx'
+import { About } from './pages/About.tsx'
+import { Contact } from './pages/Contact.tsx'
+import { Legal } from './pages/Legal.tsx'
+import { SignIn } from './pages/SignIn.tsx'
+import { Register } from './pages/Register.tsx'
+import { Account } from './pages/Account.tsx'
+import { Downloads } from './pages/Downloads.tsx'
+import { Cart } from './pages/Cart.tsx'
+import { Checkout } from './pages/Checkout.tsx'
+import { NotFound } from './pages/NotFound.tsx'
+
+/** The route table, written once, Turkish-prefixed. */
+const ROUTES = [
+  { path: '/', element: <Home /> },
+  { path: '/cekirdekler', element: <Cores /> },
+  { path: '/cekirdekler/karsilastir', element: <Compare /> },
+  { path: '/cekirdekler/:slug', element: <CoreDetail /> },
+  { path: '/hesaplayicilar', element: <Tools /> },
+  { path: '/hesaplayicilar/:slug', element: <ToolPage /> },
+  { path: '/teknoloji', element: <ProcessPage /> },
+  { path: '/lisanslar', element: <Licences /> },
+  { path: '/lisanslar/sartlar', element: <Legal page="licenceTerms" /> },
+  { path: '/fiyatlandirma', element: <Pricing /> },
+  { path: '/sss', element: <Faq /> },
+  { path: '/yazilar', element: <Articles /> },
+  { path: '/yazilar/:slug', element: <ArticlePage /> },
+  { path: '/hakkimizda', element: <About /> },
+  { path: '/iletisim', element: <Contact /> },
+  { path: '/teklif', element: <Contact quote /> },
+  { path: '/gizlilik', element: <Legal page="privacy" /> },
+  { path: '/sartlar', element: <Legal page="terms" /> },
+  { path: '/fikri-mulkiyet', element: <Legal page="ip" /> },
+  { path: '/hesap', element: <RequireAuth><Account /></RequireAuth> },
+  { path: '/hesap/indirmeler', element: <RequireAuth><Downloads /></RequireAuth> },
+  { path: '/hesap/giris', element: <SignIn /> },
+  { path: '/hesap/kayit', element: <Register /> },
+  { path: '/sepet', element: <Cart /> },
+  { path: '/sepet/odeme', element: <Checkout /> },
+] as const
 
 function Shell() {
-  const location = useLocation()
-  const navigate = useNavigate()
-
-  // `/en/...` is English; everything else is Turkish. The prefix is the single source
-  // of truth for the locale — not a state variable, not a cookie, not a preference.
-  // Deriving it from the path means a shared link always resolves to the language it
-  // was shared in, and a Turkish link keeps working after a switch because Turkish is
-  // the unprefixed default.
-  const locale: Locale = location.pathname === '/en' || location.pathname.startsWith('/en/') ? 'en' : 'tr'
+  const { pathname } = useLocation()
+  const locale: Locale = localeFromPathname(pathname)
   const strings = localeBundle(locale)
 
   useEffect(() => {
     document.documentElement.lang = LOCALE_TAGS[locale]
-    document.title = `${strings.meta.siteName} — ${strings.meta.tagline}`
-  }, [locale, strings])
+  }, [locale])
 
-  const switchTo = useCallback(
-    (next: Locale) => {
-      if (next === locale) return
-      if (next === 'en') {
-        navigate('/en' + (location.pathname === '/' ? '' : location.pathname))
-      } else {
-        const stripped = location.pathname.replace(/^\/en/, '') || '/'
-        navigate(stripped)
-      }
-    },
-    [locale, location.pathname, navigate],
-  )
+  useEffect(() => {
+    document.title = `${strings.meta.siteName} — ${strings.meta.tagline}`
+  }, [strings])
 
   return (
-    <div className="min-h-dvh bg-paper text-ink">
-      <div className="shell mx-auto flex min-h-dvh flex-col justify-center gap-6 px-6 py-24">
-        <p className="text-xs uppercase tracking-widest text-mist">{strings.meta.tagline}</p>
-        <h1 className="text-display font-medium">{strings.home.heroTitle}</h1>
-        <p className="max-w-prose text-mist">{strings.home.heroBody}</p>
-        <p className="text-sm text-mist">
-          {locale === 'tr' ? 'Türkçe' : 'English'} · <code className="font-mono">{location.pathname}</code>
-        </p>
-        <div className="flex gap-3">
-          <button type="button" className="border border-line px-4 py-2 text-sm" onClick={() => switchTo('tr')}>
-            TR
-          </button>
-          <button type="button" className="border border-line px-4 py-2 text-sm" onClick={() => switchTo('en')}>
-            EN
-          </button>
-        </div>
-      </div>
-    </div>
+    <Layout>
+      <Routes>
+        {/* The table twice: Turkish unprefixed, English under /en. Written once. */}
+        {ROUTES.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+        {ROUTES.map((route) => (
+          <Route key={`en-${route.path}`} path={`/en${route.path === '/' ? '' : route.path}`} element={route.element} />
+        ))}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
   )
+}
+
+/**
+ * The account routes' gate, on the reference site's RequireAuth pattern.
+ *
+ * The check exists for *navigation*, not for authorisation — the server still
+ * refuses every account call from a cold session and the client cannot change
+ * that. Redirecting here only keeps a signed-out visitor from watching an
+ * orders page fail four times.
+ */
+function RequireAuth({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth()
+  const { pathname } = useLocation()
+  const locale = useLocale()
+  if (loading) return <Loading label="…" />
+  if (!user) return <Navigate to={localePrefix(locale) + '/hesap/giris'} replace state={{ from: pathname }} />
+  return children
 }
 
 export function App() {
   return (
     <BrowserRouter>
-      <Shell />
+      <AuthProvider>
+        <CartProvider>
+          <Shell />
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

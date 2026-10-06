@@ -25,12 +25,14 @@ import type { VerificationSpec } from '../../shared/types.ts'
 import { figureAt, uncharacterisedAtEveryNode } from './_placeholder.ts'
 
 const spec: VerificationSpec = {
-  assertions: uncharacterisedAtEveryNode(
-    'Doğrulama ortamının assertion sayısı yayımlanabilir bir özelliktir, ancak tek başına anlamlı değildir: bin assertion, zayıf bir ortam olabilir. Sayı, ortamın kapsadığı hataların türleriyle birlikte verilmelidir ve bu ortam henüz yazılmamıştır.',
-  ),
-  coverage: uncharacterisedAtEveryNode(
-    'Kapsam yüzdesi, hangi kapsam modelinin kullanıldığına bağlıdır. Fonksiyonel, kod ve durum kapsamı aynı projede farklı sayılar verir ve hepsini tek bir “kapsam” değeriyle özetlemek yanıltıcıdır. Kullanılacak model belirlenmemiştir.',
-  ),
+  assertions: uncharacterisedAtEveryNode({
+    tr: 'Doğrulama ortamının assertion sayısı yayımlanabilir bir özelliktir, ancak tek başına anlamlı değildir: bin assertion, zayıf bir ortam olabilir. Sayı, ortamın kapsadığı hataların türleriyle birlikte verilmelidir ve bu ortam henüz yazılmamıştır.',
+    en: 'An environment’s assertion count is a publishable property but means little on its own: a thousand assertions can be a weak environment. The number must be published together with the classes of bug the environment covers, and this environment has not been written yet.',
+  }),
+  coverage: uncharacterisedAtEveryNode({
+    tr: 'Kapsam yüzdesi, hangi kapsam modelinin kullanıldığına bağlıdır. Fonksiyonel, kod ve durum kapsamı aynı projede farklı sayılar verir ve hepsini tek bir “kapsam” değeriyle özetlemek yanıltıcıdır. Kullanılacak model belirlenmemiştir.',
+    en: 'A coverage percentage depends on which coverage model is used. Functional, code and state coverage give different numbers on the same project, and summarising all of them in one "coverage" value is misleading. The model to be used has not been determined.',
+  }),
   standard: {
     tr: 'Standart henüz belirlenmemiştir. Ortamın hangi güvenlik gereksinimi için yazıldığı, iddiaların neden var olduğunu açıklar; bu olmadan bir assertion sayısı anlam taşımaz.',
     en: 'No standard has been determined yet. The safety requirement a verification environment is written against is what explains why its assertions exist, and without it an assertion count carries no meaning.',

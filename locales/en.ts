@@ -104,6 +104,7 @@ export const en: Mirror<TrShape> = {
     heroTitle: 'Characterised IP to build your design on',
     heroBody:
       'Every core ships with sourced measurements and models labelled as such. A number we have not characterised is never filled in with an estimate.',
+    heroHint: 'Move your cursor',
     browseCores: 'Browse cores',
     openTools: 'Open the calculators',
     statsCores: 'Cores',
@@ -158,6 +159,34 @@ export const en: Mirror<TrShape> = {
     enquiry: 'Enquiry',
   },
 
+  /* -------------------------------------------------------- spec fields */
+  /** See the comment on `specFields` in `locales/tr.ts`. */
+  specFields: {
+    gateEquivalents: 'Gate equivalents',
+    maxFrequency: 'Max. frequency',
+    power: 'Power',
+    density: 'Density',
+    macroArea: 'Macro area',
+    enob: 'ENOB',
+    sndr: 'SNDR',
+    sampleRate: 'Sample rate',
+    assertions: 'Assertions',
+    coverage: 'Coverage',
+    inputRange: 'Input range',
+  },
+
+  /* ------------------------------------------------- process columns */
+  /** See the comment on `processColumns` in `locales/tr.ts`. */
+  processColumns: {
+    cellArea: 'Cell area (µm²/GE)',
+    defectDensity: 'Defect density (cm⁻²)',
+    metalLayers: 'Metal layers',
+    vdd: 'Nominal supply',
+    leakage: 'Leakage / µm',
+    bondPitch: 'Bond pitch',
+    source: 'Source',
+  },
+
   /* -------------------------------------------------------------- basis */
   basis: {
     measured: 'Measured',
@@ -201,11 +230,28 @@ export const en: Mirror<TrShape> = {
     compareTiers: 'Compare the tiers',
   },
 
+  /* ----------------------------------------------------------- pricing */
+  /** See the comment on `pricing` in `locales/tr.ts`. */
+  pricing: {
+    title: 'Pricing',
+    subtitle: 'The tier and bundle structure is defined; core prices are on quote.',
+    intro:
+      'On this site a price is a written commercial decision, not a number anyone derived. That is why no core carries a pre-written price: the price is fixed at quote time, against the foundry and PDK revision, and the delivery bundle.',
+    tableNote:
+      'The core price table (the authored prices) has not been filled in yet. Until it is, every core is on quote, at every tier and bundle — not zero, on quote.',
+    multiplierNote:
+      'The tier multipliers are defined: evaluation ×0.08, production ×1, multi-use ×2.6. They apply the moment an authored price is entered.',
+    core: 'Core',
+  },
+
   /* -------------------------------------------------------------- cart */
   cart: {
     title: 'Cart',
     empty: 'Your cart is empty.',
     emptyHint: 'Choose a core and you will see its licences here.',
+    add: 'Add to cart',
+    added: 'Added to cart.',
+    viewCart: 'Go to cart',
     item: 'Item',
     licence: 'Licence tier',
     unitPrice: 'Unit price',
@@ -242,6 +288,10 @@ export const en: Mirror<TrShape> = {
     failed: 'Payment failed',
     failedBody: 'The payment provider declined the transaction. Card details are not stored on this site.',
     tryAgain: 'Try again',
+    cancelled: 'Cancelled',
+    cancelConfirm:
+      'Withdraw this unpaid order? An order that has not been paid cannot be restored.',
+    cancelBlocked: 'A paid order cannot be withdrawn here. Contact us to arrange a refund.',
   },
 
   /* -------------------------------------------------------------- auth */
@@ -351,6 +401,14 @@ export const en: Mirror<TrShape> = {
     subtitle: 'Licensing, delivery and technical verification.',
     stillHaveQuestions: 'Still have a question?',
     contactUs: 'Get in touch',
+    /** Filter-chip labels for the categories in `content/faqs.ts`. */
+    categoryNames: {
+      licenses: 'Licensing',
+      delivery: 'Delivery',
+      data: 'Data and provenance',
+      payment: 'Payment',
+      custom: 'Custom work',
+    },
   },
 
   /* ----------------------------------------------------------- articles */
@@ -491,12 +549,21 @@ export const figureUnits = {
   W: 'W',
   mA: 'mA',
   pJ: 'pJ',
+  fF: 'fF',
+  V: 'V',
+  nA: 'nA',
+  ns: 'ns',
   bit: 'bit',
   dB: 'dB',
   LSB: 'LSB',
   percent: '%',
+  ratio: '×',
+  perCm2: 'cm⁻²',
+  ohm: 'Ω',
+  celsius: '°C',
   nm: 'nm',
   um: 'µm',
+  mm: 'mm',
   ps: 'ps',
   count: 'count',
   USD: '$',

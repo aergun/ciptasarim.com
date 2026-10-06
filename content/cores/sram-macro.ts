@@ -24,15 +24,18 @@ import type { HardMacroSpec, PdkReference } from '../../shared/types.ts'
 import { figureAt, uncharacterisedAtEveryNode } from './_placeholder.ts'
 
 const spec: HardMacroSpec = {
-  density: uncharacterisedAtEveryNode(
-    'Bit başına alan (µm²/bit) bir PDK özelliğidir ve verilemez. Aynı bellek makrosu farklı bir PDK sürümünde, aynı düğüm adı altında farklı bir alan kaplar; PDK sürümü belirtilmeden yayımlanan bir yoğunluk, okuyucuya taşınamaz bir rakam verir.',
-  ),
-  macroArea: uncharacterisedAtEveryNode(
-    'Makro alanı fiziksel yerleşimdir ve ancak bir PDK’da uygulanmış bir tasarımın ölçümü veya fiziksel doğrulama çıktısıdır. Bu çekirdek için yerleşim yapılmamıştır.',
-  ),
-  maxFrequency: uncharacterisedAtEveryNode(
-    'Frekans, PDK hücre kütüphanesi ve fiziksel yerleşim tarafından belirlenir. Aynı makronun farklı bir PDK sürümünde aynı saat hızına eriştiği varsayılamaz.',
-  ),
+  density: uncharacterisedAtEveryNode({
+    tr: 'Bit başına alan (µm²/bit) bir PDK özelliğidir ve verilemez. Aynı bellek makrosu farklı bir PDK sürümünde, aynı düğüm adı altında farklı bir alan kaplar; PDK sürümü belirtilmeden yayımlanan bir yoğunluk, okuyucuya taşınamaz bir rakam verir.',
+    en: 'Area per bit (µm²/bit) is a property of the PDK and cannot be stated. The same memory macro occupies a different area under a different PDK revision behind the same node name; a density published without the PDK revision gives the reader a number that cannot be carried anywhere.',
+  }),
+  macroArea: uncharacterisedAtEveryNode({
+    tr: 'Makro alanı fiziksel yerleşimdir ve ancak bir PDK’da uygulanmış bir tasarımın ölçümü veya fiziksel doğrulama çıktısıdır. Bu çekirdek için yerleşim yapılmamıştır.',
+    en: 'Macro area is physical placement, and exists only as a measurement of a design implemented in a PDK or as physical-verification output. No placement has been done for this core.',
+  }),
+  maxFrequency: uncharacterisedAtEveryNode({
+    tr: 'Frekans, PDK hücre kütüphanesi ve fiziksel yerleşim tarafından belirlenir. Aynı makronun farklı bir PDK sürümünde aynı saat hızına eriştiği varsayılamaz.',
+    en: 'Frequency is set by the PDK’s cell library and the physical placement. The same macro cannot be assumed to reach the same clock rate under a different PDK revision.',
+  }),
   ports: [
     {
       name: 'clk',

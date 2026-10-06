@@ -115,12 +115,21 @@ export type FigureUnit =
   | 'W'
   | 'mA'
   | 'pJ' // picojoules — energy per cycle
+  | 'fF' // femtofarads — gate / wire capacitance
+  | 'V' // volts — supply voltage
+  | 'nA' // nanoamps — reference leakage per gate width
+  | 'ns' // nanoseconds — clock periods, delays, margins
   | 'bit'
   | 'dB'
   | 'LSB'
   | 'percent'
+  | 'ratio' // dimensionless — effort, activity factor, overheads
+  | 'perCm2' // cm⁻² — defect density
+  | 'ohm' // Ω per square — sheet resistance
+  | 'celsius' // junction temperature
   | 'nm' // feature size
   | 'um' // interconnect length, or a square edge
+  | 'mm' // wafer diameter, edge exclusion, wire length on a calculator input
   | 'ps'
   | 'count'
   | 'USD'
@@ -183,7 +192,14 @@ export type Figure =
     }
   | {
       basis: 'uncharacterised'
-      reason: string
+      /**
+       * The stated absence, in both languages — a gap is a fact a buyer reads,
+       * so it is prose like any other and cannot be half-translated. (The
+       * catalogue was first authored with English-only reasons; the bilingual
+       * sweep caught a Turkish reader being handed English prose under a
+       * Turkish badge, and this became `T`.)
+       */
+      reason: T
     }
 
 /**

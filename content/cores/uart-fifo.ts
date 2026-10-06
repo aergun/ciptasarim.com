@@ -14,15 +14,18 @@ import { figureAt, uncharacterisedAtEveryNode } from './_placeholder.ts'
  * that is a call rather than fourteen hand-written keys.
  */
 const spec: SoftRtlSpec = {
-  gateEquivalents: uncharacterisedAtEveryNode(
-    'No gate count has been produced for this core. Synthesis has not been run against a characterised library at any node, and a gate count taken from an uncharacterised library would reflect that library’s cell definitions rather than this core.',
-  ),
-  maxFrequency: uncharacterisedAtEveryNode(
-    'No timing closure has been performed on this core at any node. The number that would appear here is a function of the standard-cell library, the constraints and the interconnect — all three of which are per-node and per-PDK, and none of which we have published.',
-  ),
-  power: uncharacterisedAtEveryNode(
-    'Power has not been measured or modelled for this core. It depends on an activity factor, which is a property of the design that instantiates the core rather than of the core itself, so even a characterised figure would be quoted against a stated activity assumption.',
-  ),
+  gateEquivalents: uncharacterisedAtEveryNode({
+    tr: 'Bu çekirdek için bir kapı sayısı üretilmedi. Karakterize edilmiş bir kütüphaneye karşı hiçbir düğümde sentez çalışması yapılmadı; karakterize edilmemiş bir kütüphaneden alınan kapı sayısı, bu çekirdeğin değil, o kütüphanenin hücre tanımlarını yansıtırdı.',
+    en: 'No gate count has been produced for this core. Synthesis has not been run against a characterised library at any node, and a gate count taken from an uncharacterised library would reflect that library’s cell definitions rather than this core.',
+  }),
+  maxFrequency: uncharacterisedAtEveryNode({
+    tr: 'Bu çekirdek için hiçbir düğümde zamanlama kapatması yapılmadı. Burada görünecek sayı, standart hücre kütüphanesinin, kısıtların ve ara bağlantının bir işlevidir; üçü de düğüme ve PDK’ye göredir ve hiçbirini yayımlamadık.',
+    en: 'No timing closure has been performed on this core at any node. The number that would appear here is a function of the standard-cell library, the constraints and the interconnect — all three of which are per-node and per-PDK, and none of which we have published.',
+  }),
+  power: uncharacterisedAtEveryNode({
+    tr: 'Bu çekirdek için güç ölçülmedi ve modellenmedi. Güç, çekirdeğin değil, çekirdeği kullanan tasarımın bir özelliği olan etkinlik faktörüne bağlıdır; bu nedenle karakterize edilmiş bir sayı bile belirli bir etkinlik varsayımına dayanarak verilirdi.',
+    en: 'Power has not been measured or modelled for this core. It depends on an activity factor, which is a property of the design that instantiates the core rather than of the core itself, so even a characterised figure would be quoted against a stated activity assumption.',
+  }),
   ports: [
     {
       name: 'clk',

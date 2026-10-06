@@ -117,7 +117,7 @@ check('the catalogue contains figures to check', allFigures.length > 0, `${allFi
 
 for (const { path, figure } of allFigures) {
   if (figure.basis === 'uncharacterised') {
-    check(`${path} carries a reason`, typeof figure.reason === 'string' && figure.reason.trim().length > 0)
+    check(`${path} carries a reason in both languages`, typeof figure.reason?.tr === 'string' && figure.reason.tr.trim().length > 0 && typeof figure.reason?.en === 'string' && figure.reason.en.trim().length > 0)
     check(
       `${path} has no value field`,
       !('value' in figure),
@@ -299,7 +299,7 @@ for (const p of processes as Process[]) {
   for (const key of ['cellArea', 'defectDensity', 'metalLayers', 'vdd', 'leakage', 'bondPitch'] as const) {
     const figure = p[key] as Figure
     if (figure.basis === 'uncharacterised') {
-      check(`${p.node} · ${key} carries a reason`, typeof figure.reason === 'string' && figure.reason.trim().length > 0)
+      check(`${p.node} · ${key} carries a reason in both languages`, typeof figure.reason?.tr === 'string' && figure.reason.tr.trim().length > 0 && typeof figure.reason?.en === 'string' && figure.reason.en.trim().length > 0)
     } else {
       check(
         `${p.node} · ${key} claims no source it does not have`,

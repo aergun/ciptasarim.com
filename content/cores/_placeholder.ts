@@ -11,22 +11,25 @@
  *
  * So the shells do not construct `ByNode` literals at all. They call
  * `uncharacterisedAtEveryNode(reason)` and get a complete, uniformly-absent map, and
- * the reason is stated once in prose where it can be reviewed.
+ * the reason is stated once in each language where it can be reviewed.
  *
  * A real core replaces one call with the fourteen figures it actually has, which is
  * why this helper is for the shells and not something the type system requires.
  */
 
-import type { ByNode, Figure, ProcessNode } from '../../shared/types.ts'
+import type { ByNode, Figure, ProcessNode, T } from '../../shared/types.ts'
 import { PROCESS_NODES } from '../../shared/types.ts'
 
 /**
  * A figure map that is uncharacterised at every node, for the same stated reason.
  *
+ * The reason is a `T` — a gap is prose a buyer reads, in whichever language they
+ * reached the site in, and cannot fall half-translated.
+ *
  * The returned object is freshly built per call, so a core cannot accidentally share
  * (and then mutate) one map with another.
  */
-export function uncharacterisedAtEveryNode(reason: string): ByNode<Figure> {
+export function uncharacterisedAtEveryNode(reason: T): ByNode<Figure> {
   return Object.fromEntries(
     PROCESS_NODES.map((node) => [node, { basis: 'uncharacterised' as const, reason }]),
   ) as ByNode<Figure>
