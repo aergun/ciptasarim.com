@@ -46,8 +46,7 @@ export type DemoScript = {
   id: 'record' | 'calculator' | 'gap' | 'delivery'
   /** Tab label, short — one word. */
   tab: T
-  /** Section-level title and summary, shown beside/above the player. */
-  title: T
+  /** The one-line summary shown beside the tab rail. */
   summary: T
   /** The terminal's fake host — a role, not a person: verify@, hesap@… */
   host: string
@@ -70,7 +69,6 @@ export type DemoScript = {
 const record: DemoScript = {
   id: 'record',
   tab: { tr: 'Kayıt', en: 'Record' },
-  title: { tr: 'Kayıt turu', en: 'The record run' },
   summary: {
     tr: 'Bir karakterizasyon kaydı tamamlanıyor.',
     en: 'A characterisation record is completed.',
@@ -200,7 +198,6 @@ const record: DemoScript = {
 const calculator: DemoScript = {
   id: 'calculator',
   tab: { tr: 'Hesap', en: 'Calculator' },
-  title: { tr: 'Hesaplayıcı turu', en: 'The calculator run' },
   summary: {
     tr: 'Kritik yol modeli çalışıyor; varsayımlar yazılı.',
     en: 'The critical-path model runs; the assumptions are written out.',
@@ -276,7 +273,6 @@ const calculator: DemoScript = {
 const gap: DemoScript = {
   id: 'gap',
   tab: { tr: 'Boşluk', en: 'Gap' },
-  title: { tr: 'Boşluk turu', en: 'The gap run' },
   summary: {
     tr: 'Karakterize edilmemiş bir sayının nasıl göründüğü.',
     en: 'How an uncharacterised figure renders.',
@@ -378,7 +374,6 @@ const gap: DemoScript = {
 const delivery: DemoScript = {
   id: 'delivery',
   tab: { tr: 'Teslim', en: 'Delivery' },
-  title: { tr: 'Teslim turu', en: 'The delivery run' },
   summary: {
     tr: 'Kademe ve paket seçimi, teslim listesiyle bağlanıyor.',
     en: 'Choosing a tier and package, tied to the delivery list.',

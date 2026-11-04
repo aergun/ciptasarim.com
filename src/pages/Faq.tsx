@@ -69,8 +69,14 @@ export function Faq() {
           <div className="mt-10 divide-y divide-line border-y border-line">
             {shown.map((entry) => (
               <details key={entry.question.tr} className="group py-5">
-                <summary className="cursor-pointer list-none text-[15px] font-medium text-ink marker:hidden">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[15px] font-medium text-ink marker:hidden">
                   {t(entry.question)}
+                  {/* The open affordance: a chevron that turns through the
+                      answer as it opens, so the disclosure is visible in both
+                      states rather than only after the first click. */}
+                  <span aria-hidden className="mt-1 shrink-0 text-gold transition-transform duration-200 group-open:rotate-90">
+                    ›
+                  </span>
                 </summary>
                 <Prose className="mt-3">{t(entry.answer)}</Prose>
               </details>

@@ -87,7 +87,7 @@ export function Home() {
       {/* Vision: the reference's manifesto-plus-principles block, paired
           with the interactive die scene, all resting on the provenance
           discipline rather than an agent story. */}
-      <Section id="vizyon">
+      <Section id="vizyon" className="scroll-mt-16">
         <Container>
           <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
             <Reveal>
@@ -151,7 +151,7 @@ export function Home() {
 
       {/* Architecture: the spec-to-delivery line the reference site draws for
           its agent stack, redrawn for the chain a buy travels here. */}
-      <Section id="mimari">
+      <Section id="mimari" className="scroll-mt-16">
         <Reveal>
           <Container>
             <Eyebrow>{home.archEyebrow}</Eyebrow>
@@ -188,7 +188,7 @@ export function Home() {
 
       {/* Demos: the reference site's "one flow, four runs" rail, replaying
           this site's own flows instead of footage it does not have. */}
-      <Section id="tur" className="bg-stage">
+      <Section id="tur" className="bg-stage scroll-mt-16">
         <Reveal>
           <Container>
             <Demos />
@@ -258,8 +258,11 @@ export function Home() {
           <div className="mt-10 divide-y divide-line border-y border-line">
             {faqs.slice(0, 4).map((faq) => (
               <details key={faq.question.tr} className="group py-4">
-                <summary className="cursor-pointer list-none text-[15px] font-medium text-ink marker:hidden">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[15px] font-medium text-ink marker:hidden">
                   {t(faq.question)}
+                  <span aria-hidden className="mt-1 shrink-0 text-gold transition-transform duration-200 group-open:rotate-90">
+                    ›
+                  </span>
                 </summary>
                 <Prose className="mt-3">{t(faq.answer)}</Prose>
               </details>
