@@ -197,7 +197,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .rise,
-  .nudge {
+  .nudge,
+  .animate-pulseDot,
+  .animate-blink {
     animation: none;
   }
   .rise {

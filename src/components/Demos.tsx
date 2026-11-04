@@ -44,7 +44,7 @@ export function Demos() {
               role="tab"
               aria-selected={isActive}
               onClick={() => setActiveId(demo.id)}
-              className={`rounded-full border px-4 py-2 font-mono text-[11px] tracking-wide transition-colors ${
+              className={`min-h-[44px] rounded-full border px-4 py-2 font-mono text-[11px] tracking-wide transition-colors ${
                 isActive
                   ? 'border-gold/60 bg-gold/10 text-gold'
                   : 'border-line text-mist hover:border-gold/40 hover:text-ink'

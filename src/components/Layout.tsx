@@ -111,7 +111,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex shrink-0 items-center gap-3">
             <LocaleLink
               to="/sepet"
-              className="whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-mist hover:text-ink"
+              className="inline-flex min-h-[44px] items-center whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-mist hover:text-ink"
               aria-label={strings.nav.cart}
             >
               {strings.nav.cart}
@@ -123,7 +123,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </LocaleLink>
             <LocaleLink
               to={user ? '/hesap' : '/hesap/giris'}
-              className="hidden whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-mist hover:text-ink sm:inline"
+              className="hidden min-h-[44px] items-center whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-mist hover:text-ink sm:inline-flex"
             >
               {user ? strings.nav.account : strings.auth.signIn}
             </LocaleLink>
@@ -149,12 +149,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <nav id="mobile-menu" aria-label="Primary" className="border-t border-line bg-paper xl:hidden">
             <Container className="grid grid-cols-2 gap-x-8 gap-y-3 py-6">
               {primaryNav.map((entry) => (
-                <LocaleLink key={entry.to} to={entry.to} className="text-sm font-medium text-ink">
+                <LocaleLink key={entry.to} to={entry.to} className="flex min-h-[44px] items-center text-sm font-medium text-ink">
                   {(strings.nav as Record<string, string>)[NAV_KEYS[entry.to] ?? ''] ?? entry.label}
                 </LocaleLink>
               ))}
-              <LocaleLink to="/sepet" className="text-sm font-medium text-mist">{strings.nav.cart}</LocaleLink>
-              <LocaleLink to={user ? '/hesap' : '/hesap/giris'} className="text-sm font-medium text-mist">
+              <LocaleLink to="/sepet" className="flex min-h-[44px] items-center text-sm font-medium text-mist">{strings.nav.cart}</LocaleLink>
+              <LocaleLink to={user ? '/hesap' : '/hesap/giris'} className="flex min-h-[44px] items-center text-sm font-medium text-mist">
                 {user ? strings.nav.account : strings.auth.signIn}
               </LocaleLink>
             </Container>
@@ -185,7 +185,7 @@ function LanguageButton({
       type="button"
       onClick={onClick}
       aria-pressed={current}
-      className={`border px-2 py-1 text-[10px] font-semibold tracking-wide transition-colors ${
+      className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center border px-2 py-1 text-[10px] font-semibold tracking-wide transition-colors ${
         current ? 'border-ink bg-ink text-paper' : 'border-line text-mist hover:border-ink hover:text-ink'
       }`}
     >

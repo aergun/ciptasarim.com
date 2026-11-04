@@ -58,8 +58,15 @@ export default {
          * active nav item. It deliberately does NOT touch figures — a number
          * coloured gold would read as certain the way `proven` does, and only
          * a measurement earns that.
+         *
+         * `deep` is the same role on the light band: the reference gold is
+         * 2.2:1 on bone, under the 4.5:1 floor, and structure inside the band
+         * must still read. Only the band should use it.
          */
-        gold: '#C09657',
+        gold: {
+          DEFAULT: '#C09657',
+          deep: '#7A5F26',
+        },
         line: {
           DEFAULT: '#2C1B25',
           soft: '#221820',

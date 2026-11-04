@@ -152,7 +152,7 @@ export function InvertedSection({
   return (
     <section
       id={id}
-      className={`bg-ink py-20 text-paper md:py-28 [&_h1]:text-paper [&_h2]:text-paper [&_h3]:text-paper [&_h4]:text-paper ${className}`}
+      className={`bg-ink py-20 text-paper md:py-28 [&_h1]:text-paper [&_h2]:text-paper [&_h3]:text-paper [&_h4]:text-paper [&_.eyebrow]:text-gold-deep ${className}`}
     >
       {children}
     </section>

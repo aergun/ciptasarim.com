@@ -47,7 +47,9 @@ export function About() {
       <InvertedSection className="mt-14">
         <Container width="narrow">
           <Heading as="h2">{strings.home.provenanceTitle}</Heading>
-          <Prose className="mt-4">
+          {/* The body copy inversion is explicit: `mist` is the dark theme's
+              secondary tone and fails contrast on this band (2.6:1). */}
+          <Prose className="mt-4 text-paper/75">
             {about.noFabrication}
           </Prose>
         </Container>
