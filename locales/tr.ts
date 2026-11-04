@@ -126,6 +126,52 @@ export const tr = {
     processBody:
       'Geniş bir düğüm aralığı. Karakterize edilmemiş hücreler boş bırakılmaz, nedenleriyle birlikte listelenir.',
     faqTitle: 'Sıkça sorulan sorular',
+
+    /* ---- Architecture: the spec-to-delivery flow diagram. --------------*/
+    /* Captions are two-sentence scale, so they stay in the bundle like the
+       other home labels rather than moving to a content file. */
+    archEyebrow: 'Mimari',
+    archTitle: 'Spesifikasyondan teslime',
+    archBody:
+      'Sitenin akışı bir hat üzerinde taşınır: spesifikasyonunuz katalogda bir çekirdeğe iner, hesaplayıcılar ve karakterizasyon kaydı her sayıyı durumuyla denetler, teklif ve teslim paketi zincirin sonunda gelir. Kesik bir hat, henüz oturmuş bir ölçümün yokluğudur — boş bırakılır ve nedeni yazılır, tahminle doldurulmaz.',
+    archNodes: {
+      you: { label: 'Siz', caption: 'Spesifikasyon ve girdiler' },
+      catalogue: { label: 'Kataloğun', caption: 'Çekirdekler, durum etiketleriyle' },
+      calculators: { label: 'Hesaplayıcılar', caption: 'Sekiz model, yazılı varsayımlar' },
+      quote: { label: 'Teklif', caption: 'Fiyat, düğüm ve pakete göre' },
+      delivery: { label: 'Teslim', caption: 'Netlist, GDSII, UVM — pakete göre' },
+    },
+    archRecord: {
+      title: 'Karakterizasyon kaydı',
+      caption: 'Her sayının arkasındaki durum.',
+    },
+    archTable: {
+      title: 'Teknoloji düğümü tablosu',
+      caption: '180 nm’den 2 nm’ye düğümler; boş hücreler nedenleriyle listelenir.',
+    },
+    archFoundry: {
+      title: 'Dökümhane + PDK',
+      caption: 'Doğrulanmış PDK referansı yalnızca teklif sırasında bağlanır.',
+    },
+    archLoops: {
+      audit: {
+        title: 'Denetim çevrimi',
+        caption: 'Yayımlanmadan önce her sayının durumu iki kez doğrulanır: betikler ve derleyici.',
+      },
+      measure: {
+        title: 'Ölçüm çevrimi',
+        caption: 'Her teklif, tabloya girecek yeni bir ölçümle döner; boş hücreler zamanla oturur.',
+      },
+    },
+
+    /* ---- The characterisation run viewer. ------------------------------*/
+    runEyebrow: 'Bir doğrulama turu',
+    runTitle: 'Bir turun içinde',
+    runBody:
+      'Bir karakterizasyon kaydının nasıl tamamlandığını gösteren tur. Tur, kapı dediğimiz noktada durur ve sizden karar bekler: karakterize edilmemiş bir sayı için boşluk bırakıp gerekçesini yazmak ya da modelden hesaplayıp etiketlemek. İkisi de dürüsttür; boş alana tahmin yazmak değildir.',
+    runPhases: { spec: 'Spesifikasyon', figures: 'Figürler', gate: 'Kapı', record: 'Kayıt' },
+    runReplay: 'Tekrar oynat',
+    runLive: 'canlı',
   },
 
   /* -------------------------------------------------------------- cores */

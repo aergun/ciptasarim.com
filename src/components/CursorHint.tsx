@@ -28,7 +28,7 @@ export function CursorHint({ label }: { label: string }) {
       <div
         data-cursor-hint
         data-dismissed="false"
-        className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.22em] text-paper/70 transition-opacity duration-1000"
+        className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.22em] text-ink/70 transition-opacity duration-1000"
       >
         {label}
         <span aria-hidden className="nudge inline-block text-flare">

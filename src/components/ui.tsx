@@ -126,7 +126,20 @@ export function Section({
   )
 }
 
-/** A section on the deep navy, for breaking up a long light page. */
+/**
+ * A section that inverts to the bone field, for breaking up a long dark page.
+ *
+ * Under the light theme this was the dark navy band; when the site went dark
+ * the tokens inverted in place, so it is now the light band — the one
+ * deliberate contrast move the dark theme kept, and the reason the inverted
+ * button variants below still read as accents rather than washing out.
+ *
+ * Headings inside it must invert too. `Heading` hardcodes `text-ink` (the
+ * foreground token everywhere else on the site), which on this band is the
+ * band's own colour — the same trap the light theme had with the reverse
+ * polarity, now caught by the theme flip. Rather than make every page pass an
+ * override, the band inverts its own headings.
+ */
 export function InvertedSection({
   children,
   className = '',
@@ -137,7 +150,10 @@ export function InvertedSection({
   id?: string
 }) {
   return (
-    <section id={id} className={`bg-ink py-20 text-paper md:py-28 ${className}`}>
+    <section
+      id={id}
+      className={`bg-ink py-20 text-paper md:py-28 [&_h1]:text-paper [&_h2]:text-paper [&_h3]:text-paper [&_h4]:text-paper ${className}`}
+    >
       {children}
     </section>
   )
@@ -249,7 +265,7 @@ export function Field({
 }
 
 const INPUT_STYLES =
-  'w-full rounded-lg border border-line bg-paper px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-mist/60 focus:border-ink'
+  'w-full rounded-lg border border-line bg-ink/[0.03] px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-mist/60 focus:border-gold'
 
 /*
  * The form controls forward their refs.

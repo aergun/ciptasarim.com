@@ -5,55 +5,79 @@ export default {
     extend: {
       colors: {
         /*
-         * Near-black with a blue cast. The dominant field colour — a spec
-         * table reads as instrumentation, so the page sits dark-on-light
-         * rather than the reverse.
+         * The dark theme, ported from the reference site's palette and re-roled
+         * for this one. The token *names* kept their light-theme meanings —
+         * `paper` is still "the page field" and `ink` still "the foreground" —
+         * but the values inverted in place when the site went dark, so a spec
+         * table reads as instrumentation on a dark ground rather than a light
+         * sheet.
+         *
+         * The two colours that did NOT move are the provenance semaphores:
+         * `proven` still belongs to measured figures alone and `flare` to
+         * modelled ones. They were re-tuned for contrast on the dark field,
+         * never re-assigned.
+         */
+        // The page field. Near-black with a warm cast — the reference body
+        // colour (#08040A) rather than a blue-black, so the green/orange
+        // provenance semaphores sit against warmth, not cold navy.
+        paper: '#08040A',
+        // The raised field: panels and section bands a shade above `paper`.
+        stage: '#100A11',
+        /*
+         * The foreground: warm bone, on the page and inside raised panels that
+         * invert to it (bg-ink sections render as light bands on the dark
+         * ground — the one deliberate contrast move the dark theme kept).
          */
         ink: {
-          DEFAULT: '#0B1620',
-          soft: '#152634',
-          mute: '#2E4256',
+          DEFAULT: '#F1E7E2',
+          soft: '#E2D6CF',
+          mute: '#C4B6AF',
         },
-        paper: '#F5F6F8',
-        stage: '#EDEFF2',
-        // Body copy, and any secondary numeric readout.
-        mist: '#5A6B78',
+        // Secondary copy: the reference's ~60%-alpha bone.
+        mist: '#9C8F92',
         /*
-         * WARNING accent. Used for figures whose basis is `modelled`, and for
-         * the engineering caveat. Deliberately the same role as the reference
-         * site's warning colour: it means "look before you use this number".
+         * WARNING accent. Modelled figures and the engineering caveat. Same
+         * role as the light theme, lightened for the dark field.
          */
-        flare: '#D9541E',
+        flare: '#E07840',
         /*
-         * PROVENANCE green. Reserved for `measured` figures and nothing else.
-         * A colour that means only one thing is worth more here than a wider
-         * palette, because the whole point of Figure.basis is that a reader
-         * can tell a measured number from a modelled one at a glance.
+         * PROVENANCE green. Measured figures and nothing else. Re-tuned to the
+         * reference's server-dot green; the role is untouched.
          */
-        proven: '#0E7A5F',
+        proven: '#5BC89B',
         /*
-         * Technical blue. Carries the engineering register: dimension lines,
-         * port groups on a block diagram, calculated values.
+         * Technical blue. Dimension lines, port groups, calculated values.
+         * Lightened like the other semaphores.
          */
-        signal: '#1F6FB2',
-        // "No data" — a figure we have not characterised, deliberately not red.
-        // Absence is not an error, so it must not be coloured like one.
-        void: '#7A8794',
+        signal: '#7FB0DC',
+        // "No data" — deliberately still not red. Absence is not an error.
+        void: '#8A7C85',
+        /*
+         * The ornamental gold, carried over from the reference site. It marks
+         * structure, not data: eyebrows, kick lines, hairline connectors, the
+         * active nav item. It deliberately does NOT touch figures — a number
+         * coloured gold would read as certain the way `proven` does, and only
+         * a measurement earns that.
+         */
+        gold: '#C09657',
         line: {
-          DEFAULT: '#DDE2E7',
-          soft: '#E9EDF1',
+          DEFAULT: '#2C1B25',
+          soft: '#221820',
         },
       },
       fontFamily: {
-        // Inter covers Turkish (including dotless ı and dotted İ) with no
-        // fallback substitution, so it needs no separate Turkish face.
-        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
         /*
-         * Part numbers, spec values, anything monospaced. JetBrains Mono
-         * includes Latin Extended-A, so the Turkish glyphs render without a
-         * fallback jump in a monospaced context.
+         * IBM Plex Sans, from the reference site. Covers Latin Extended-A, so
+         * Turkish glyphs — dotless ı, dotted İ, ş, ğ, ç — render without a
+         * fallback face swapping in mid-line, which in a spec table is
+         * visually obvious.
          */
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        sans: ['"IBM Plex Sans"', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        /*
+         * Part numbers, spec values, anything monospaced. IBM Plex Mono pairs
+         * with the sans and carries the same Turkish coverage.
+         */
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       fontSize: {
         'display-sm': ['clamp(2.1rem, 5vw, 3.1rem)', { lineHeight: '1.03' }],
@@ -67,6 +91,11 @@ export default {
       maxWidth: {
         prose: '38rem',
         shell: '82rem',
+      },
+      boxShadow: {
+        // The reference's card shadow: a deep drop plus a hairline inner top.
+        panel: 'inset 0 1px 0 rgba(255,240,230,0.06), 0 24px 60px -36px rgba(0,0,0,0.9)',
+        hot: 'inset 0 1px 0 rgba(255,235,210,0.14), 0 50px 110px -50px rgba(99,17,25,0.95), 0 0 0 1px rgba(192,150,95,0.08)',
       },
       transitionTimingFunction: {
         expo: 'cubic-bezier(0.16, 1, 0.3, 1)',
@@ -85,11 +114,23 @@ export default {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
+        // The reference's pulse dot: a node that is alive (a live run, a
+        // reachable service) breathes a small halo.
+        pulseDot: {
+          '50%': { boxShadow: '0 0 0 5px rgba(192,150,95,0.12), 0 0 16px rgba(192,150,95,0.9)' },
+        },
+        // The terminal caret.
+        blink: {
+          '0%, 49%': { opacity: '1' },
+          '50%, 100%': { opacity: '0' },
+        },
       },
       animation: {
         rise: 'rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both',
         dropIn: 'dropIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both',
         fadeIn: 'fadeIn 0.5s ease-out both',
+        pulseDot: 'pulseDot 2.4s ease-in-out infinite',
+        blink: 'blink 1.1s step-end infinite',
       },
     },
   },

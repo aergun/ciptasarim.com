@@ -74,14 +74,88 @@
   /*
    * The small tracked label above a heading. `Eyebrow` renders this class rather
    * than a utility string so it reads consistently in devtools across every page.
+   *
+   * Gold, not flare: under the dark theme the reference site's gold became this
+   * site's structural accent, and `flare` stayed with the warning figures. An
+   * eyebrow is structure, not a caveat.
    */
   .eyebrow {
-    @apply text-[10px] font-semibold uppercase tracking-[0.24em] text-flare;
+    @apply text-[10px] font-semibold uppercase tracking-[0.24em] text-gold;
   }
 
   /* The quiet horizontal separator; `Rule` renders it. */
   .rule {
     @apply border-0 border-t border-line;
+  }
+
+  /*
+   * The dark-theme card, ported from the reference site's architecture cards:
+   * a vertical warm gradient, a hairline border, a soft deep drop, and a light
+   * inner-top edge that reads as a machined chamfer. On hover it lifts three
+   * pixels and its border warms — the reference's exact motion.
+   */
+  .panel {
+    position: relative;
+    border-radius: 1.25rem;
+    border: 1px solid #2c1b25;
+    background: linear-gradient(180deg, #140b12 0%, #0d070b 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 240, 230, 0.06), 0 24px 60px -36px rgba(0, 0, 0, 0.9);
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease,
+      transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  /* The chamfer: a light seam across the card's top edge. */
+  .panel::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    right: 1.5rem;
+    top: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(241, 231, 226, 0.18), transparent);
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    .panel:hover {
+      transform: translateY(-3px);
+      border-color: #4a3040;
+    }
+  }
+
+  /*
+   * The "hot" variant — the one card on a spread that is the subject. The
+   * reference layered two radial glows (a cold one top-left, an ember one
+   * bottom-right) over the same gradient, and let the gold seam through at
+   * full strength. Here it is reserved for the panel a run is currently
+   * talking to, so hotness is state, not decoration.
+   */
+  .panel-hot {
+    border-color: rgba(192, 150, 95, 0.5);
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(24, 40, 74, 0.95) 0%, rgba(24, 40, 74, 0.35) 45%, transparent 70%),
+      radial-gradient(90% 80% at 100% 100%, rgba(99, 17, 25, 0.75) 0%, transparent 65%),
+      #0d070b;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 235, 210, 0.14),
+      0 50px 110px -50px rgba(99, 17, 25, 0.95),
+      0 0 0 1px rgba(192, 150, 95, 0.08);
+  }
+
+  .panel-hot::before {
+    background: linear-gradient(90deg, transparent, rgba(243, 218, 151, 0.55), transparent);
+  }
+
+  /*
+   * A glowing connector segment (vertical or horizontal). The reference gave
+   * its gold links a faint bloom; a connector that glows slightly reads as
+   * live wiring rather than a diagram border.
+   */
+  .conduit {
+    background: linear-gradient(#e0bd85, #8a6640);
+    box-shadow: 0 0 10px rgba(192, 150, 95, 0.35);
   }
 }
 
@@ -128,5 +202,59 @@
   }
   .rise {
     opacity: 1;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Scroll reveal, ported from the reference site's scroll-triggered sections. */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The `Reveal` component toggles `.is-in` when its block first crosses the
+ * viewport. One class rather than per-item delays: a section reveals as a
+ * whole, the way the reference's do, and stagger can be done with inline
+ * transition-delay where a single block really needs it.
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 0.61, 0.21, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* The terminal caret in the run viewer. */
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: #c09657;
+  animation: blink 1.1s step-end infinite;
+}
+
+/* Terminal scanlines: the faint stripe texture the reference puts behind
+   its server panel, so a live region reads as instrumentation. */
+.scanlines {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(241, 231, 226, 0.025) 22px 23px),
+    linear-gradient(180deg, #140b12, #0d070b);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .caret {
+    animation: none;
   }
 }

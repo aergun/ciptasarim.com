@@ -121,6 +121,50 @@ export const en: Mirror<TrShape> = {
     processBody:
       'A broad range of nodes. Cells that are not characterised are not left blank — they are listed with the reason.',
     faqTitle: 'Frequently asked questions',
+
+    /* ---- Architecture: the spec-to-delivery flow diagram. --------------*/
+    archEyebrow: 'Architecture',
+    archTitle: 'Spec to delivery',
+    archBody:
+      'The site’s flow travels one line: your spec lands on a core in the catalogue, the calculators and the characterisation record check every figure against its basis, and the quote and delivery package close the chain. A broken line is the absence of a measurement that has not settled yet — it is left empty with its reason written, never filled with a guess.',
+    archNodes: {
+      you: { label: 'You', caption: 'Your spec and inputs' },
+      catalogue: { label: 'The catalogue', caption: 'Cores with basis badges' },
+      calculators: { label: 'The calculators', caption: 'Eight models, written assumptions' },
+      quote: { label: 'Quote', caption: 'Priced by node, tier and package' },
+      delivery: { label: 'Delivery', caption: 'Netlist, GDSII, UVM — by package' },
+    },
+    archRecord: {
+      title: 'The characterisation record',
+      caption: 'The basis behind every figure.',
+    },
+    archTable: {
+      title: 'The process-node table',
+      caption: 'Nodes from 180 nm down to 2 nm; empty cells listed with their reasons.',
+    },
+    archFoundry: {
+      title: 'Foundry + PDK',
+      caption: 'A confirmed PDK reference attaches only at quote time.',
+    },
+    archLoops: {
+      audit: {
+        title: 'The audit loop',
+        caption: 'Before anything ships, every figure’s basis is verified twice: by the scripts and by the compiler.',
+      },
+      measure: {
+        title: 'The measurement loop',
+        caption: 'Every quote returns a new measurement into the table; empty cells settle over time.',
+      },
+    },
+
+    /* ---- The characterisation run viewer. ------------------------------*/
+    runEyebrow: 'A verification run',
+    runTitle: 'Inside a run',
+    runBody:
+      'A replay of how a characterisation record is completed. The run stops at what we call the gate and waits for your decision on an uncharacterised figure: leave the gap with its reason written, or compute from a model and label it. Both are honest; a guess typed into a blank field is not.',
+    runPhases: { spec: 'Spec', figures: 'Figures', gate: 'Gate', record: 'Record' },
+    runReplay: 'Replay',
+    runLive: 'live',
   },
 
   /* -------------------------------------------------------------- cores */

@@ -98,7 +98,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     to={entry.to}
                     className={({ isActive }) =>
                       `whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors ${
-                        isActive ? 'text-flare' : 'text-mist hover:text-ink'
+                        isActive ? 'text-gold' : 'text-mist hover:text-ink'
                       }`
                     }
                   >

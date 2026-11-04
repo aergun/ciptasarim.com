@@ -13,6 +13,9 @@
 
 import { LocaleLink, useSite } from '../lib/site.tsx'
 import { VideoHero } from '../components/VideoHero.tsx'
+import { Reveal } from '../components/Reveal.tsx'
+import { Architecture } from '../components/Architecture.tsx'
+import { RunTerminal } from '../components/RunTerminal.tsx'
 import { Container, Eyebrow, Heading, Prose, Section, InvertedSection, Stat, ButtonLink } from '../components/ui.tsx'
 import { FigureBadge, figureColor, figureValue, FigureGap, BASIS_FIGURES } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
@@ -97,6 +100,21 @@ export function Home() {
         </Container>
       </Section>
 
+      {/* Architecture: the spec-to-delivery line the reference site draws for
+          its agent stack, redrawn for the chain a buy travels here. */}
+      <Section id="mimari">
+        <Reveal>
+          <Container>
+            <Eyebrow>{home.archEyebrow}</Eyebrow>
+            <Heading className="mt-4">{home.archTitle}</Heading>
+            <Prose className="mt-6">{home.archBody}</Prose>
+            <div className="mt-14">
+              <Architecture />
+            </div>
+          </Container>
+        </Reveal>
+      </Section>
+
       {/* Featured cores — one per kind, each led by its first authored figure. */}
       <Section>
         <Container>
@@ -119,10 +137,25 @@ export function Home() {
         </Container>
       </Section>
 
+      {/* The characterisation run: the reference's "inside a run" viewer
+          re-grounded on this site's own decision — what to do with a gap. */}
+      <Section id="tur" className="bg-stage">
+        <Reveal>
+          <Container>
+            <Eyebrow>{home.runEyebrow}</Eyebrow>
+            <Heading className="mt-4">{home.runTitle}</Heading>
+            <Prose className="mt-6">{home.runBody}</Prose>
+            <div className="mt-12 md:px-6">
+              <RunTerminal phases={home.runPhases} replayLabel={home.runReplay} />
+            </div>
+          </Container>
+        </Reveal>
+      </Section>
+
       {/* The calculators, listed so a design engineer can judge the models first. */}
       <InvertedSection>
         <Container>
-          <Eyebrow className="text-flare">{strings.nav.tools}</Eyebrow>
+          <Eyebrow>{strings.nav.tools}</Eyebrow>
           <Heading className="mt-4">{home.toolsTitle}</Heading>
           <Prose className="mt-6 text-paper/80">{home.toolsBody}</Prose>
           <div className="mt-12 grid gap-px bg-paper/10 md:grid-cols-2">
@@ -206,7 +239,7 @@ function FeaturedCard({ core }: { core: Core }) {
   const price = entryPriceFrom([core])
 
   return (
-    <LocaleLink to={`/cekirdekler/${core.slug}`} className="group block border border-line bg-paper transition-colors hover:border-ink">
+    <LocaleLink to={`/cekirdekler/${core.slug}`} className="group block border border-line bg-paper transition-colors hover:border-gold/50">
       <div className="aspect-[16/9] overflow-hidden border-b border-line bg-stage">
         <CoreImage core={core} className="h-full w-full object-cover" />
       </div>
