@@ -171,6 +171,33 @@ export const tr = {
       'Sitenin akışı dört turda oynatılır: kayıt, hesap, boşluk ve teslim. Her tur, bir kararın gerektiği kapıda durur; onaylayın ve devam edin.',
     demosReplay: 'Tekrar oynat',
     demosLive: 'canlı',
+
+    /* ---- Vision: the manifesto, the principles and the wafer scene. ----*/
+    visionEyebrow: 'Vizyon',
+    visionStatement:
+      'Yarı iletken IP, tahminle değil kanıtla satılır. Bu katalogda her sayı kaynağıyla birlikte görünür: ölçülen, modellenen ya da karakterize edilmemiş.',
+    visionClause: 'Boş hücre bir gizlenme değil, beyandır — kararınızı kendi verinizle verin.',
+    principles: {
+      source: {
+        title: 'Kaynağı yazılıdır',
+        body: 'Her sayının yanında durumu görünür: ölçülen, modellenen ya da karakterize edilmemiş. İkisi birbirinin görünümünü taşımaz.',
+      },
+      gap: {
+        title: 'Boşluk tahmin değildir',
+        body: 'Ölçülmemiş değer uydurulmaz; hücre boş bırakılır, nedeni iki dilde yazılır. Sıfır, çizgi ya da boş alan olarak görünmez.',
+      },
+      pdk: {
+        title: 'PDK doğrulanmadan ad çıkmaz',
+        body: 'Doğrulanmamış bir dökümhane ya da PDK referansı doğrulanmış gibi sunulmaz; kaynak bilgisi null kalır.',
+      },
+      price: {
+        title: 'Fiyat bir karardır',
+        body: 'Fiyat, teklif sırasında dökümhane ve pakete göre yazılır. Sitede yayımlanmış bir tahmin fiyatı yoktur.',
+      },
+    },
+    waferHint: 'Sürükleyerek döndürün',
+    waferLegend: { pads: 'Pad halkası', rows: 'Standart hücre sıraları', macro: 'Makro bölgeleri', core: 'Çekirdek bölgesi' },
+    waferCaption: 'Ölçekli bir yerleşim değildir — yalnızca bölgeleri gösterir.',
   },
 
   /* -------------------------------------------------------------- cores */

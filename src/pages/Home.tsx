@@ -16,6 +16,7 @@ import { VideoHero } from '../components/VideoHero.tsx'
 import { Reveal } from '../components/Reveal.tsx'
 import { Architecture } from '../components/Architecture.tsx'
 import { Demos } from '../components/Demos.tsx'
+import { WaferScene } from '../components/WaferScene.tsx'
 import { Container, Eyebrow, Heading, Prose, Section, InvertedSection, Stat, ButtonLink } from '../components/ui.tsx'
 import { FigureBadge, figureColor, figureValue, FigureGap, BASIS_FIGURES } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
@@ -82,6 +83,54 @@ export function Home() {
           ))}
         </div>
       </Container>
+
+      {/* Vision: the reference's manifesto-plus-principles block, paired
+          with the interactive die scene, all resting on the provenance
+          discipline rather than an agent story. */}
+      <Section id="vizyon">
+        <Container>
+          <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
+            <Reveal>
+              <div>
+                <Eyebrow>{home.visionEyebrow}</Eyebrow>
+                <p className="mt-6 text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-[1.22] tracking-[-0.01em] text-ink">
+                  {home.visionStatement}
+                </p>
+                <p className="mt-4 text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-[1.22] tracking-[-0.01em] text-gold">
+                  {home.visionClause}
+                </p>
+
+                {/* The four principles, numbered like the reference's cards;
+                    the reveal staggers one row behind the last. */}
+                <div className="mt-12">
+                  {[
+                    home.principles.source,
+                    home.principles.gap,
+                    home.principles.pdk,
+                    home.principles.price,
+                  ].map((principle, index) => (
+                    <Reveal key={principle.title} delay={index * 90}>
+                      <div className="border-t border-line pt-5 pb-7">
+                        <p aria-hidden className="font-mono text-[12px] text-gold">
+                          {String(index + 1).padStart(2, '0')}
+                        </p>
+                        <p className="mt-2 text-[17px] font-medium leading-snug text-ink">{principle.title}</p>
+                        <Prose className="mt-2 text-[13px] leading-[1.7]">{principle.body}</Prose>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* The interactive die. Pointer motion only — a keyboard reader
+                is not penalised for skipping decorative movement. */}
+            <Reveal delay={150}>
+              <WaferScene />
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
 
       {/* The provenance legend: the site's central discipline, stated once. */}
       <Section className="bg-stage">

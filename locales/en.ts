@@ -164,6 +164,33 @@ export const en: Mirror<TrShape> = {
       'The site’s flow, replayed as four runs: the record, the calculator, the gap and the delivery. Each run pauses at the gate where a decision is needed — approve and continue.',
     demosReplay: 'Replay',
     demosLive: 'live',
+
+    /* ---- Vision: the manifesto, the principles and the wafer scene. ----*/
+    visionEyebrow: 'Vision',
+    visionStatement:
+      'Semiconductor IP is not sold on guesses. In this catalogue every figure appears with its source: measured, modelled or uncharacterised.',
+    visionClause: 'An empty cell is not concealment — it is a statement. Make your decision on your own data.',
+    principles: {
+      source: {
+        title: 'The source is written',
+        body: 'Beside every figure sits its basis: measured, modelled or uncharacterised. Two figures with different bases never look the same.',
+      },
+      gap: {
+        title: 'A gap is not a guess',
+        body: 'An uncharacterised value is never invented; the cell is left empty and the reason is written in both languages. Never 0, never a dash, never a blank field.',
+      },
+      pdk: {
+        title: 'PDKs stay null until confirmed',
+        body: 'An unconfirmed foundry or PDK reference is never presented as confirmed; the source field stays null.',
+      },
+      price: {
+        title: 'A price is a decision',
+        body: 'A price is written at quote time, per foundry and package. There is no published estimate of one on this site.',
+      },
+    },
+    waferHint: 'Drag to turn',
+    waferLegend: { pads: 'Pad ring', rows: 'Standard-cell rows', macro: 'Macro regions', core: 'Core region' },
+    waferCaption: 'Not a scaled placement — regions only.',
   },
 
   /* -------------------------------------------------------------- cores */

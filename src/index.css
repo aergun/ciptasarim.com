@@ -258,3 +258,47 @@
     animation: none;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* The wafer scene: pointer tilt, drag turn, spotlight.                        */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The wafer root carries `--rx`/`--ry` (tilt angles) and `--mx`/`--my`
+ * (pointer position), written from `WaferScene`. The content rotates under a
+ * perspective; the spotlight is a gold pool positioned at the pointer and
+ * does not move with the tilt.
+ */
+.wafer {
+  cursor: grab;
+}
+
+.wafer.is-turning {
+  cursor: grabbing;
+}
+
+.wafer-content {
+  transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.25s ease-out;
+  will-change: transform;
+}
+
+/* Dragging: no easing lag, the turn must track the pointer. */
+.wafer.is-turning .wafer-content {
+  transition: none;
+}
+
+.wafer-spot {
+  background: radial-gradient(240px at var(--mx, 62%) var(--my, 40%), rgba(192, 150, 95, 0.14), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wafer {
+    cursor: default;
+  }
+
+  .wafer-content {
+    transform: none;
+    transition: none;
+  }
+}
