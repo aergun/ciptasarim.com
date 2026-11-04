@@ -164,14 +164,13 @@ export const tr = {
       },
     },
 
-    /* ---- The characterisation run viewer. ------------------------------*/
-    runEyebrow: 'Bir doğrulama turu',
-    runTitle: 'Bir turun içinde',
-    runBody:
-      'Bir karakterizasyon kaydının nasıl tamamlandığını gösteren tur. Tur, kapı dediğimiz noktada durur ve sizden karar bekler: karakterize edilmemiş bir sayı için boşluk bırakıp gerekçesini yazmak ya da modelden hesaplayıp etiketlemek. İkisi de dürüsttür; boş alana tahmin yazmak değildir.',
-    runPhases: { spec: 'Spesifikasyon', figures: 'Figürler', gate: 'Kapı', record: 'Kayıt' },
-    runReplay: 'Tekrar oynat',
-    runLive: 'canlı',
+    /* ---- Demos: the tabbed run players. -------------------------------*/
+    demosEyebrow: 'Demolar',
+    demosTitle: 'Tek akış, dört tur',
+    demosBody:
+      'Sitenin akışı dört turda oynatılır: kayıt, hesap, boşluk ve teslim. Her tur, bir kararın gerektiği kapıda durur; onaylayın ve devam edin.',
+    demosReplay: 'Tekrar oynat',
+    demosLive: 'canlı',
   },
 
   /* -------------------------------------------------------------- cores */

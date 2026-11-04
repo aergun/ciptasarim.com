@@ -15,7 +15,7 @@ import { LocaleLink, useSite } from '../lib/site.tsx'
 import { VideoHero } from '../components/VideoHero.tsx'
 import { Reveal } from '../components/Reveal.tsx'
 import { Architecture } from '../components/Architecture.tsx'
-import { RunTerminal } from '../components/RunTerminal.tsx'
+import { Demos } from '../components/Demos.tsx'
 import { Container, Eyebrow, Heading, Prose, Section, InvertedSection, Stat, ButtonLink } from '../components/ui.tsx'
 import { FigureBadge, figureColor, figureValue, FigureGap, BASIS_FIGURES } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
@@ -137,17 +137,12 @@ export function Home() {
         </Container>
       </Section>
 
-      {/* The characterisation run: the reference's "inside a run" viewer
-          re-grounded on this site's own decision — what to do with a gap. */}
+      {/* Demos: the reference site's "one flow, four runs" rail, replaying
+          this site's own flows instead of footage it does not have. */}
       <Section id="tur" className="bg-stage">
         <Reveal>
           <Container>
-            <Eyebrow>{home.runEyebrow}</Eyebrow>
-            <Heading className="mt-4">{home.runTitle}</Heading>
-            <Prose className="mt-6">{home.runBody}</Prose>
-            <div className="mt-12 md:px-6">
-              <RunTerminal phases={home.runPhases} replayLabel={home.runReplay} />
-            </div>
+            <Demos />
           </Container>
         </Reveal>
       </Section>

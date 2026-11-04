@@ -1,35 +1,35 @@
 import { useEffect, useRef, useState } from 'react'
-import { runScript, type RunGateOption, type RunLine } from '../../content/runlog.ts'
+import type { DemoScript, RunGateOption, RunLine } from '../../content/runlog.ts'
 import { useSite } from '../lib/site.tsx'
 
 /**
- * RunTerminal — the "inside a run" viewer, ported from the reference site's
- * live-session mockup and demo players, then re-grounded.
+ * RunTerminal — the demo player of the Demos section, ported from the
+ * reference site's run-log players and re-grounded.
  *
- * The reference replays its agent's tool calls; this site has no agent, so
- * the honest analogue is the decision *this* site actually automates nothing
- * of: completing a characterisation record. The terminal replays that —
- * figures check out one by one, a gap is found, and the run stops at a GATE
- * where the reader must pick one of the two legitimate completions (write
- * the gap's reason, or compute-and-label as modelled). That is the demo
- * player's "Paused for you — approve & continue" gesture carrying this
- * site's own cargo: the pause is the provenance discipline.
+ * The reference replays its agent's tool calls over demo videos; this site
+ * has no agent and no honest footage to fabricate, so the player replays
+ * *this site's own flows* as scripted terminal runs: figures checking out, a
+ * model running with its assumptions, a gap rendering, a delivery package
+ * being specified. Each script stops at a GATE where a real decision exists,
+ * and the reader approves one of the legitimate completions to continue —
+ * the reference's "Paused for you — approve & continue" gesture carrying
+ * this site's provenance cargo.
  *
  * Interaction summary, matching the reference's players:
  *  - auto-plays when it scrolls into view (IntersectionObserver, once),
  *  - pauses at the gate until the reader approves an option,
  *  - has play/pause and replay controls,
- *  - phases tick in a rail, like the reference's numbered run steps,
+ *  - ticks through the script's phases in a rail (per-demo milestones), the
+ *    reference's numbered run steps,
  *  - `prefers-reduced-motion` renders the log in full (the gate stays
  *    interactive) instead of running on a timer.
  *
- * The dialogue comes from `content/runlog.ts` as `T`s; the chrome labels come
- * from the locale bundle, so nothing here is monolingual.
+ * The dialogue comes from `content/runlog.ts` as `T`s; the chrome labels —
+ * `live` and `replayLabel` — come from the locale bundle via the page, so no
+ * string is authored in one language in two places.
  */
 
 const LINE_SPEED_MS = 850
-
-type Phase = 'spec' | 'figures' | 'gate' | 'record'
 
 const LINE_STYLES: Record<RunLine['kind'], { glyph: string; tone: string }> = {
   cmd: { glyph: '❯', tone: 'text-gold' },
@@ -39,16 +39,17 @@ const LINE_STYLES: Record<RunLine['kind'], { glyph: string; tone: string }> = {
   // The gate prompt carries its own panel and is not part of the line register.
 }
 
-export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, string>; replayLabel: string }) {
-  const { t, strings } = useSite()
+export function RunTerminal({
+  demo,
+  live,
+  replayLabel,
+}: {
+  demo: DemoScript
+  live: string
+  replayLabel: string
+}) {
+  const { t } = useSite()
   const rootRef = useRef<HTMLDivElement>(null)
-
-  /*
-   * Chrome labels — `phases` and `replayLabel` — arrive from the locale bundle
-   * via the page, so the viewer itself never hardcodes a string in one
-   * language. The dialogue comes from `content/runlog.ts` as `T`s; the viewer
-   * owns no copy of its own.
-   */
 
   const [started, setStarted] = useState(false)
   const [playing, setPlaying] = useState(true)
@@ -78,8 +79,13 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
             // log is on screen at once; the gate keeps its interaction.
             if (reduceMotion) {
               setPlaying(false)
-              setShown(runScript.lines.length)
-              setGateShown(true)
+              if (demo.gate) {
+                setShown(demo.lines.length)
+                setGateShown(true)
+              } else {
+                setShown(demo.lines.length + demo.epilogue.length)
+                setDone(true)
+              }
             }
             observer.disconnect()
           }
@@ -90,6 +96,8 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
 
     observer.observe(node)
     return () => observer.disconnect()
+    // One run per mount: the Demos section remounts the player per tab.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   /* The single pacing effect. It holds while the run is not playing, holds
@@ -97,27 +105,33 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
      otherwise. Each branch returns its own timeout cleanup, so a state change
      mid-line never double-fires. */
   useEffect(() => {
-    if (!started || !playing) return
+    if (!started || !playing || done) return
 
     if (chosen == null) {
       if (gateShown) return
-      if (shown < runScript.lines.length) {
+      if (demo.gate && shown < demo.lines.length) {
         const id = setTimeout(() => setShown((s) => s + 1), LINE_SPEED_MS)
         return () => clearTimeout(id)
       }
-      const id = setTimeout(() => setGateShown(true), 600)
-      return () => clearTimeout(id)
-    }
-
-    if (postShown < runScript.epilogue.length) {
-      const id = setTimeout(() => setPostShown((s) => s + 1), LINE_SPEED_MS)
-      return () => clearTimeout(id)
-    }
-    if (!done) {
+      if (!demo.gate && shown < demo.lines.length + demo.epilogue.length) {
+        const id = setTimeout(() => setShown((s) => s + 1), LINE_SPEED_MS)
+        return () => clearTimeout(id)
+      }
+      if (demo.gate) {
+        const id = setTimeout(() => setGateShown(true), 600)
+        return () => clearTimeout(id)
+      }
       const id = setTimeout(() => setDone(true), 700)
       return () => clearTimeout(id)
     }
-  }, [started, playing, shown, gateShown, chosen, postShown, done])
+
+    if (postShown < demo.epilogue.length) {
+      const id = setTimeout(() => setPostShown((s) => s + 1), LINE_SPEED_MS)
+      return () => clearTimeout(id)
+    }
+    const id = setTimeout(() => setDone(true), 700)
+    return () => clearTimeout(id)
+  }, [started, playing, shown, gateShown, chosen, postShown, done, demo])
 
   const approve = (option: RunGateOption) => {
     if (chosen != null) return
@@ -135,8 +149,47 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
     setStarted(true)
   }
 
-  /* Phase derivation for the rail: which block the run is inside right now. */
-  const currentPhase: Phase = done ? 'record' : gateShown || chosen != null ? 'gate' : shown < 2 ? 'spec' : 'figures'
+  /*
+   * The phase rail. Slots: the script's milestones, then — when the script
+   * has a gate — the gate slot, then the close-out slot. Gateless scripts
+   * (the calculator) reach their close-out slot by running the epilogue
+   * straight off the last line; `shown` then counts into the epilogue, so
+   * gateless rendering splits the two blocks at the milestone boundary.
+   */
+  const gateless = !demo.gate
+  const bodyLines: RunLine[] = gateless ? [...demo.lines, ...demo.epilogue] : demo.lines
+  const revealedGateless = Math.min(shown, bodyLines.length)
+
+  const railSlots: { label: string; reached: boolean; current: boolean }[] = []
+  {
+    const startIdx = currentMilestone(demo, shown)
+    demo.milestones.forEach((milestone, index) => {
+      railSlots.push({
+        label: t(milestone.label),
+        reached: index <= startIdx,
+        current: index === startIdx && !gateShown && chosen == null,
+      })
+    })
+    if (demo.gate) {
+      railSlots.push({
+        label: t(demo.gate.railLabel),
+        reached: gateShown || chosen != null,
+        current: (gateShown || chosen != null) && !done,
+      })
+    }
+    railSlots.push({
+      label: t(demo.recordLabel),
+      reached: done,
+      current: done,
+    })
+  }
+
+  const currentTone = (state: { reached: boolean; current: boolean }) =>
+    state.current
+      ? 'animate-pulseDot border-gold/60 bg-gold/10 text-gold'
+      : state.reached
+        ? 'border-proven/40 text-proven'
+        : 'border-line text-mist/60'
 
   const lineRows = (lines: RunLine[], visibleCount: number) =>
     lines.slice(0, visibleCount).map((line, index) => {
@@ -156,30 +209,30 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
         <div className="flex min-w-0 items-center gap-3 font-mono text-[11px] tracking-wide">
           <span aria-hidden className="inline-block h-[7px] w-[7px] shrink-0 rounded-full bg-proven shadow-[0_0_8px_rgba(91,200,155,0.8)] animate-pulseDot" />
           <span className="truncate text-ink">
-            dogrulama@{runScript.process} — {t(runScript.title)}
+            {demo.host}@ciptasarim — {t(demo.scriptTitle)}
           </span>
         </div>
         <span className="shrink-0 rounded-full border border-gold/30 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gold">
-          {strings.home.runLive}
+          {live}
         </span>
       </div>
 
       <div className="md:flex">
-          {/* The log itself. min-h keeps the gate's arrival from jarring the
+        {/* The log itself. min-h keeps the gate's arrival from jarring the
             layout — the box is sized for the finished run. */}
         <div className="min-h-[21rem] flex-1 space-y-2 px-5 py-5">
-          {lineRows(runScript.lines, shown)}
+          {gateless ? lineRows(bodyLines, revealedGateless) : lineRows(demo.lines, shown)}
 
           {/* The gate. Hidden until pre-choice lines finish; sticky after the
               choice so the record of the decision stays on screen. */}
-          {gateShown ? (
-            <div className={`panel-hot mt-4 rounded-xl p-4 ${chosen && !playing ? 'opacity-90' : ''}`}>
+          {gateShown && demo.gate ? (
+            <div className="panel-hot mt-4 rounded-xl p-4">
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
-                {t(runScript.gate.prompt)}
+                {t(demo.gate.prompt)}
               </p>
-              <p className="mt-2 text-[13px] leading-relaxed text-ink">{t(runScript.gate.question)}</p>
-              <div className="mt-3 space-y-2" role="group" aria-label={t(runScript.gate.question)}>
-                {runScript.gate.options.map((option, index) => {
+              <p className="mt-2 text-[13px] leading-relaxed text-ink">{t(demo.gate.question)}</p>
+              <div className="mt-3 space-y-2" role="group" aria-label={t(demo.gate.question)}>
+                {demo.gate.options.map((option, index) => {
                   const isChosen = chosen?.id === option.id
                   const isOtherChosen = chosen != null && !isChosen
                   return (
@@ -211,17 +264,14 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
           {/* The choice's outcome and the epilogue after it. */}
           {chosen ? (
             <>
-              <div className="mt-4 flex gap-3 font-mono text-[12.5px] leading-relaxed">
-                <span aria-hidden className="shrink-0 text-proven">✓</span>
-                <span className="text-mist">{t(chosen.outcome)}</span>
-              </div>
-              {postShown > 0 ? <div className="mt-2 space-y-2">{lineRows(runScript.epilogue, postShown)}</div> : null}
+              {lineRows(chosen.outcome, chosen.outcome.length)}
+              {postShown > 0 ? <div className="mt-2 space-y-2">{lineRows(demo.epilogue, postShown)}</div> : null}
             </>
           ) : null}
 
           {done ? (
             <p className="mt-4 border-t border-line pt-3 font-mono text-[12px] text-gold">
-              {t(runScript.close)}
+              {t(demo.close)}
               <span aria-hidden className="caret" />
             </p>
           ) : !gateShown ? (
@@ -229,31 +279,23 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
           ) : null}
         </div>
 
-        {/* The phase rail, the reference's numbered run steps reduced to the
-            four blocks this run has. */}
+        {/* The phase rail, the reference's numbered run steps reduced to this
+            script's blocks. */}
         <aside className="border-t border-line px-5 py-4 md:w-56 md:border-l md:border-t-0 md:py-5">
           <ol className="space-y-3">
-            {(Object.keys(phases) as Phase[]).map((phase, index) => {
-              const isPast = index < PHASE_ORDER.indexOf(currentPhase)
-              const isCurrent = phase === currentPhase
-              return (
-                <li key={phase} className="flex items-center gap-3 font-mono text-[11px] tracking-wide">
-                  <span
-                    aria-hidden
-                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] ${
-                      isCurrent
-                        ? 'animate-pulseDot border-gold/60 bg-gold/10 text-gold'
-                        : isPast
-                          ? 'border-proven/40 text-proven'
-                          : 'border-line text-mist/60'
-                    }`}
-                  >
-                    {index + 1}
-                  </span>
-                  <span className={isCurrent ? 'text-ink' : isPast ? 'text-mist' : 'text-mist/50'}>{phases[phase]}</span>
-                </li>
-              )
-            })}
+            {railSlots.map((slot, index) => (
+              <li key={index} className="flex items-center gap-3 font-mono text-[11px] tracking-wide">
+                <span
+                  aria-hidden
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] ${currentTone(slot)}`}
+                >
+                  {index + 1}
+                </span>
+                <span className={slot.current ? 'text-ink' : slot.reached ? 'text-mist' : 'text-mist/50'}>
+                  {slot.label}
+                </span>
+              </li>
+            ))}
           </ol>
         </aside>
       </div>
@@ -269,7 +311,7 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
           {playing ? '❚❚' : '▶'}
         </button>
         <span className="font-mono text-[11px] text-mist tabular">
-          {String(Math.min(shown, runScript.lines.length)).padStart(2, '0')}/{String(runScript.lines.length).padStart(2, '0')}
+          {String(Math.min(shown, demo.lines.length)).padStart(2, '0')}/{String(demo.lines.length).padStart(2, '0')}
         </span>
         <button
           type="button"
@@ -283,5 +325,12 @@ export function RunTerminal({ phases, replayLabel }: { phases: Record<Phase, str
   )
 }
 
-/** Phase order for the rail's past/current marking. */
-const PHASE_ORDER: Phase[] = ['spec', 'figures', 'gate', 'record']
+/** Which milestone is current: the last one whose line threshold is passed. */
+function currentMilestone(demo: DemoScript, shown: number): number {
+  let index = 0
+  for (let i = 0; i < demo.milestones.length; i++) {
+    const milestone = demo.milestones[i]
+    if (milestone && shown >= milestone.afterLines) index = i
+  }
+  return index
+}

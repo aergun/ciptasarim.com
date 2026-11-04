@@ -157,14 +157,13 @@ export const en: Mirror<TrShape> = {
       },
     },
 
-    /* ---- The characterisation run viewer. ------------------------------*/
-    runEyebrow: 'A verification run',
-    runTitle: 'Inside a run',
-    runBody:
-      'A replay of how a characterisation record is completed. The run stops at what we call the gate and waits for your decision on an uncharacterised figure: leave the gap with its reason written, or compute from a model and label it. Both are honest; a guess typed into a blank field is not.',
-    runPhases: { spec: 'Spec', figures: 'Figures', gate: 'Gate', record: 'Record' },
-    runReplay: 'Replay',
-    runLive: 'live',
+    /* ---- Demos: the tabbed run players. -------------------------------*/
+    demosEyebrow: 'Demos',
+    demosTitle: 'One flow, four runs',
+    demosBody:
+      'The site’s flow, replayed as four runs: the record, the calculator, the gap and the delivery. Each run pauses at the gate where a decision is needed — approve and continue.',
+    demosReplay: 'Replay',
+    demosLive: 'live',
   },
 
   /* -------------------------------------------------------------- cores */
