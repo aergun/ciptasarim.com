@@ -21,7 +21,8 @@
  */
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { createElement } from 'react'
 import { AuthProvider } from '../src/context/AuthContext.tsx'
@@ -30,7 +31,9 @@ import { MemoryRouter } from 'react-router-dom'
 import { Shell } from '../src/App.tsx'
 import { setStaticMode } from '../src/lib/staticMode.ts'
 
-const ROOT = 'C:/Users/PC/Desktop/ciptasarim.com'
+/* Repo root, resolved from this script — the hardcoded Windows path this
+   replaced broke the container build at its first read. */
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(ROOT, 'dist')
 const indexHtml = readFileSync(join(dist, 'index.html'), 'utf8')
 
