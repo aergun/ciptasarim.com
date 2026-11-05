@@ -27,7 +27,7 @@
  * no gateway in this build, so there is also no flag to accidentally enable here.
  */
 
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import crypto from 'node:crypto'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -47,7 +47,7 @@ process.env.FILES_DIR = FILES_DIR
 process.env.SESSION_SECRET = 'smoke-suite-secret-0123456789abcdef0123456789abcdef'
 
 const { createApp } = await import('./app.ts')
-const { closeDb, getDb, now } = await import('./db.ts')
+const { closeDb, getDb, now, ROOT: APP_ROOT } = await import('./db.ts')
 const { cores } = await import('../content/cores.ts')
 const { coreFor } = await import('../content/cores.ts')
 const { localeBundle } = await import('../locales/index.ts')
@@ -196,6 +196,58 @@ async function main(): Promise<void> {
     check('health returns 200', health.status === 200, `status=${health.status}`)
     check('health says payment is bank transfer', health.json.payment === 'bank-transfer')
     check('/api under an unknown route is a JSON 404, not the SPA', (await call(base, {}, 'GET', '/api/definitely-not-a-route')).json.error === 'No such endpoint.')
+
+    /* -------------------------------------------------------- the crawler head */
+    section('The crawler head')
+
+    /*
+     * The SPA fallback is the only code path that serves the shell, and
+     * `renderHead` rewrites it per request, per locale. These checks read the HTML
+     * the way a crawler would: as text, with no JavaScript to run afterwards.
+     *
+     * They need a built `dist/` — a suite run on a tree that has never been built
+     * cannot exercise the fallback, so the section reports that and moves on rather
+     * than failing. Run them after `npm run build`.
+     */
+    const shellPath = join(APP_ROOT, 'dist', 'index.html')
+    const shellBuilt = existsSync(shellPath)
+    check('a built shell exists for the fallback to serve', shellBuilt)
+
+    if (shellBuilt) {
+      const corePage = await call(base, {}, 'GET', '/cekirdekler/uart-fifo')
+      check('a core page serves its part number as the title', corePage.body.includes(`<title>${PART_NUMBER} — `))
+      check('a core page carries an absolute canonical', corePage.body.includes('rel="canonical" href="https://ciptasarim.com/cekirdekler/uart-fifo"'))
+      check('a core page hreflang-alternates its English twin', corePage.body.includes('hreflang="en" href="https://ciptasarim.com/en/cekirdekler/uart-fifo"'))
+      check('a core page og-titles the part number', corePage.body.includes('og:title" content="CT-UART-FIFO'))
+      check('a core page ships a Product JSON-LD node', corePage.body.includes('&quot;@type&quot;:&quot;Product&quot;') || corePage.body.includes('"@type":"Product"'), 'Product node')
+      check(
+        'a core page og-describes it in the page language',
+        corePage.body.includes(`og:description" content="${seededCore.summary.tr}"`),
+      )
+
+      const enCorePage = await call(base, {}, 'GET', '/en/cekirdekler/uart-fifo')
+      check('an English page canonicals under /en', enCorePage.body.includes('rel="canonical" href="https://ciptasarim.com/en/cekirdekler/uart-fifo"'))
+      check('an English page og-locales en_US', enCorePage.body.includes('og:locale" content="en_US"'))
+      check(
+        'an English page og-describes it in English',
+        enCorePage.body.includes(`og:description" content="${seededCore.summary.en}"`),
+      )
+
+      const articlePage = await call(base, {}, 'GET', `/yazilar/${articles[0]!.slug}`)
+      check('an article page og-types itself an article', articlePage.body.includes('og:type" content="article"'))
+      check('an article page ships an Article JSON-LD node', articlePage.body.includes('"@type":"Article"'))
+
+      const homePage = await call(base, {}, 'GET', '/')
+      check('the home page ships the Organization node', homePage.body.includes('"@type":"Organization"'))
+      check('the home page x-defaults to the Turkish root', homePage.body.includes('hreflang="x-default" href="https://ciptasarim.com/"'))
+
+      const sitemap = await call(base, {}, 'GET', '/sitemap.xml')
+      check('sitemap.xml is XML', sitemap.headers.get('content-type')?.includes('xml') === true)
+      check('the sitemap lists the seeded core', sitemap.body.includes('/cekirdekler/uart-fifo<'))
+      check('the sitemap lists an English route', sitemap.body.includes('https://ciptasarim.com/en/'))
+      const robots = await call(base, {}, 'GET', '/robots.txt')
+      check('robots.txt points at the sitemap', robots.body.includes('Sitemap: https://ciptasarim.com/sitemap.xml'))
+    }
 
     /* -------------------------------------------------------- locale integrity */
     section('Locale integrity')

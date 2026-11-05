@@ -45,6 +45,7 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { existsSync } from 'node:fs'
+import { readFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import type { Express, NextFunction, Request, Response } from 'express'
 import { ROOT, getDb } from './db.ts'
@@ -55,6 +56,8 @@ import { catalogueRouter } from './routes/catalogue.ts'
 import { postEnquiry } from './routes/enquiries.ts'
 import { libraryRouter } from './routes/library.ts'
 import { ordersRouter } from './routes/orders.ts'
+import { renderHead } from './head.ts'
+import { robotsTxt, sitemapXml } from './sitemap.ts'
 
 export function createApp(): Express {
   const app = express()
@@ -184,6 +187,19 @@ export function createApp(): Express {
   const distDir = resolve(ROOT, 'dist')
 
   /*
+   * Crawler endpoints, generated from content rather than checked in — a checked-in
+   * sitemap quietly stops listing new cores and articles (server/sitemap.ts).
+   */
+  app.get('/sitemap.xml', (_req, res) => {
+    res.setHeader('Cache-Control', 'max-age=3600')
+    res.type('application/xml').send(sitemapXml())
+  })
+  app.get('/robots.txt', (_req, res) => {
+    res.setHeader('Cache-Control', 'max-age=3600')
+    res.type('text/plain').send(robotsTxt())
+  })
+
+  /*
    * `index: false` on the static handler.
    *
    * With it on, a request for `/` is answered by `express.static` from disk and the
@@ -222,19 +238,26 @@ export function createApp(): Express {
    * server on 5173 and proxies `/api` here — so the fallback is skipped rather than
    * 404ing. That is why `npm run dev` works before the first `npm run build`.
    */
+  /*
+   * In development `dist/` does not exist — Vite serves the client from its own dev
+   * server on 5173 and proxies `/api` here — so the fallback is skipped rather than
+   * 404ing. That is why `npm run dev` works before the first `npm run build`.
+   */
   const indexHtml = join(distDir, 'index.html')
 
-  app.use((req, res, next) => {
+  app.use(async (req, res, next) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       next()
       return
     }
-    if (!existsSync(indexHtml)) {
+    const html = existsSync(indexHtml) ? renderHead(req.path, await readFile(indexHtml, 'utf8')) : null
+    if (html === null) {
       next()
       return
     }
     res.setHeader('Cache-Control', 'no-cache')
-    res.sendFile(indexHtml)
+    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    res.send(html)
   })
 
   // Nothing at all matched: a real 404 for a non-SPA request (a bad asset path, say).
