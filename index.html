@@ -30,19 +30,15 @@
     <link rel="alternate" hreflang="en" href="/en" />
     <link rel="alternate" hreflang="x-default" href="/" />
 
-    <!-- Fonts. Preconnect first so the handshake overlaps with HTML parse. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!--
-      IBM Plex Sans and IBM Plex Mono, from the reference site. Both cover
-      Latin Extended-A, so Turkish glyphs — dotless ı, dotted İ, ş, ğ, ç —
-      render without a fallback face swapping in mid-line, which in a spec
-      table is visually obvious.
+      IBM Plex Sans and IBM Plex Mono, self-hosted from /fonts (public/fonts) —
+      see the @font-face block at the top of src/index.css. Both cover Latin
+      Extended-A, so Turkish glyphs — dotless ı, dotted İ, ş, ğ, ç — render
+      without a fallback face swapping in mid-line, which in a spec table is
+      visually obvious. font-display: swap is declared per face, so the fallback
+      paints immediately and the swap happens when the subset arrives; no
+      preconnect or third-party request is needed for the first paint.
     -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <div id="root"></div>
