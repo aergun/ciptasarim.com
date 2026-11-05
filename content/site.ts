@@ -104,6 +104,7 @@ export const site = {
  * out what it costs, then get in touch.
  */
 export const primaryNav = [
+  { label: 'EDA MCP', to: '/mcp' },
   { label: 'Cores', to: '/cekirdekler' },
   { label: 'Tools', to: '/hesaplayicilar' },
   { label: 'Process', to: '/teknoloji' },
@@ -138,6 +139,7 @@ export const footerNav = [
   {
     heading: { tr: 'Mühendislik', en: 'Engineering' },
     links: [
+      { label: { tr: 'EDA MCP', en: 'EDA MCP' }, to: '/mcp' },
       { label: { tr: 'Hesaplayıcılar', en: 'Calculators' }, to: '/hesaplayicilar' },
       { label: { tr: 'Teknoloji düğümleri', en: 'Process nodes' }, to: '/teknoloji' },
       { label: { tr: 'Teknik yazılar', en: 'Technical notes' }, to: '/yazilar' },

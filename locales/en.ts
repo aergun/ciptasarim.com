@@ -29,6 +29,7 @@ export const en: Mirror<TrShape> = {
   /* ----------------------------------------------------------------- nav */
   nav: {
     home: 'Home',
+    mcp: 'EDA MCP',
     cores: 'Cores',
     core: 'Core',
     tools: 'Calculators',
@@ -101,12 +102,17 @@ export const en: Mirror<TrShape> = {
 
   /* --------------------------------------------------------------- home */
   home: {
-    heroTitle: 'Characterised IP to build your design on',
+    /*
+     * Hero, EDA_MCP-first (addendum). Faithfully derived from the Turkish
+     * hero in the tr bundle — see that comment for the confirm-flagged
+     * tie-in this copy deliberately avoids.
+     */
+    heroTitle: 'Agents drive real EDA tools; the *engineer opens* the gates',
     heroBody:
-      'Every core ships with sourced measurements and models labelled as such. A number we have not characterised is never filled in with an estimate.',
+      'EDA_MCP connects local AI IDEs to Cadence Virtuoso, Siemens Eldo and Calibre on a remote Linux cluster. Every step from schematic through DRC, LVS and PEX produces evidence; the critical decisions pass through engineer-approved gates.',
     heroHint: 'Move your cursor',
+    heroMcp: 'Explore EDA MCP',
     browseCores: 'Browse cores',
-    openTools: 'Open the calculators',
     statsCores: 'Cores',
     statsNodes: 'Process nodes',
     statsKinds: 'IP kinds',
@@ -515,6 +521,122 @@ export const en: Mirror<TrShape> = {
     ipNotice: 'Intellectual property',
     contactEmail: 'Email',
     madeIn: 'Designed in Türkiye',
+  },
+
+  /* ------------------------------------------------------------------- mcp */
+  /*
+   * The /mcp page's and the home teaser's chrome in English, faithfully
+   * derived from the Turkish section in the tr bundle (which holds the
+   * confirm-flagged tie-in comment). Key-for-key identical.
+   */
+  mcp: {
+    /* Home teaser */
+    teaserEyebrow: 'EDA MCP',
+    teaserTitle: 'Agents drive real EDA tools; the engineer is at the gate',
+    teaserBody:
+      'EDA_MCP connects local agents — Claude Code, Cursor and the like — to Cadence Virtuoso, Siemens Eldo and Calibre on your remote Linux cluster. It builds the schematic, sizes the devices, exports the netlist, simulates and files the evidence of every verification step. Critical steps pass through engineer-approved gates.',
+    teaserCta: 'Open the EDA MCP page',
+    proofTitle: 'Proof points',
+    proofConditionsLabel: 'Conditions',
+    proofSourceLabel: 'Source',
+
+    /* Page lead — section (a) */
+    pageEyebrow: 'EDA MCP',
+    pageTitle: 'Real EDA tools, engineer-approved gates — EDA_MCP',
+    pageLead:
+      'EDA_MCP is an open-source control plane that connects local agents speaking the Model Context Protocol (Claude Code, Claude Desktop, Cursor, Windsurf, Antigravity) to Cadence Virtuoso, Siemens Eldo and Siemens Calibre on your remote Linux cluster. The agent drives the closed-loop flow from schematic capture and PDK sizing through Layout XL generation, Calibre DRC/LVS/xRC PEX and post-layout Eldo simulation; every step files its evidence and passes through engineer-approved gates.',
+    installLabel: 'Install — one line',
+    installNote:
+      'Clone the repo, run `pip3 install -r requirements.txt`, and fill the `config/*.template` files with your own SSH sessions. Then:',
+
+    /* Pipeline — section (b) */
+    pipelineEyebrow: 'Flow',
+    pipelineTitle: 'Closed loop: schematic to post-layout',
+    pipelineBody:
+      'Six boxes, six tools: each stage produces the evidence the next one consumes. There are no skipped targets — LVS will not run before DRC is clean, and PEX will not run before LVS matches.',
+
+    /* Architecture — section (c) */
+    archEyebrow: 'Architecture',
+    archTitle: 'Local agent, SSH tunnel, remote cluster',
+    archBody:
+      'The agent on the local side talks to the FastMCP server; the server drives the remote cluster’s tools over persistent OpenSSH ControlMaster sockets and streamed file transfer. Five modules work over isolated per-tool sessions: workboard mirrors the files into local Git; virtuoso writes SKILL into the `MCP.command` FIFO of an open GUI session; eldo runs the `.cir` decks on an interactive REPL; remote_control serves a persistent csh subshell under `/cadence/cshrc`; report_issue opens the bug reports on GitHub.',
+    archLocalTitle: 'Local — developer + AI agent',
+    archLocalNote: 'Claude Code, Claude Desktop, Cursor, Windsurf, Antigravity',
+    archServerTitle: 'EDA_MCP — FastMCP server',
+    archServerNote: 'server.py + 5 modules',
+    archSshTitle: 'OpenSSH ControlMaster',
+    archSshNote: 'persistent socket, streamed transfer',
+    archRemoteTitle: 'Remote Linux cluster',
+    archRemoteNote: 'Cadence Virtuoso · Siemens Eldo · Siemens Calibre · PDK',
+    archTools: {
+      virtuoso: 'Cadence Virtuoso — SKILL FIFO (MCP.command)',
+      eldo: 'Siemens Eldo — `eldo -inter` REPL',
+      calibre: 'Siemens Calibre — DRC / LVS / xRC PEX',
+      pdk: 'Process PDK (README example: cmos065)',
+      git: 'Git workspace — WorkBoard sync',
+    },
+
+    /* Tool matrix — section (d) */
+    matrixEyebrow: 'Tools',
+    matrixTitle: 'The capabilities matrix of the five modules',
+    matrixBody:
+      'Module names and action lists are copied in full from the upstream README; the use-case column is authored in both languages.',
+    matrixModuleCol: 'Module',
+    matrixActionsCol: 'Actions',
+    matrixDescCol: 'What it does',
+
+    /* Guard rails — section (e) */
+    guardsEyebrow: 'Guard rails',
+    guardsTitle: 'A fast flow is trustworthy because it is auditable',
+    guardsBody:
+      'The upstream README and dual-track specs put four safety properties beside the speed: write after diff, intent before track, human before merge, guard before run.',
+
+    /* Replay — section (f) */
+    replayEyebrow: 'Session replay',
+    replayTitle: 'One session; one paused step',
+    replayBody:
+      'Watch the flow: tool call, evidence, result. The single gate sits at the DRC record — the flow pauses and waits for your call. If you close the gate the agent moves on; both options are legitimate, and none of them is the dishonest one.',
+    illustrative: 'ILLUSTRATIVE',
+    illustrativeNote:
+      'This session is illustrative — written to show how an EDA_MCP session behaves; it is not a real session log from the upstream repo.',
+
+    /* Demo video — section (g) */
+    demoEyebrow: 'Demo',
+    demoTitle: 'Depletion-load inverter — live run',
+    demoBody:
+      'The upstream demo record: an agent schematics, sizes and CDL-netlists a depletion-load inverter and simulates it in Eldo — live, inside Cadence Virtuoso and Siemens Eldo sessions.',
+    demoSourceLabel: 'Record source',
+    demoSource: 'EDA_MCP repo, `doc/media/demo.mp4` (MIT)',
+    demoVideoLabel: 'EDA_MCP demo video: depletion-load inverter simulation',
+
+    /* Get started — section (h) */
+    getStartedEyebrow: 'Get started',
+    getStartedTitle: 'Requirements and client configuration',
+    getStartedBody:
+      'On the local side, Python 3.10+ and OpenSSH; on the remote side, a Linux cluster with Cadence Virtuoso, Siemens Eldo and Siemens Calibre installed. The PDK comes from your cluster’s licensed installation; the configuration templates are filled for your own cluster.',
+    requirementsTitle: 'Requirements',
+    requirements: {
+      python: 'Python 3.10+',
+      ssh: 'OpenSSH client — on the local system',
+      cluster: 'A remote Linux with Cadence Virtuoso, Siemens Eldo and Calibre',
+    },
+    snippetsTitle: 'Client configuration snippets',
+
+    /* CTAs — section (i) */
+    githubCta: 'View on GitHub',
+    docsCta: 'Read the README',
+    talkCta: 'Talk to us',
+
+    /* Trust */
+    licenceLabel: 'MIT License',
+    upstreamTitle: 'The upstream project',
+    noticeTrademarkTitle: 'Trademarks',
+    noticePdkTitle: 'PDK data',
+
+    /* The page's own meta, so head.ts never duplicates the strings. */
+    metaTitle: 'EDA_MCP — an MCP server for Virtuoso and Eldo',
+    metaDescription:
+      'An open-source MCP server connecting local AI agents to Cadence Virtuoso, Siemens Eldo and Calibre: a closed-loop flow from schematic through DRC, LVS and PEX, engineer-approved gates, evidence at every step. Search phrases: MCP server for EDA, Virtuoso MCP, Eldo MCP, AI agent analog chip design.',
   },
 }
 

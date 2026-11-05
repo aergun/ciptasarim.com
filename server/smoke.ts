@@ -241,6 +241,38 @@ async function main(): Promise<void> {
       check('the home page ships the Organization node', homePage.body.includes('"@type":"Organization"'))
       check('the home page x-defaults to the Turkish root', homePage.body.includes('hreflang="x-default" href="https://ciptasarim.com/"'))
 
+      /* The /mcp page: prerendered content (no JS), dedicated card and meta,
+         SoftwareSourceCode JSON-LD. These read the page as a crawler does. */
+      const mcpPage = await call(base, {}, 'GET', '/mcp')
+      check(
+        'the /mcp page carries its own title',
+        mcpPage.body.includes('<title>EDA_MCP — Virtuoso ve Eldo için MCP sunucusu — Çip Tasarım'),
+      )
+      check(
+        'the /mcp page canonicals itself',
+        mcpPage.body.includes('rel="canonical" href="https://ciptasarim.com/mcp"'),
+      )
+      check('the /mcp page ships its own og card', mcpPage.body.includes('/og/mcp-og.png'))
+      check('the /mcp page ships SoftwareSourceCode JSON-LD', mcpPage.body.includes('"@type":"SoftwareSourceCode"'))
+      check('the /mcp page ships TechArticle JSON-LD', mcpPage.body.includes('"@type":"TechArticle"'))
+      check(
+        'the /mcp page prerenders its flow, readable without JavaScript',
+        mcpPage.body.includes('schCheck') && mcpPage.body.includes('workboard') && mcpPage.body.includes('report_issue'),
+      )
+      check(
+        'the /mcp page prerenders the illustrative replay and its gate',
+        mcpPage.body.includes('İLLÜSTRATİF') && mcpPage.body.includes('DRC raporu temiz değil'),
+      )
+      check('the /mcp page credits the upstream repo', mcpPage.body.includes('github.com/vs34/EDA_MCP'))
+      const enMcpPage = await call(base, {}, 'GET', '/en/mcp')
+      check('the English /mcp page canonicals under /en/mcp', enMcpPage.body.includes('https://ciptasarim.com/en/mcp'))
+      check(
+        'the English /mcp page reads in English without JS',
+        enMcpPage.body.includes('ILLUSTRATIVE') && enMcpPage.body.includes('engineer-approved'),
+      )
+      const sitemap2 = await call(base, {}, 'GET', '/sitemap.xml')
+      check('the sitemap lists /mcp and its English twin', sitemap2.body.includes('/mcp</loc>') && sitemap2.body.includes('/en/mcp</loc>'))
+
       const sitemap = await call(base, {}, 'GET', '/sitemap.xml')
       check('sitemap.xml is XML', sitemap.headers.get('content-type')?.includes('xml') === true)
       check('the sitemap lists the seeded core', sitemap.body.includes('/cekirdekler/uart-fifo<'))

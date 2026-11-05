@@ -13,7 +13,7 @@
  * translated — `nav.cores` is typed in both locale files.
  */
 
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { site, primaryNav, footerNav, legalRoutes } from '../../content/site.ts'
 import { Container, Rule } from './ui.tsx'
@@ -23,6 +23,7 @@ import { useCart } from '../context/CartContext.tsx'
 
 /** `primaryNav`'s entry route → its key in the `nav.*` locale namespace. */
 const NAV_KEYS: Record<string, string> = {
+  '/mcp': 'mcp',
   '/cekirdekler': 'cores',
   '/hesaplayicilar': 'tools',
   '/teknoloji': 'process',
@@ -42,7 +43,7 @@ const NAV_KEYS: Record<string, string> = {
  * the remaining three are one click away in the footer on every page and in
  * the mobile menu at every viewport.
  */
-const DESKTOP_NAV = ['/cekirdekler', '/hesaplayicilar', '/teknoloji', '/lisanslar', '/fiyatlandirma', '/sss']
+const DESKTOP_NAV = ['/mcp', '/cekirdekler', '/hesaplayicilar', '/teknoloji', '/lisanslar', '/fiyatlandirma']
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { strings, locale } = useSite()
@@ -57,6 +58,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMenuOpen(false)
   }, [location.pathname])
+
+  /* The `html.js` class arms the reveal styles (`src/index.css`). Layout's
+     layout effect runs before this mount's first paint, so a rendered block is
+     never seen un-revealed; the prerendered /mcp page adds the same class via
+     its own inline script instead. */
+  useLayoutEffect(() => {
+    document.documentElement.classList.add('js')
+  }, [])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {

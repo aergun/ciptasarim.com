@@ -17,6 +17,7 @@ import { Reveal } from '../components/Reveal.tsx'
 import { Architecture } from '../components/Architecture.tsx'
 import { Demos } from '../components/Demos.tsx'
 import { WaferScene } from '../components/WaferScene.tsx'
+import { McpTeaser } from './McpPage.tsx'
 import { Container, Eyebrow, Heading, Prose, Section, InvertedSection, Stat, ButtonLink } from '../components/ui.tsx'
 import { FigureBadge, figureColor, figureValue, FigureGap, BASIS_FIGURES } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
@@ -69,11 +70,15 @@ export function Home() {
           body={home.heroBody}
           hint={home.heroHint}
           ctas={[
+            { label: home.heroMcp, to: '/mcp' },
             { label: home.browseCores, to: '/cekirdekler' },
-            { label: home.openTools, to: '/hesaplayicilar' },
           ]}
         />
       </div>
+
+      {/* The EDA_MCP teaser — the addendum's centerpiece claim, stated as its
+          proof points and linked to the dedicated page; the catalogue follows. */}
+      <McpTeaser />
 
       {/* A strip of the three counts that describe the catalogue. */}
       <Container className="py-16 md:py-20">

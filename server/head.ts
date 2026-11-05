@@ -29,6 +29,7 @@
 
 import { articleBySlug } from '../content/articles.ts'
 import { coreFor } from '../content/cores.ts'
+import { mcpUpstream } from '../content/mcp.ts'
 import { site } from '../content/site.ts'
 import { localeBundle } from '../locales/index.ts'
 import type { Locale } from '../shared/i18n.ts'
@@ -66,6 +67,38 @@ function pageMeta(
 ): { title: string; description: string; ogType: 'website' | 'article'; jsonLd: Array<Record<string, unknown>> } {
   const strings = localeBundle(locale)
   const p = pagePath(pathname)
+
+  // The /mcp page: dedicated meta, SoftwareSourceCode + TechArticle JSON-LD,
+  // and its own og card. The upstream project (vs34/EDA_MCP, MIT) is credited
+  // on the page and in the structured data's authorship note — schema.org's
+  // SoftwareSourceCode `author` would be the upstream maintainer, so the site
+  // stays out of that field and links instead.
+  if (p === '/mcp') {
+    const s = localeBundle(locale).mcp
+    return {
+      title: `${s.metaTitle} — ${strings.meta.siteName}`,
+      description: s.metaDescription,
+      ogType: 'article',
+      jsonLd: [
+        {
+          '@type': 'SoftwareSourceCode',
+          name: mcpUpstream.name,
+          url: mcpUpstream.repo,
+          codeRepository: mcpUpstream.repo,
+          license: 'https://opensource.org/licenses/MIT',
+          programmingLanguage: 'Python',
+        },
+        {
+          '@type': 'TechArticle',
+          headline: s.metaTitle,
+          description: s.metaDescription,
+          inLanguage: locale,
+          author: { '@type': 'Organization', name: site.name },
+          publisher: { '@type': 'Organization', name: site.name },
+        },
+      ],
+    }
+  }
 
   // A slug whose record was removed falls through to the site defaults below:
   // `coreFor` returns null and every deep link still gets a correct head.
@@ -180,7 +213,8 @@ export function renderHead(pathname: string, html: string, css: string | null = 
   const p = pagePath(pathname)
   const trUrl = site.url + (/^\/$/.test(p) ? '/' : p)
   const enUrl = site.url + (/^\/$/.test(p) ? '/en/' : '/en' + p)
-  const image = `${site.url}/og/ciptasarim-og.png`
+  // /mcp ships its own card; every other route shares the site's.
+  const image = `${site.url}/og/${p === '/mcp' ? 'mcp-og.png' : 'ciptasarim-og.png'}`
 
   const alternates = [
     `<link rel="alternate" hreflang="tr" href="${trUrl}" />`,

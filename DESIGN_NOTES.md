@@ -5,6 +5,75 @@ decision the build made against each requirement, and the token list. Written af
 implementation, as the record of what changed and why — every "deviation" below is a
 decision, not an oversight.
 
+## Addendum — EDA_MCP as the centerpiece
+
+The site's lead story is now EDA_MCP (addendum): the home hero leads with "agents + real
+EDA tools + engineer-approved gates", an `/mcp` teaser sits between hero and catalogue,
+and `/mcp` (+ `/en/mcp`) is the dedicated page — pipeline, architecture, tool matrix,
+guard rails, session replay with a gate, the demo video, get-started, CTAs.
+
+### Hero variants (Turkish first; variant 1 shipped)
+
+1. **"Ajanlar gerçek EDA araçlarını sürer; kapıları *mühendis açar*"**
+   EN: "Agents drive real EDA tools; the *engineer opens* the gates."
+   The `kapı` (gate) pun is doing real work: logic gate, verification gate, approval
+   gate — all the same word, all true of this flow. The emphasised segment is marked
+   `*…*` in the bundle and rendered italic by `VideoHero` (no colour: gold is
+   structure, flare is the action accent).
+2. "Uçtan uca silikon akışı, her adımda kanıt."
+   EN: "The end-to-end silicon flow, evidence at every step."
+3. "Mekanik ajanın; karar mühendisin."
+   EN: "The mechanics are the agent's; the calls stay the engineer's."
+
+### Proof discipline, as built
+
+- Every numeric claim on the site comes from the upstream README
+  (https://github.com/vs34/EDA_MCP) **with its conditions printed beside it** —
+  sub-10 ms (ControlMaster design property), 793 parasitics (one 65 nm op-amp run),
+  the full-flow baseline (Issue #53 CheckPoint), `schCheck (0 0)` (the designer
+  context's completion criterion). `content/mcp.ts` is a closed set; the page cannot
+  display a claim without its conditions (one component, `EvidenceList`, renders them).
+- **`TODO(content: confirm)`** — the tie-in "our IP's verification evidence is produced
+  and reproduced on this flow" is authored as a comment in `locales/tr.ts` (`home.hero*`)
+  and nowhere visible. It goes on the page only when the owner confirms our IP was
+  verified with EDA_MCP.
+- The session replay is labelled **İLLÜSTRATİF** structurally (badge + terminal title +
+  note); replacing it with a real log file is a content change.
+- The demo video is the upstream repo's real record (`doc/media/demo.mp4`, MIT,
+  credit shown), lazy-loaded on viewport entry with no-JS/poster fallback.
+
+### No-JS rendering of /mcp
+
+`scripts/prerender-mcp.ts` renders the same React tree through
+`renderToStaticMarkup` (`staticMode` flag → `src/lib/staticMode.ts`) into
+`dist/mcp/index.html` + `dist/en/mcp/index.html`; `server/app.ts` serves those before
+the SPA fallback, `server/head.ts` rewrites their head per locale (OG, canonical,
+hreflang, SoftwareSourceCode + TechArticle JSON-LD). With JS off: full content, no
+reveal-hiding (the `html.js` gate in `src/index.css`), copy buttons absent (an inert
+button would be a dead affordance), the replay at its gate, the video on its poster.
+With JS on: the bundle replaces the document and all interactivity returns.
+
+### Legal/trust decisions
+
+- MIT licence + upstream credit rendered wherever the project is described
+  (`mcpUpstream.credit`, both languages).
+- Trademark notice: Cadence/Virtuoso/SKILL (Cadence Design Systems), Siemens/Eldo/
+  Calibre (Siemens) — "works with", never endorsement.
+- PDK caution: cmos065 named as an identifier only; no PDK files, layer maps, rule
+  decks, or layouts showing PDK-specific geometry anywhere; all drawings generic.
+- **Needs approval before publishing**: whether any frame of the upstream demo video
+  discloses NDA-covered PDK geometry (it is already public in the upstream repo, but
+  the owner should confirm it is publishable here too).
+
+### SEO
+
+- `/mcp` targets: "MCP server for EDA", "Virtuoso MCP", "Eldo MCP", "AI agent analog
+  chip design" + Turkish equivalents — carried in the page's own meta strings
+  (`mcp.metaTitle/metaDescription`) and rendered into the head by `renderHead` per
+  locale; SoftwareSourceCode + TechArticle JSON-LD on /mcp only; dedicated
+  1200×630 `og/mcp-og.png`. The sitemap lists `/mcp` and `/en/mcp`.
+- Smoke covers all of it (11 new checks).
+
 ## What the reference contributes, and what it doesn't
 
 The reference (silicad.github.io) contributes **structure, motion and visual language
@@ -126,3 +195,10 @@ guarded, but the list is the same. Nothing below is invented on the site:
 5. Every engineering figure in `content/cores/*.ts` — `uncharacterised` with a bilingual
    reason by design, until real characterisation data exists
 6. Every price in `content/packages.ts` / licence tiers — quote-only by design
+7. **The EDA_MCP ↔ our-IP tie-in** — `TODO(content: confirm)` in `locales/tr.ts`'s
+   `home.hero*` comment: does Cip Tasarım's verification evidence get produced and
+   reproduced on EDA_MCP? The page claims nothing until this is confirmed.
+8. **The illustrative replay** — `content/mcplog.ts` is the labelled illustration; a
+   real EDA_MCP session log should replace it (and drop the İLLÜSTRATİF label).
+9. **Demo video publishability** — the embedded `doc/media/demo.mp4` is upstream's
+   public record; confirm no frame discloses NDA-covered PDK geometry.

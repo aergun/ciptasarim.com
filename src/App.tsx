@@ -27,6 +27,7 @@ import { AuthProvider, useAuth } from './context/AuthContext.tsx'
 import { CartProvider } from './context/CartContext.tsx'
 import { Loading } from './components/ui.tsx'
 import { Home } from './pages/Home.tsx'
+import { McpPage } from './pages/McpPage.tsx'
 
 /*
  * One chunk per route, Home alone eager. The home page is the route whose LCP
@@ -64,6 +65,7 @@ const NotFound = lazy(() => import('./pages/NotFound.tsx').then((m) => ({ defaul
  */
 const ROUTES = [
   { path: '/', element: <Home /> },
+  { path: '/mcp', element: <McpPage /> },
   { path: '/cekirdekler', element: <Cores /> },
   { path: '/cekirdekler/karsilastir', element: <Compare /> },
   { path: '/cekirdekler/:slug', element: <CoreDetail /> },
@@ -90,7 +92,12 @@ const ROUTES = [
   { path: '/sepet/odeme', element: <Checkout /> },
 ] as const
 
-function Shell() {
+/*
+ * `Shell` is exported: `scripts/prerender-mcp.ts` renders the same component
+ * under `MemoryRouter` at build time, so the prerendered /mcp pages and the
+ * live SPA render one tree — there is no second template to drift.
+ */
+export function Shell() {
   const { pathname } = useLocation()
   const locale: Locale = localeFromPathname(pathname)
   const strings = localeBundle(locale)

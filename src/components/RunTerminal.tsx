@@ -43,18 +43,32 @@ export function RunTerminal({
   demo,
   live,
   replayLabel,
+  static: staticMode = false,
 }: {
   demo: DemoScript
   live: string
   replayLabel: string
+  static?: boolean
+  /**
+   * The prerendered branch of `/mcp`: the whole pre-gate log on screen at
+   * once, holding at the gate. With no JS running there is no pacing to
+   * animate and no option that could be clicked, so the terminal shows its
+   * honest state — every observation up to the decision, and the decision
+   * itself in front of the reader. No epilogue can render, because rendering
+   * one would invent a choice nobody made.
+   */
 }) {
   const { t } = useSite()
   const rootRef = useRef<HTMLDivElement>(null)
 
   const [started, setStarted] = useState(false)
   const [playing, setPlaying] = useState(true)
-  const [shown, setShown] = useState(0) // script lines revealed
-  const [gateShown, setGateShown] = useState(false)
+  /* A static render cannot pace itself and has no viewer events to wait for; it
+     arrives pre-played to the gate (the same final state reduced motion gets,
+     minus the epilogue): every observation on screen, then the decision. No
+     epilogue can render — rendering one would invent a choice nobody made. */
+  const [shown, setShown] = useState(staticMode ? demo.lines.length : 0)
+  const [gateShown, setGateShown] = useState(staticMode && demo.gate !== undefined)
   const [chosen, setChosen] = useState<RunGateOption | null>(null)
   const [postShown, setPostShown] = useState(0) // epilogue lines revealed after the choice
   const [done, setDone] = useState(false)

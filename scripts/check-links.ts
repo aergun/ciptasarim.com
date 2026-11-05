@@ -34,6 +34,7 @@ const BASE = process.env.BASE ?? 'http://127.0.0.1:4100'
  */
 const STATIC_ROUTES = [
   '/',
+  '/mcp',
   '/cekirdekler',
   '/cekirdekler/karsilastir',
   '/hesaplayicilar',

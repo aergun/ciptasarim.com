@@ -34,6 +34,7 @@ export const tr = {
   /* ----------------------------------------------------------------- nav */
   nav: {
     home: 'Ana sayfa',
+    mcp: 'EDA MCP',
     cores: 'Çekirdekler',
     core: 'Çekirdek',
     tools: 'Hesaplayıcılar',
@@ -106,12 +107,24 @@ export const tr = {
 
   /* --------------------------------------------------------------- home */
   home: {
-    heroTitle: 'Tasarımınızın üzerine inşa edilecek doğrulanmış IP',
+    /*
+     * Hero, EDA_MCP-first (addendum). Three variants are recorded in
+     * DESIGN_NOTES.md; this is variant 1. The *asterisks* mark the one
+     * emphasised word VideoHero renders as <em>.
+     *
+     * TODO(content: confirm) — the teaser prose deliberately does NOT say
+     * Çip Tasarım's IP is verified with EDA_MCP; the visible sentence below
+     * claims only what the README states about the tool itself. When the
+     * owner confirms the tie-in, the sentence "Çip Tasarım doğrulama
+     * kanıtlarını bu akışla üretir ve yeniden üretir" goes into `teaserBody`
+     * and `pageLead`.
+     */
+    heroTitle: 'Ajanlar gerçek EDA araçlarını sürer; kapıları *mühendis açar*',
     heroBody:
-      'Her çekirdek, kaynağı belirtilmiş ölçümler ve açıkça işaretlenmiş modellerle birlikte teslim edilir. Karakterize edilmemiş bir sayı hiçbir zaman tahmin edilerek doldurulmaz.',
+      'EDA_MCP, yerel AI IDE’lerini uzak Linux kümesindeki Cadence Virtuoso, Siemens Eldo ve Calibre’ye bağlar. Şemadan DRC, LVS ve PEX’e her adım kanıt üretir; kritik kararlar mühendis onaylı kapılardan geçer.',
     heroHint: 'İmlecinizi gezdirin',
+    heroMcp: 'EDA MCP’yi keşfet',
     browseCores: 'Çekirdeklere göz at',
-    openTools: 'Hesaplayıcıları aç',
     statsCores: 'Çekirdek',
     statsNodes: 'Teknoloji düğümü',
     statsKinds: 'IP türü',
@@ -540,6 +553,130 @@ export const tr = {
     ipNotice: 'Fikri mülkiyet',
     contactEmail: 'E-posta',
     madeIn: 'Türkiye’de tasarlandı',
+  },
+
+  /* ------------------------------------------------------------------- mcp */
+  /*
+   * The /mcp page's and the home teaser's chrome. The factual tables — flow
+   * stages, tool matrix, guard rails, evidence, snippets — live in
+   * content/mcp.ts as `T`s, because they are *content* the page displays;
+   * these strings are the page's own voice around that content. Every
+   * heading/lead pair follows the same shape the home section keys use.
+   *
+   * Proof discipline: prose here never states a number the README does not
+   * carry a condition for, and the tie-in to Çip Tasarım's own IP (is our
+   * verification evidence produced on EDA_MCP?) is authored as a marked TODO
+   * in `content/mcp.ts` + this file's home.hero* comment, pending owner
+   * confirmation — never as visible copy.
+   */
+  mcp: {
+    /* Home teaser */
+    teaserEyebrow: 'EDA MCP',
+    teaserTitle: 'Ajanlar gerçek EDA araçlarını sürer; kapıda mühendis',
+    teaserBody:
+      'EDA_MCP, Claude Code ve Cursor gibi yerel ajanları, uzak Linux kümenizdeki Cadence Virtuoso, Siemens Eldo ve Calibre’ye bağlar. Şemayı kurar, boyutlandırır, netlist’i dışa yazar, benzetir ve her doğrulama adımının kanıtını dosyalar. Kritik adımlar mühendis onaylı kapılardan geçer.',
+    teaserCta: 'EDA MCP sayfasını aç',
+    proofTitle: 'Kanıt noktaları',
+    proofConditionsLabel: 'Koşullar',
+    proofSourceLabel: 'Kaynak',
+
+    /* Page lead — section (a) */
+    pageEyebrow: 'EDA MCP',
+    pageTitle: 'Gerçek EDA araçları, mühendis onaylı kapılarla — EDA_MCP',
+    pageLead:
+      'EDA_MCP, Model Context Protocol konuşan yerel ajanları (Claude Code, Claude Desktop, Cursor, Windsurf, Antigravity) uzak Linux kümenizdeki Cadence Virtuoso, Siemens Eldo ve Siemens Calibre’ye bağlayan açık kaynak bir kontrol düzlemidir. Şema çekiminden PDK boyutlandırmasına, Layout XL üretiminden Calibre DRC/LVS/xRC PEX’e ve Eldo son yerleşim benzetimine kadar kapalı döngü akışı ajan yürütür; her adım kanıt dosyalarıyla belgelenir ve mühendis onaylı kapılardan geçer.',
+    installLabel: 'Kurulum — tek satır',
+    installNote:
+      'Depoyu klonlayın, `pip3 install -r requirements.txt` çalıştırın ve `config/*.template` dosyalarını kendi SSH oturumlarınıza göre doldurun. Sonra:',
+
+    /* Pipeline — section (b) */
+    pipelineEyebrow: 'Akış',
+    pipelineTitle: 'Kapalı döngü: şemadan son yerleşime',
+    pipelineBody:
+      'Altı kutu, altı araç: her aşama, bir sonraki aşamanın girdisi olacak kanıtı üretir. Boş hedef yok — DRC temizlenmeden LVS, LVS eşleşmeden PEX çalışmaz.',
+
+    /* Architecture — section (c) */
+    archEyebrow: 'Mimari',
+    archTitle: 'Yerel ajan, SSH tüneli, uzak küme',
+    archBody:
+      'Yerel taraftaki ajan FastMCP sunucusuyla konuşur; sunucu, kalıcı OpenSSH ControlMaster soketiyle ve akış dosya transferiyle uzak kümenin araçlarını sürer. Beş modül iki tarafta ayrı oturumlarla çalışır: workboard dosyaları yerel Git’te mirror’lar; virtuoso, açık GUI’de SKILL FIFO MCP.command’ı yazar; eldo, `.cir` deck’lerini interaktif REPL’de çalıştırır; remote_control, `/cadence/cshrc` ortamında csh subshell sağlar; report_issue, GitHub issues’de hata bildirir.',
+    archLocalTitle: 'Yerel — geliştirici + AI ajan',
+    archLocalNote: 'Claude Code, Claude Desktop, Cursor, Windsurf, Antigravity',
+    archServerTitle: 'EDA_MCP — FastMCP sunucusu',
+    archServerNote: 'server.py + 5 modül',
+    archSshTitle: 'OpenSSH ControlMaster',
+    archSshNote: 'kalıcı soket, akış transferi',
+    archRemoteTitle: 'Uzak Linux kümesi',
+    archRemoteNote: 'Cadence Virtuoso · Siemens Eldo · Siemens Calibre · PDK',
+    archTools: {
+      virtuoso: 'Cadence Virtuoso — SKILL FIFO (MCP.command)',
+      eldo: 'Siemens Eldo — `eldo -inter` REPL',
+      calibre: 'Siemens Calibre — DRC / LVS / xRC PEX',
+      pdk: 'İşlem PDK’sı (README örneği: cmos065)',
+      git: 'Git çalışma alanı — WorkBoard sync',
+    },
+
+    /* Tool matrix — section (d) */
+    matrixEyebrow: 'Araçlar',
+    matrixTitle: 'Beş modülün yetenek matrisi',
+    matrixBody:
+      'Modül adları ve eylem listeleri üst deponun README’sinden eksiksiz alınmıştır; kullanım sütunu iki dilde yazılmıştır.',
+    matrixModuleCol: 'Modül',
+    matrixActionsCol: 'Eylemler',
+    matrixDescCol: 'Ne işe yarar',
+
+    /* Guard rails — section (e) */
+    guardsEyebrow: 'Koruyucular',
+    guardsTitle: 'Hızlı olan bir akış, denetlenebilir olduğu için güvenilir',
+    guardsBody:
+      'EDA_MCP’nin README’si ve çift-iz spec’si, hızın yanına dört güvenlik özelliği koyar: diff’ten önce yazım, izden önce amaç, birleştirmeden önce insan, çalıştırmadan önce bekçi.',
+
+    /* Replay — section (f) */
+    replayEyebrow: 'Oturum kaydı',
+    replayTitle: 'Bir oturum; kapıda duran bir adım',
+    replayBody:
+      'Akışı izleyin: araç çağrısı, kanıt, sonuç. Tek kapı, DRC kaydında — akış durur, sizin kararınızı bekler. Kapıyı kapanmıyorsa ajan da kapanmaz: iki seçenek de meşrudur, sahte olan hiçbiri.',
+    illustrative: 'İLLÜSTRATİF',
+    illustrativeNote:
+      'Bu oturum kurgusaldır: bir EDA_MCP oturumunun izleyeni temsil eder; üst depodan gerçek bir oturum kaydı değildir.',
+
+    /* Demo video — section (g) */
+    demoEyebrow: 'Demo',
+    demoTitle: 'Depletion-load inverter — canlı yürütme',
+    demoBody:
+      'Üst deponun demo kaydı: bir ajan depletion-load inverter’ı şemalar, transistörleri boyutlandırır, CDL netlist’ini dışa yazar ve Eldo’da benzetir — Cadence Virtuoso ve Siemens Eldo oturumlarında canlı.',
+    demoSourceLabel: 'Kayıt kaynağı',
+    demoSource: 'EDA_MCP deposu, `doc/media/demo.mp4` (MIT)',
+    demoVideoLabel: 'EDA_MCP demo videosu: depletion-load inverter benzetimi',
+
+    /* Get started — section (h) */
+    getStartedEyebrow: 'Başlarken',
+    getStartedTitle: 'Gereksinimler ve istemci yapılandırması',
+    getStartedBody:
+      'Yerel tarafta Python 3.10+ ve OpenSSH; uzak tarafta Cadence Virtuoso, Siemens Eldo ve Siemens Calibre kurulu bir Linux küme. PDK, kümenizin lisanslı sürümünden gelir; yapılandırma şablonları kendi kümenize göre doldurulur.',
+    requirementsTitle: 'Gereksinimler',
+    requirements: {
+      python: 'Python 3.10+',
+      ssh: 'OpenSSH istemcisi — yerel sistemde',
+      cluster: 'Cadence Virtuoso, Siemens Eldo ve Calibre kurulu uzak Linux',
+    },
+    snippetsTitle: 'İstemci yapılandırma parçaları',
+
+    /* CTAs — section (i) */
+    githubCta: 'GitHub’da gör',
+    docsCta: 'README’yi okuyun',
+    talkCta: 'Bize ulaşın',
+
+    /* Trust */
+    licenceLabel: 'MIT Lisansı',
+    upstreamTitle: 'Üst proje',
+    noticeTrademarkTitle: 'Ticari markalar',
+    noticePdkTitle: 'PDK verileri',
+
+    /* The page's own meta, so head.ts never duplicates the strings. */
+    metaTitle: 'EDA_MCP — Virtuoso ve Eldo için MCP sunucusu',
+    metaDescription:
+      'Yerel AI ajanlarını Cadence Virtuoso, Siemens Eldo ve Calibre’ye bağlayan açık kaynak MCP sunucusu: şemadan DRC, LVS ve PEX’e kapalı döngü akış, mühendis onaylı kapılar ve her adımda kanıt. Hedefli aramalar: MCP server for EDA, Virtuoso MCP, Eldo MCP, AI agent analog chip design, Virtuoso MCP sunucusu, Eldo MCP.',
   },
 } as const
 

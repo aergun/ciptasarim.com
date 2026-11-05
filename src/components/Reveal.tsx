@@ -23,10 +23,18 @@ export function Reveal({
   children,
   className = '',
   delay = 0,
+  tabIndex,
+  role,
+  ariaLabel,
 }: {
   children: ReactNode
   className?: string
   delay?: number
+  /** Focusable/region passthroughs for scrollable content — axe's
+      `scrollable-region-focusable` rule: a clipped block its keys must reach. */
+  tabIndex?: number
+  role?: 'region'
+  ariaLabel?: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -55,7 +63,14 @@ export function Reveal({
   }, [])
 
   return (
-    <div ref={ref} className={`reveal ${className}`} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      tabIndex={tabIndex}
+      role={role}
+      aria-label={ariaLabel}
+    >
       {children}
     </div>
   )

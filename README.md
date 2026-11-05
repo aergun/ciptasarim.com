@@ -21,7 +21,7 @@ build-essential); the Dockerfile handles this for deploys.
 ## Verify
 
 ```bash
-npm run smoke            # 105-check in-process suite (boots the real Express app)
+npm run smoke            # 116-check in-process suite (boots the real Express app)
 npm run verify:figures   # 423 checks: article/tool figure + spec blocks
 npm run verify:i18n      # 72 checks: en/tr structure parity
 npm run verify:catalogue # 984 checks: cores, processes, provenance rules
@@ -41,8 +41,13 @@ BASE=http://127.0.0.1:4100 npx tsx scripts/check-links.ts  # broken links (serve
 - **Env**: `SESSION_SECRET` (required in prod), `DATABASE_PATH`, `FILES_DIR`, `PORT`,
   `HOST`.
 - **Content is data** under `content/` (cores, tools, articles, licences, packages,
-  runlog); locale strings in `locales/tr.ts` + `locales/en.ts` (mirror-checked);
+  runlog, mcp); locale strings in `locales/tr.ts` + `locales/en.ts` (mirror-checked);
   engineering models in `shared/engineering.ts`; pricing in `shared/pricing.ts`.
+- **The /mcp pages are prerendered** — `scripts/prerender-mcp.ts` (part of `npm run
+  build`) renders the same React tree to `dist/mcp/index.html` + `dist/en/mcp/index.html`,
+  `server/app.ts` serves them before the SPA fallback, and they read fully without
+  JavaScript (the `html.js` gate in `src/index.css` keeps reveal styles inert for
+  no-JS readers). See `DESIGN_NOTES.md` § addendum for the EDA_MCP proof discipline.
 - **Design system**: dark instrumentation, tokens in `tailwind.config.js`, reusable
   classes in `src/index.css`, scroll-reveal via `Reveal.tsx`, gate-paused run-log via
   `RunTerminal.tsx` + `content/runlog.ts`. See `DESIGN_NOTES.md` for the design-layer

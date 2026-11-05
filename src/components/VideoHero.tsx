@@ -35,6 +35,16 @@ interface VideoHeroProps {
   ctas: { label: string; to: string }[]
 }
 
+/**
+ * The hero title carries one emphasised segment, written as `*word*` in the
+ * bundle: the original task's "huge headline with one italic/emphasised word".
+ * The asterisk form keeps the string a plain `T` (translators reposition the
+ * marks freely); the split pairs render alternating text and `<em>`.
+ */
+function heroTitleParts(title: string): string[] {
+  return title.split(/\*([^*]+)\*/)
+}
+
 export function VideoHero({ title, body, hint, ctas }: VideoHeroProps) {
   const [primary, secondary] = ctas
 
@@ -62,7 +72,18 @@ export function VideoHero({ title, body, hint, ctas }: VideoHeroProps) {
       <section className="pointer-events-none absolute inset-0 z-20 flex flex-col items-start justify-end px-5 pb-28 sm:justify-center sm:px-10 sm:pb-0 lg:px-20">
         <div className="max-w-[42rem]">
           <h1 className="rise font-sans text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-ink [animation-delay:180ms] sm:text-6xl lg:text-7xl">
-            {title}
+            {heroTitleParts(title).map((part, index) =>
+              /* Plain italic, no colour: gold marks *structure* and flare the
+                 action accents — an emphasised word earns its emphasis from
+                 form alone, or the palette's roles start drifting. */
+              index % 2 === 1 ? (
+                <em key={index} className="font-light italic">
+                  {part}
+                </em>
+              ) : (
+                part
+              ),
+            )}
           </h1>
 
           <p className="rise mt-5 max-w-md text-base leading-relaxed text-ink/80 [animation-delay:340ms] sm:mt-6 sm:text-lg">

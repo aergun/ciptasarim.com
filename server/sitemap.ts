@@ -23,6 +23,7 @@ type Entry = { path: string }
 /** The static pages worth indexing, in priority order. */
 const staticPages: readonly Entry[] = [
   { path: '/' },
+  { path: '/mcp' },
   { path: '/cekirdekler' },
   { path: '/cekirdekler/karsilastir' },
   { path: '/hesaplayicilar' },

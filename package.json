@@ -10,7 +10,7 @@
     "dev": "concurrently -n client,api -c cyan,magenta \"npm:dev:client\" \"npm:dev:api\"",
     "dev:client": "vite",
     "dev:api": "tsx watch server/index.ts",
-    "build": "npm run typecheck && vite build",
+    "build": "npm run typecheck && vite build && tsx scripts/prerender-mcp.ts",
     "start": "tsx server/index.ts --prod",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit",
     "smoke": "tsx server/smoke.ts",

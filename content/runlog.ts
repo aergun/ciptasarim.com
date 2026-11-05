@@ -43,7 +43,7 @@ export type RunGate = {
 
 export type DemoScript = {
   /** Stable demo id the tab rail keys on. */
-  id: 'record' | 'calculator' | 'gap' | 'delivery'
+  id: 'record' | 'calculator' | 'gap' | 'delivery' | 'mcp'
   /** Tab label, short — one word. */
   tab: T
   /** The one-line summary shown beside the tab rail. */

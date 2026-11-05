@@ -209,6 +209,34 @@ export function createApp(): Express {
   })
 
   /*
+   * The prerendered /mcp pages, served before the SPA fallback.
+   *
+   * These are complete documents (scripts/prerender-mcp.ts) whose content is
+   * readable without JavaScript; the fallback serves them with the same
+   * per-request head rewrite every other page gets, so OG/Twitter/JSON-LD are
+   * per-locale exactly as the SPA shell's are. Explicit routes rather than a
+   * directory-index generalisation: two known paths, no path-derived file read,
+   * no traversal surface. The SPA never mounts here on a direct hit — React's
+   * `createRoot` replaces the prerendered body when the bundle runs, and with
+   * JS off the document is the content.
+   */
+  for (const route of ['/mcp', '/en/mcp']) {
+    app.get(route, async (_req, res, next) => {
+      const file = join(distDir, route === '/mcp' ? 'mcp' : 'en/mcp', 'index.html')
+      if (!existsSync(file)) {
+        next()
+        return
+      }
+      const built = await readFile(file, 'utf8')
+      const cssMatch = built.match(/<link rel="stylesheet" crossorigin href="([^"]+\.css)"/)
+      const css = cssMatch ? await readFile(join(distDir, decodeURIComponent(cssMatch[1] ?? '')), 'utf8') : null
+      res.setHeader('Cache-Control', 'no-cache')
+      res.setHeader('Content-Type', 'text/html; charset=utf-8')
+      res.send(renderHead(route, built, css))
+    })
+  }
+
+  /*
    * `index: false` on the static handler.
    *
    * With it on, a request for `/` is answered by `express.static` from disk and the
