@@ -59,6 +59,10 @@ COPY shared ./shared
 COPY content ./content
 COPY locales ./locales
 COPY public ./public
+# The build script now includes the /mcp prerender (scripts/prerender-mcp.ts) —
+# missing this copy is exactly what failed the first two deployments after the
+# addendum, with a build error indistinguishable from "build failed" to the API.
+COPY scripts ./scripts
 
 RUN npm run build
 
