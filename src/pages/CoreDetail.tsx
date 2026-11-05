@@ -152,7 +152,7 @@ function CoreView({
       {/* Figures — the authored spec stack, every row badged. */}
       <Section className="py-14">
         <Container width="narrow">
-          <Heading as="h3" className="mb-6">
+          <Heading as="h2" size="display-sm" className="mb-6">
             {strings.cores.spec}
           </Heading>
           <SpecCellTable cells={core.figures} />
@@ -163,7 +163,7 @@ function CoreView({
       {/* Per-node specifications. */}
       <Section className="py-14">
         <Container width="narrow">
-          <Heading as="h3" className="mb-8">
+          <Heading as="h2" size="display-sm" className="mb-8">
             {strings.cores.specByNode}
           </Heading>
           <div className="space-y-12">
@@ -179,7 +179,7 @@ function CoreView({
       {portsOf(core).length > 0 ? (
         <Section className="py-14">
           <Container width="narrow">
-            <Heading as="h3" className="mb-6">
+            <Heading as="h2" size="display-sm" className="mb-6">
               {strings.cores.ports}{' '}
               <span className="font-mono text-[13px] font-normal text-mist">
                 {portsOf(core).length} {strings.cores.portCount}
@@ -195,7 +195,7 @@ function CoreView({
       {core.kind === 'hard-macro' ? (
         <Section className="py-14">
           <Container width="narrow">
-            <Heading as="h3" className="mb-6">
+            <Heading as="h2" size="display-sm" className="mb-6">
               {strings.cores.pdk}
             </Heading>
             <SpecTable
@@ -222,7 +222,7 @@ function CoreView({
       {core.kind === 'verification' ? (
         <Section className="py-14">
           <Container width="narrow">
-            <Heading as="h3" className="mb-6">
+            <Heading as="h2" size="display-sm" className="mb-6">
               {strings.cores.standard}
             </Heading>
             <SpecTable rows={[{ label: strings.cores.standard, value: t(core.spec.standard) }]} />
@@ -235,7 +235,7 @@ function CoreView({
       {core.kind === 'analog' ? (
         <Section className="py-14">
           <Container width="narrow">
-            <Heading as="h3" className="mb-6">
+            <Heading as="h2" size="display-sm" className="mb-6">
               {strings.specFields.inputRange}
             </Heading>
             <SpecTable rows={[{ label: strings.specFields.inputRange, value: t(core.spec.inputRange) }]} />
@@ -247,7 +247,7 @@ function CoreView({
       <Section className="py-14">
         <Container width="narrow">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <Heading as="h3">{strings.cores.deliverables}</Heading>
+            <Heading as="h2" size="display-sm">{strings.cores.deliverables}</Heading>
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
                 {strings.licences.tier}

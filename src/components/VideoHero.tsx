@@ -40,7 +40,7 @@ export function VideoHero({ title, body, hint, ctas }: VideoHeroProps) {
 
   return (
     <>
-      <ScrubVideo src="/media/home/hero.mp4" />
+      <ScrubVideo src="/media/home/hero.mp4" poster="/media/home/hero-poster.webp" />
 
       {/* Legibility scrim: fades the page's own near-black in from the left
           edge, vanishing before it can ever touch the subject on the right. */}

@@ -67,7 +67,7 @@ export function Licences() {
                 <div className="flex flex-wrap items-baseline justify-between gap-6">
                   <div>
                     <p className="eyebrow">{strings.licenseTiers[licence.id]}</p>
-                    <Heading as="h3" className="mt-2">
+                    <Heading as="h2" size="display-sm" className="mt-2">
                       {t(licence.name)}
                     </Heading>
                   </div>

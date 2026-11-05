@@ -33,26 +33,37 @@ export function Eyebrow({ children, className = '' }: { children: ReactNode; cla
   return <p className={`eyebrow ${className}`}>{children}</p>
 }
 
-/** A display heading. `level` picks the tag without changing the type. */
+/** A display heading. `as` picks the tag; `size` overrides the optical size, which
+ * otherwise follows the tag. They are separate because document order and optical
+ * weight have different drivers: a section heading whose page already has an `h1`
+ * is an `h2` to screen readers even when the design wants the smaller `display-sm`
+ * type (axe's `heading-order` rule flagged the h1→h3 skips the earlier tag-only
+ * shape produced). */
+const HEADING_SIZES: Record<'h1' | 'h2' | 'h3' | 'h4' | 'display-lg' | 'display' | 'display-sm' | 'xl', string> = {
+  h1: 'text-display-lg',
+  h2: 'text-display',
+  h3: 'text-display-sm',
+  h4: 'text-xl',
+  'display-lg': 'text-display-lg',
+  'display-sm': 'text-display-sm',
+  display: 'text-display',
+  xl: 'text-xl',
+} as const
+
 export function Heading({
   children,
-  level = 2,
   className = '',
   as: Tag = 'h2',
+  size,
 }: {
   children: ReactNode
-  level?: 1 | 2 | 3 | 4
   className?: string
   as?: 'h1' | 'h2' | 'h3' | 'h4'
+  size?: keyof typeof HEADING_SIZES
 }) {
-  void level
-  const sizes: Record<string, string> = {
-    h1: 'text-display-lg',
-    h2: 'text-display',
-    h3: 'text-display-sm',
-    h4: 'text-xl',
-  }
-  return <Tag className={`${sizes[Tag]} text-ink ${className}`}>{children}</Tag>
+  return (
+    <Tag className={`${HEADING_SIZES[size ?? Tag]} text-ink ${className}`}>{children}</Tag>
+  )
 }
 
 /** Body copy. `prose` applies the measure constraint that long text needs. */

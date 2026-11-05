@@ -45,6 +45,10 @@ WORKDIR /app
 # Dependencies in their own layer, cached on package.json/package-lock.json.
 # --include=dev is explicit: the build phase needs tsc and vite, and npm skips
 # devDependencies whenever a production flag is present in the build env.
+# PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: playwright is a devDependency only for
+# `scripts/check-links.ts` and the og-card render; the container must not pull
+# ~120 MB of browser binaries it will never run.
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 COPY package.json package-lock.json ./
 RUN npm ci --include=dev
 

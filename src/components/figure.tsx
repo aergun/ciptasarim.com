@@ -154,13 +154,19 @@ export function SpecFigureCell({ cell, className = '' }: { cell: SpecCell; class
   const { t, locale, strings } = useSite()
   const { figure } = cell
 
+  /*
+   * A `<dl>` accepts only `dt`/`dd` children (optionally wrapped in one `div`), so
+   * this row is that pair: the term is the label and its note; the definition is
+   * the figure, its basis badge and the provenance line. The p-based row this
+   * replaced read fine but failed axe's `definition-list` rule on every core page.
+   */
   return (
     <div className={`flex items-baseline justify-between gap-6 py-3 border-b border-line last:border-b-0 ${className}`}>
-      <div className="min-w-0">
+      <dt className="min-w-0">
         <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{t(cell.label)}</p>
-        {cell.note ? <p className="mt-1 text-[11px] leading-snug text-mist">{t(cell.note)}</p> : null}
-      </div>
-      <div className="text-right shrink-0">
+        {cell.note ? <p className="mt-1 text-[11px] leading-snug normal-case tracking-normal text-mist">{t(cell.note)}</p> : null}
+      </dt>
+      <dd className="text-right shrink-0">
         {figure.basis === 'uncharacterised' ? (
           <FigureGap figure={figure} />
         ) : (
@@ -185,7 +191,7 @@ export function SpecFigureCell({ cell, className = '' }: { cell: SpecCell; class
             {figure.source ? ` · ${strings.basis.source}: ${figure.source}` : ''}
           </p>
         ) : null}
-      </div>
+      </dd>
     </div>
   )
 }

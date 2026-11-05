@@ -98,7 +98,7 @@ function cookieHeader(jar: Jar): string {
 
 interface HttpResult {
   status: number
-  body: unknown
+  body: string
   json: Record<string, unknown>
   headers: Headers
 }

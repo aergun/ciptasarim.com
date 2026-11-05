@@ -17,7 +17,7 @@
  * ever sets document state itself.
  */
 
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { LOCALE_TAGS, type Locale } from '../shared/i18n.ts'
 import { localeBundle } from '../locales/index.ts'
@@ -26,31 +26,42 @@ import { Layout } from './components/Layout.tsx'
 import { AuthProvider, useAuth } from './context/AuthContext.tsx'
 import { CartProvider } from './context/CartContext.tsx'
 import { Loading } from './components/ui.tsx'
-
 import { Home } from './pages/Home.tsx'
-import { Cores } from './pages/Cores.tsx'
-import { CoreDetail } from './pages/CoreDetail.tsx'
-import { Compare } from './pages/Compare.tsx'
-import { Tools } from './pages/Tools.tsx'
-import { ToolPage } from './pages/ToolPage.tsx'
-import { ProcessPage } from './pages/Process.tsx'
-import { Licences } from './pages/Licences.tsx'
-import { Pricing } from './pages/Pricing.tsx'
-import { Faq } from './pages/Faq.tsx'
-import { Articles } from './pages/Articles.tsx'
-import { ArticlePage } from './pages/ArticlePage.tsx'
-import { About } from './pages/About.tsx'
-import { Contact } from './pages/Contact.tsx'
-import { Legal } from './pages/Legal.tsx'
-import { SignIn } from './pages/SignIn.tsx'
-import { Register } from './pages/Register.tsx'
-import { Account } from './pages/Account.tsx'
-import { Downloads } from './pages/Downloads.tsx'
-import { Cart } from './pages/Cart.tsx'
-import { Checkout } from './pages/Checkout.tsx'
-import { NotFound } from './pages/NotFound.tsx'
 
-/** The route table, written once, Turkish-prefixed. */
+/*
+ * One chunk per route, Home alone eager. The home page is the route whose LCP
+ * every Lighthouse run measures; deferring the other nineteen pages pulls their
+ * bytes off its critical path entirely — the calculators and the commercial
+ * pages are a different visit's work most of the time. Each lazy import maps the
+ * page's named export onto the module default, which is all `lazy` accepts.
+ */
+const Cores = lazy(() => import('./pages/Cores.tsx').then((m) => ({ default: m.Cores })))
+const CoreDetail = lazy(() => import('./pages/CoreDetail.tsx').then((m) => ({ default: m.CoreDetail })))
+const Compare = lazy(() => import('./pages/Compare.tsx').then((m) => ({ default: m.Compare })))
+const Tools = lazy(() => import('./pages/Tools.tsx').then((m) => ({ default: m.Tools })))
+const ToolPage = lazy(() => import('./pages/ToolPage.tsx').then((m) => ({ default: m.ToolPage })))
+const ProcessPage = lazy(() => import('./pages/Process.tsx').then((m) => ({ default: m.ProcessPage })))
+const Licences = lazy(() => import('./pages/Licences.tsx').then((m) => ({ default: m.Licences })))
+const Pricing = lazy(() => import('./pages/Pricing.tsx').then((m) => ({ default: m.Pricing })))
+const Faq = lazy(() => import('./pages/Faq.tsx').then((m) => ({ default: m.Faq })))
+const Articles = lazy(() => import('./pages/Articles.tsx').then((m) => ({ default: m.Articles })))
+const ArticlePage = lazy(() => import('./pages/ArticlePage.tsx').then((m) => ({ default: m.ArticlePage })))
+const About = lazy(() => import('./pages/About.tsx').then((m) => ({ default: m.About })))
+const Contact = lazy(() => import('./pages/Contact.tsx').then((m) => ({ default: m.Contact })))
+const Legal = lazy(() => import('./pages/Legal.tsx').then((m) => ({ default: m.Legal })))
+const SignIn = lazy(() => import('./pages/SignIn.tsx').then((m) => ({ default: m.SignIn })))
+const Register = lazy(() => import('./pages/Register.tsx').then((m) => ({ default: m.Register })))
+const Account = lazy(() => import('./pages/Account.tsx').then((m) => ({ default: m.Account })))
+const Downloads = lazy(() => import('./pages/Downloads.tsx').then((m) => ({ default: m.Downloads })))
+const Cart = lazy(() => import('./pages/Cart.tsx').then((m) => ({ default: m.Cart })))
+const Checkout = lazy(() => import('./pages/Checkout.tsx').then((m) => ({ default: m.Checkout })))
+const NotFound = lazy(() => import('./pages/NotFound.tsx').then((m) => ({ default: m.NotFound })))
+
+/**
+ * The route table, written once, Turkish-prefixed. Every element sits in the
+ * same single `<Suspense>` the table is rendered under, so the chunk's loading
+ * state is `Shell`'s concern, not each route's.
+ */
 const ROUTES = [
   { path: '/', element: <Home /> },
   { path: '/cekirdekler', element: <Cores /> },
@@ -95,12 +106,23 @@ function Shell() {
   return (
     <Layout>
       <Routes>
-        {/* The table twice: Turkish unprefixed, English under /en. Written once. */}
+        {/* The table twice: Turkish unprefixed, English under /en. Written once.
+            One Suspense boundary wraps each route's element rather than the
+            `<Routes>` children themselves — `<Routes>` permits only `<Route>`
+            children, so the boundary has to live inside the element it defers. */}
         {ROUTES.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
+          <Route
+            key={route.path}
+            path={route.path}
+            element={<Suspense fallback={<Loading label="…" />}>{route.element}</Suspense>}
+          />
         ))}
         {ROUTES.map((route) => (
-          <Route key={`en-${route.path}`} path={`/en${route.path === '/' ? '' : route.path}`} element={route.element} />
+          <Route
+            key={`en-${route.path}`}
+            path={`/en${route.path === '/' ? '' : route.path}`}
+            element={<Suspense fallback={<Loading label="…" />}>{route.element}</Suspense>}
+          />
         ))}
         <Route path="*" element={<NotFound />} />
       </Routes>

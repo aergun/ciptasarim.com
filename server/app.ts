@@ -44,6 +44,7 @@
 
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import compression from 'compression'
 import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
@@ -68,6 +69,14 @@ export function createApp(): Express {
    */
   app.set('trust proxy', 1)
   app.disable('x-powered-by')
+
+  /*
+   * gzip on every compressible response — the SPA shell, the hashed JS/CSS bundles,
+   * the fonts' text neighbours and the JSON API. Without it the JS bundle went out
+   * raw (a `uses-text-compression` saving of ~360 kB on the Lighthouse run);
+   * express.static never compresses on its own.
+   */
+  app.use(compression({ threshold: 1024 }))
 
   /*
    * A body cap on every route.
@@ -221,6 +230,16 @@ export function createApp(): Express {
         // match is right on both platforms rather than assuming a POSIX join.
         if (/[\\/]assets[\\/]/.test(filePath)) {
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+          return
+        }
+        // Fonts, the social card and the hero media change only when their bytes
+        // do — the font filenames carry the subset, not a version, so they are the
+        // one class of un-fingerprinted file worth a year; a 30-day TTL was still
+        // `uses-long-cache-ttl`-flagged. The hero video's bytes change when a new
+        // cut is deployed would need a new name (or a cache purge) — accepted.
+        if (/\.(woff2|png|jpe?g|webp|mp4)$/i.test(filePath)) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+          return
         }
       },
     }),
@@ -250,14 +269,24 @@ export function createApp(): Express {
       next()
       return
     }
-    const html = existsSync(indexHtml) ? renderHead(req.path, await readFile(indexHtml, 'utf8')) : null
-    if (html === null) {
+    if (!existsSync(indexHtml)) {
       next()
       return
     }
+    const html = readFile(indexHtml, 'utf8')
+    /*
+     * The stylesheet is the only render-blocking request left, so the fallback
+     * inlines it: a `<style>` the shell ships inline costs one transfer instead of
+     * two round trips, and the CSS is already client code the page cannot render
+     * without. `renderHead` does the swap so the logic stays next to the other
+     * head rewriting (server/head.ts).
+     */
+    const built = await html
+    const cssMatch = built.match(/<link rel="stylesheet" crossorigin href="([^"]+\.css)"/)
+    const css = cssMatch ? await readFile(join(distDir, decodeURIComponent(cssMatch[1] ?? '')), 'utf8') : null
     res.setHeader('Cache-Control', 'no-cache')
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
-    res.send(html)
+    res.send(renderHead(req.path, built, css))
   })
 
   // Nothing at all matched: a real 404 for a non-SPA request (a bad asset path, say).

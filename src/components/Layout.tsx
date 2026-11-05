@@ -80,8 +80,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <LocaleLink
             to="/"
             className="flex shrink-0 flex-col whitespace-nowrap leading-tight"
-            aria-label={site.name}
           >
+            {/* No aria-label: the visible wordmark and descriptor ARE the name, and
+                an aria-label that dropped the descriptor line failed the
+                label-in-name rule the Lighthouse run caught. */}
             <span className="text-[15px] font-semibold tracking-tight text-ink">{site.name}</span>
             <span className="text-[9px] font-medium uppercase tracking-[0.24em] text-mist">{site.descriptor}</span>
           </LocaleLink>

@@ -161,16 +161,18 @@ function schemaGraph(locale: Locale, nodes: Array<Record<string, unknown>>) {
 }
 
 /**
- * Rewrites the built shell for one request, or returns `null` to skip injection —
- * which is how the fallback knows development has no built shell to serve.
+ * Rewrites the built shell for one request.
  *
  * The template's `<title>`, description and `hreflang` links are the Turkish
  * defaults; every one is replaced, not appended to, so a crawler never sees two
  * competing claims about the same document. The OG/Twitter/JSON-LD block has no
  * template counterpart and is inserted before `</head>`.
+ *
+ * `css`, when given, is the built stylesheet's content: the fallback inlines it
+ * over the `<link>` tag, so its bytes stop being the one render-blocking request
+ * (see the notes in `app.ts`).
  */
-export function renderHead(pathname: string, html: string | null): string | null {
-  if (html === null) return null
+export function renderHead(pathname: string, html: string, css: string | null = null): string {
   const locale = localeFromPathname(pathname)
   const strings = localeBundle(locale)
   const { title, description, ogType, jsonLd } = pageMeta(pathname, locale)
@@ -210,12 +212,26 @@ export function renderHead(pathname: string, html: string | null): string | null
     '@graph': schemaGraph(locale, jsonLd),
   })}\n  </script>`
 
-  return html
+  const cssInline = css === null
+    ? null
+    : `<style>${css.replace(/<\/style/gi, '<\\/style')}</style>`
+
+  let out = html
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeAttr(description)}" />`)
     .replace(
       /(?:[ \t]*<link rel="alternate" hreflang="[^"]*" href="[^"]*" \/>[ \t]*\n)+/,
       () => `    ${alternates}\n\n`,
     )
-    .replace('</head>', `  ${canonicalLink}\n    ${og}\n    ${jsonLdScript}\n  </head>`)
+    // The hero's poster is the home page's LCP element and arrives only after
+    // React mounts otherwise; a preload hint lets discovery start at parse time,
+    // which is what the Lighthouse run showed as that element's Load Delay.
+    .replace(
+      '</head>',
+      `  ${canonicalLink}\n${/^\/$/.test(p) ? '    <link rel="preload" as="image" href="/media/home/hero-poster.webp" fetchpriority="high" />\n' : ''}    ${og}\n    ${jsonLdScript}\n  </head>`,
+    )
+  if (cssInline !== null) {
+    out = out.replace(/<link rel="stylesheet" crossorigin href="[^"]+\.css"[^>]*>/, () => cssInline)
+  }
+  return out
 }

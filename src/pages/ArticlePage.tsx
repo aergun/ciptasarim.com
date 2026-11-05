@@ -99,7 +99,7 @@ export function ArticlePage() {
 
       <Section className="pb-24 pt-0">
         <Container width="narrow">
-          <Heading as="h3" className="mb-6">
+          <Heading as="h2" size="display-sm" className="mb-6">
             {strings.articles.related}
           </Heading>
           <ul className="divide-y divide-line border-y border-line">
@@ -154,7 +154,9 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
       return <Prose>{t(block.text)}</Prose>
 
     case 'heading':
-      return <Heading as="h3">{t(block.text)}</Heading>
+      /* h2, not h3: the article's title is the h1 and these are its section
+         headers; the display-sm size keeps them visually as they were. */
+      return <Heading as="h2" size="display-sm">{t(block.text)}</Heading>
 
     case 'list':
       return (

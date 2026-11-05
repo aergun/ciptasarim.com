@@ -29,7 +29,7 @@ import { useEffect, useRef } from 'react'
  * to the frozen first frame there: an inert video is the honest fallback for a
  * reader who has asked the page to stop moving.
  */
-export function ScrubVideo({ src }: { src: string }) {
+export function ScrubVideo({ src, poster }: { src: string; poster?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   // Mutable refs for the scrub machinery — they drive seeks and must never
@@ -167,9 +167,13 @@ export function ScrubVideo({ src }: { src: string }) {
       className="absolute inset-0 z-0 h-full w-full object-cover opacity-0 transition-opacity duration-700"
       style={{ objectPosition: '75% center' }}
       src={src}
+      poster={poster}
       muted
       playsInline
-      preload="auto"
+      /* metadata, not auto: the poster paints the LCP frame (a ~75 KB JPEG) and the
+       * 5.5 MB video follows on demand — a seek, or the touch fallback's play().
+       * With `auto` the whole file was one eager download before first paint. */
+      preload="metadata"
       /* Intentionally no `autoPlay` / `loop` — the cursor is the playhead. */
       aria-hidden="true"
     />
