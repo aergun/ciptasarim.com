@@ -487,6 +487,15 @@ export const en: Mirror<TrShape> = {
     },
   },
 
+  /* ------------------------------------------------------- skycad (panel) */
+  skycad: {
+    eyebrow: 'From SkyCadEda: GOAL layout automation, V2',
+    intro:
+      'Below, the SkyCadEda announcement reproduced in place: 34 cells of analog layout, their schematics and half-cell highlights, and the 8-bit SAR ADC plate. The panel carries the announcement’s original English text and visual language as-is; its figures are the announcement’s own values.',
+    noteLink: 'Read our note for an evaluation',
+    sourceLink: 'Original announcement',
+  },
+
   /* ----------------------------------------------------------- articles */
   articles: {
     title: 'Technical notes',

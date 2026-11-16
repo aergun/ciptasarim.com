@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 530 424" width="530" height="424" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+<style>line,polyline,polygon,rect,circle{stroke:#111;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.name{font-size:12px;font-weight:700;fill:#111}.size{font-size:10.5px;fill:#555}.net{font-size:11.5px;font-style:italic;fill:#1d4ed8}.pin{font-size:10px;fill:#555}.pt{font-size:11px;font-weight:700;fill:#b45309}.ttl{font-size:13px;font-weight:700;fill:#555}text{stroke:none}polygon.flag{}</style>
+<rect x="-16" y="-16" width="530" height="424" fill="#fff" style="stroke:none"/>
+<g transform="translate(0,0.0)">
+<line x1="143.8" y1="82.0" x2="143.8" y2="64.0"/>
+<line x1="143.8" y1="142.0" x2="143.8" y2="160.0"/>
+<line x1="187.8" y1="112.0" x2="187.8" y2="148.0"/>
+<line x1="187.8" y1="148.0" x2="143.8" y2="148.0"/>
+<line x1="143.8" y1="178.0" x2="143.8" y2="160.0"/>
+<line x1="143.8" y1="238.0" x2="143.8" y2="256.0"/>
+<line x1="99.8" y1="208.0" x2="99.8" y2="172.0"/>
+<line x1="99.8" y1="172.0" x2="143.8" y2="172.0"/>
+<line x1="143.8" y1="274.0" x2="143.8" y2="256.0"/>
+<line x1="143.8" y1="334.0" x2="143.8" y2="352.0"/>
+<line x1="99.8" y1="304.0" x2="85.8" y2="304.0"/>
+<line x1="369.2" y1="82.0" x2="369.2" y2="64.0"/>
+<line x1="369.2" y1="142.0" x2="369.2" y2="160.0"/>
+<line x1="369.2" y1="178.0" x2="369.2" y2="160.0"/>
+<line x1="369.2" y1="238.0" x2="369.2" y2="256.0"/>
+<line x1="325.2" y1="208.0" x2="325.2" y2="172.0"/>
+<line x1="325.2" y1="172.0" x2="369.2" y2="172.0"/>
+<line x1="369.2" y1="274.0" x2="369.2" y2="256.0"/>
+<line x1="369.2" y1="334.0" x2="369.2" y2="352.0"/>
+<line x1="325.2" y1="304.0" x2="311.2" y2="304.0"/>
+<line x1="187.8" y1="112.0" x2="325.2" y2="112.0"/>
+<line x1="256.5" y1="112.0" x2="256.5" y2="100.0"/>
+<line x1="143.8" y1="160.0" x2="149.8" y2="160.0"/>
+<line x1="143.8" y1="256.0" x2="149.8" y2="256.0"/>
+<line x1="369.2" y1="160.0" x2="375.2" y2="160.0"/>
+<line x1="369.2" y1="256.0" x2="375.2" y2="256.0"/>
+<line x1="64" y1="64.0" x2="486.4" y2="64.0"/>
+<line x1="64" y1="352.0" x2="486.4" y2="352.0"/>
+<circle cx="143.8" cy="64.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="143.8" cy="160.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="143.8" cy="148.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="143.8" cy="256.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="143.8" cy="172.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="143.8" cy="352.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="369.2" cy="64.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="369.2" cy="160.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="369.2" cy="256.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="369.2" cy="172.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="369.2" cy="352.0" r="3.2" fill="#111" stroke="none"/>
+<circle cx="256.5" cy="112.0" r="3.2" fill="#111" stroke="none"/>
+<line x1="187.8" y1="112.0" x2="174.8" y2="112.0"/>
+<line x1="168.8" y1="97.0" x2="168.8" y2="127.0"/>
+<line x1="162.8" y1="94.0" x2="162.8" y2="130.0"/>
+<line x1="162.8" y1="100.0" x2="143.8" y2="100.0"/>
+<line x1="162.8" y1="124.0" x2="143.8" y2="124.0"/>
+<line x1="143.8" y1="100.0" x2="143.8" y2="82.0"/>
+<line x1="143.8" y1="124.0" x2="143.8" y2="142.0"/>
+<circle cx="171.8" cy="112.0" r="3" fill="#fff"/>
+<polygon points="152.8,96.0 152.8,104.0 160.8,100.0" fill="#111"/>
+<text x="133.8" y="109.0" text-anchor="end" class="name">XMp1</text>
+<text x="133.8" y="123.0" text-anchor="end" class="size">2/8 nf=2</text>
+<line x1="99.8" y1="208.0" x2="118.8" y2="208.0"/>
+<line x1="118.8" y1="193.0" x2="118.8" y2="223.0"/>
+<line x1="124.8" y1="190.0" x2="124.8" y2="226.0"/>
+<line x1="124.8" y1="196.0" x2="143.8" y2="196.0"/>
+<line x1="124.8" y1="220.0" x2="143.8" y2="220.0"/>
+<line x1="143.8" y1="196.0" x2="143.8" y2="178.0"/>
+<line x1="143.8" y1="220.0" x2="143.8" y2="238.0"/>
+<polygon points="133.8,216.0 133.8,224.0 141.8,220.0" fill="#111"/>
+<text x="153.8" y="205.0" text-anchor="start" class="name">XMn1</text>
+<text x="153.8" y="219.0" text-anchor="start" class="size">2/8 nf=2 B=gnd</text>
+<line x1="99.8" y1="304.0" x2="118.8" y2="304.0"/>
+<line x1="118.8" y1="289.0" x2="118.8" y2="319.0"/>
+<line x1="124.8" y1="286.0" x2="124.8" y2="322.0"/>
+<line x1="124.8" y1="292.0" x2="143.8" y2="292.0"/>
+<line x1="124.8" y1="316.0" x2="143.8" y2="316.0"/>
+<line x1="143.8" y1="292.0" x2="143.8" y2="274.0"/>
+<line x1="143.8" y1="316.0" x2="143.8" y2="334.0"/>
+<polygon points="133.8,312.0 133.8,320.0 141.8,316.0" fill="#111"/>
+<text x="153.8" y="301.0" text-anchor="start" class="name">XMn2</text>
+<text x="153.8" y="315.0" text-anchor="start" class="size">8/8 nf=4</text>
+<line x1="325.2" y1="112.0" x2="338.2" y2="112.0"/>
+<line x1="344.2" y1="97.0" x2="344.2" y2="127.0"/>
+<line x1="350.2" y1="94.0" x2="350.2" y2="130.0"/>
+<line x1="350.2" y1="100.0" x2="369.2" y2="100.0"/>
+<line x1="350.2" y1="124.0" x2="369.2" y2="124.0"/>
+<line x1="369.2" y1="100.0" x2="369.2" y2="82.0"/>
+<line x1="369.2" y1="124.0" x2="369.2" y2="142.0"/>
+<circle cx="341.2" cy="112.0" r="3" fill="#fff"/>
+<polygon points="360.2,96.0 360.2,104.0 352.2,100.0" fill="#111"/>
+<text x="379.2" y="109.0" text-anchor="start" class="name">XMp2</text>
+<text x="379.2" y="123.0" text-anchor="start" class="size">2/8 nf=2</text>
+<line x1="325.2" y1="208.0" x2="344.2" y2="208.0"/>
+<line x1="344.2" y1="193.0" x2="344.2" y2="223.0"/>
+<line x1="350.2" y1="190.0" x2="350.2" y2="226.0"/>
+<line x1="350.2" y1="196.0" x2="369.2" y2="196.0"/>
+<line x1="350.2" y1="220.0" x2="369.2" y2="220.0"/>
+<line x1="369.2" y1="196.0" x2="369.2" y2="178.0"/>
+<line x1="369.2" y1="220.0" x2="369.2" y2="238.0"/>
+<polygon points="359.2,216.0 359.2,224.0 367.2,220.0" fill="#111"/>
+<text x="379.2" y="205.0" text-anchor="start" class="name">XMn3</text>
+<text x="379.2" y="219.0" text-anchor="start" class="size">2/4 nf=2 B=gnd</text>
+<line x1="325.2" y1="304.0" x2="344.2" y2="304.0"/>
+<line x1="344.2" y1="289.0" x2="344.2" y2="319.0"/>
+<line x1="350.2" y1="286.0" x2="350.2" y2="322.0"/>
+<line x1="350.2" y1="292.0" x2="369.2" y2="292.0"/>
+<line x1="350.2" y1="316.0" x2="369.2" y2="316.0"/>
+<line x1="369.2" y1="292.0" x2="369.2" y2="274.0"/>
+<line x1="369.2" y1="316.0" x2="369.2" y2="334.0"/>
+<polygon points="359.2,312.0 359.2,320.0 367.2,316.0" fill="#111"/>
+<text x="379.2" y="301.0" text-anchor="start" class="name">XMn4</text>
+<text x="379.2" y="315.0" text-anchor="start" class="size">8/4 nf=4</text>
+<text x="82.8" y="308.0" text-anchor="end" class="net">a</text>
+<polygon points="311.2,304.0 305.2,296.0 269.2,296.0 269.2,312.0 305.2,312.0" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/><text x="287.2" y="308.0" text-anchor="middle" class="pt">vref</text>
+<text x="256.5" y="97.0" text-anchor="middle" class="net">a</text>
+<text x="152.8" y="157.0" text-anchor="start" class="net">a</text>
+<text x="152.8" y="253.0" text-anchor="start" class="net">x</text>
+<polygon points="375.2,153.0 381.2,145.0 417.2,145.0 417.2,161.0 381.2,161.0" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/><text x="399.2" y="157.0" text-anchor="middle" class="pt">vref</text>
+<text x="378.2" y="253.0" text-anchor="start" class="net">y</text>
+<polygon points="64.0,64.0 58.0,56.0 29.0,56.0 29.0,72.0 58.0,72.0" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/><text x="43.5" y="68.0" text-anchor="middle" class="pt">vdd</text>
+<polygon points="64.0,352.0 58.0,344.0 29.0,344.0 29.0,360.0 58.0,360.0" fill="#fff7ed" stroke="#b45309" stroke-width="1.2"/><text x="43.5" y="356.0" text-anchor="middle" class="pt">gnd</text>
+</g>
+</svg>

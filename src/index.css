@@ -390,3 +390,463 @@ html.js .reveal.is-in .mcp-stage {
     transition: none;
   }
 }
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/archivo/v25/k3kQo8UDI-1M0wlSfdfoLnnA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/archivo/v25/k3kQo8UDI-1M0wlSfdnoLg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourceserif4/v15/vEFH2_tTDB4M7-auWDN0ahZJW1ge6NmXq2ZbF8zBfb98SUr0aX2AzA.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourceserif4/v15/vEFH2_tTDB4M7-auWDN0ahZJW1ge6NmXq2ZbF8zBfb98SUr6aX0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400 650;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourceserif4/v15/vEFI2_tTDB4M7-auWDN0ahZJW1gV8tenXg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 400 650;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourceserif4/v15/vEFI2_tTDB4M7-auWDN0ahZJW1gb8tc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/*
+ * ---------------------------------------------------------------------------
+ * SkyCadEda GOAL v2 replica panel (/cekirdekler)
+ * ---------------------------------------------------------------------------
+ * A scoped port of the announcement page's own stylesheet
+ * (skycadeda.github.io/blog/layout-automation-v2): its light theme is forced
+ * on the panel — the replica must read like the original, not like this site —
+ * and every selector is nested under `.skv2` so the panel's paper, type and
+ * rules never leak into the dark instrumentation around it. The fonts are the
+ * original page's faces, self-hosted under /skycadeda/layout-automation-v2.
+ */
+
+/* replica scope: light values forced — the original page's own */
+.skv2 {
+  --skv2-bg: #f4f6f8;
+  --skv2-paper: #ffffff;
+  --skv2-ink: #14181d;
+  --skv2-muted: #56606b;
+  --skv2-rule: #d9dee4;
+  --skv2-accent: #1e5bd8;
+  --skv2-mirror: #e8790a;
+  --skv2-good: #12804a;
+  --skv2-bad: #c62835;
+  --skv2-chip: #e8edf4;
+  --skv2-plate: #ffffff;
+  --skv2-plate-edge: #cfd6de;
+  --skv2-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --skv2-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --skv2-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --skv2-col: 44rem;
+  --skv2-wide: 78rem;
+
+  background: var(--skv2-bg);
+  color: var(--skv2-ink);
+  font: 400 1.125rem/1.62 var(--skv2-body);
+  padding-block: 2.4rem 4rem;
+}
+
+.skv2 .col {
+  max-width: var(--skv2-col);
+  margin-inline: auto;
+  width: 100%;
+}
+.skv2 .wide {
+  max-width: var(--skv2-wide);
+  margin-inline: auto;
+  width: 100%;
+}
+.skv2 h1,
+.skv2 h2 {
+  font-family: var(--skv2-display);
+  text-wrap: balance;
+  line-height: 1.12;
+  margin: 0;
+  color: var(--skv2-ink);
+}
+.skv2 h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.9rem);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.01em;
+}
+.skv2 h2 {
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  font-weight: 750;
+  font-stretch: 108%;
+  margin-top: 4.2rem;
+}
+.skv2 p {
+  margin: 1rem 0 0;
+  color: var(--skv2-ink);
+}
+.skv2 a {
+  color: var(--skv2-accent);
+  text-decoration: underline;
+}
+.skv2 .byline {
+  color: var(--skv2-muted);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+.skv2 ul {
+  padding-left: 1.2rem;
+  margin: 0.8rem 0 0;
+  list-style-type: disc;
+  color: var(--skv2-ink);
+}
+.skv2 ul li {
+  margin-top: 0.35rem;
+}
+
+/* layout plates */
+.skv2 figure {
+  margin: 2rem 0 0;
+}
+.skv2 .plate {
+  background: var(--skv2-plate);
+  border: 1px solid var(--skv2-plate-edge);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.skv2 .plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.skv2 .plate.zoom {
+  cursor: zoom-in;
+}
+.skv2 figcaption {
+  font-size: 0.92rem;
+  color: var(--skv2-muted);
+  line-height: 1.5;
+  margin-top: 0.7rem;
+  max-width: var(--skv2-col);
+}
+.skv2 .wide figcaption {
+  margin-inline: auto;
+}
+.skv2 figcaption b {
+  color: var(--skv2-ink);
+  font-weight: 600;
+}
+
+/* overlay toggle */
+.skv2 .tog {
+  display: inline-flex;
+  border: 1px solid var(--skv2-rule);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 1rem;
+  background: var(--skv2-paper);
+}
+.skv2 .tog button {
+  font: 600 0.8rem/1 var(--skv2-mono);
+  padding: 0.55rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: var(--skv2-muted);
+  cursor: pointer;
+}
+.skv2 .tog button[aria-pressed='true'] {
+  background: var(--skv2-ink);
+  color: var(--skv2-bg);
+}
+
+/* gallery */
+.skv2 .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.4rem;
+}
+.skv2 .chips button {
+  font: 600 0.78rem/1 var(--skv2-mono);
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--skv2-rule);
+  background: var(--skv2-paper);
+  color: var(--skv2-muted);
+  cursor: pointer;
+}
+.skv2 .chips button[aria-pressed='true'] {
+  border-color: var(--skv2-ink);
+  color: var(--skv2-ink);
+}
+.skv2 .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.skv2 .card {
+  background: var(--skv2-paper);
+  border: 1px solid var(--skv2-rule);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: zoom-in;
+  text-align: left;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+}
+.skv2 .card .pic {
+  background: var(--skv2-plate);
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--skv2-rule);
+}
+.skv2 .card .pic .fit {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+}
+.skv2 .card .pic img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+.skv2 .card .info {
+  padding: 0.75rem 0.85rem 0.85rem;
+  display: grid;
+  gap: 0.3rem;
+}
+.skv2 .card .nm {
+  font: 700 0.98rem/1.2 var(--skv2-display);
+  font-stretch: 100%;
+  color: var(--skv2-ink);
+}
+.skv2 .card .dt {
+  font: 400 0.74rem/1.45 var(--skv2-mono);
+  color: var(--skv2-muted);
+}
+.skv2 .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.skv2 .badge {
+  font: 600 0.66rem/1 var(--skv2-mono);
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.45rem;
+  border-radius: 3px;
+  background: var(--skv2-chip);
+  color: var(--skv2-muted);
+}
+.skv2 .badge.ok {
+  color: var(--skv2-good);
+}
+.skv2 .badge.m {
+  color: var(--skv2-accent);
+}
+.skv2 svg.ov {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.skv2 .hide-ov svg.ov {
+  display: none;
+}
+.skv2 .skv2-focusable:focus-visible,
+.skv2 .card:focus-visible,
+.skv2 .tog button:focus-visible,
+.skv2 .chips button:focus-visible,
+.skv2-lb button:focus-visible {
+  outline: 2px solid var(--skv2-accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skv2 .card {
+    transition: border-color 0.15s;
+  }
+  .skv2 .card:hover {
+    border-color: var(--skv2-accent);
+  }
+}
+
+/* the lightbox (portal to body, so it is scoped by its own class) */
+.skv2 [hidden] {
+  display: none !important;
+}
+.skv2-lb {
+  --skv2-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --skv2-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(8, 10, 12, 0.92);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: env(safe-area-inset-top, 0px) max(12px, env(safe-area-inset-right, 0px))
+    env(safe-area-inset-bottom, 0px) max(12px, env(safe-area-inset-left, 0px));
+}
+.skv2-lb header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  padding: 0.8rem 0;
+  color: #e6eaee;
+}
+.skv2-lb header .t {
+  font: 700 1.05rem/1.2 var(--skv2-display);
+  margin-right: auto;
+  min-width: 0;
+}
+.skv2-lb header .t small {
+  display: block;
+  font: 400 0.75rem/1.4 var(--skv2-mono);
+  color: #a9b3bd;
+  margin-top: 0.2rem;
+}
+.skv2-lb button {
+  font: 600 0.78rem/1 var(--skv2-mono);
+  padding: 0.55rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #3a444f;
+  background: #1a2027;
+  color: #e6eaee;
+  cursor: pointer;
+  text-decoration: none;
+}
+.skv2-lb button[aria-pressed='true'] {
+  background: #e6eaee;
+  color: #111;
+}
+.skv2-lb .vp {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 4px;
+  min-height: 0;
+  touch-action: none;
+  cursor: grab;
+}
+.skv2-lb .vp.drag {
+  cursor: grabbing;
+}
+.skv2-lb .sv {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.skv2-lb .cv {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.skv2-lb .cv img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.skv2-lb .hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font: 400 0.72rem/1 var(--skv2-mono);
+  color: #444;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.4rem 0.55rem;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.skv2-lb .tabs {
+  display: inline-flex;
+  border: 1px solid #3a444f;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.skv2-lb .tabs button {
+  border: 0;
+  border-radius: 0;
+}
+.skv2-lb .zbtns {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skv2 .card {
+    transition: none;
+  }
+}
