@@ -18,6 +18,77 @@ import type { Article } from '../shared/types.ts'
 export const articles: readonly Article[] = [
   /* ------------------------------------------------------------------------ */
   {
+    slug: 'analog-yerlesim-otomasyonu-v2',
+    title: {
+      tr: 'Analog yerleşim otomasyonu: V2',
+      en: 'Analog layout automation: V2',
+    },
+    standfirst: {
+      tr: 'GOAL yerleşim motoru Rust ile sıfırdan yeniden yazıldı, V1’in kalite eksikleri tek tek kapatıldı ve sıradaki hedef IP düzeyinde otomasyon: 8–12 bit SAR ADC. Bu yazı, duyuru metnini özetler.',
+      en: 'The GOAL layout engine has been rewritten from scratch in Rust, V1’s quality gaps closed one by one, and the next target is IP-level automation: an 8–12-bit SAR ADC. This note summarises the announcement.',
+    },
+    date: '2026-11-16',
+    readingMinutes: 4,
+    tags: ['analog', 'yerlesim', 'otomasyon'],
+    blocks: [
+      { kind: 'paragraph', text: {
+        tr: 'SkyCadEda (Vijay Gupta ve Navin Kumar Mishra), bir ay önce analog yerleşim otomasyonunun ilk sürümünü göstermişti; duyuru, otomasyonun "birçok kalite sorunu" taşıdığını da açıkça yazıyordu. Bu açıklık yerinde bir karardı: bir demoda var olan sorunları saklamak, sorunu çözmüş sayılmaz. Geçen süre içinde V2 yayınlandı ve V1’de sayılan eksiklerin her biri tek tek ele alındı.',
+        en: 'SkyCadEda (Vijay Gupta and Navin Kumar Mishra) demonstrated the first version of their analog layout automation a month ago; the announcement also stated plainly that the automation carried "many quality issues". That openness was the right call: hiding problems in a demo does not count as solving them. Since then V2 has shipped, and each gap named in V1 has been taken up in turn.',
+      } },
+      { kind: 'heading', text: {
+        tr: 'V2’nin getirdikleri',
+        en: 'What V2 adds',
+      } },
+      { kind: 'list', items: [
+        { tr: 'Yerinde olan devrelerde isteğe bağlı yarım hücre (half-cell) yerleşimleri.', en: 'Optional half-cell layouts, where the circuit allows.' },
+        { tr: 'Guard ring’ler ve kalkan (shield) yapıları.', en: 'Guard rings and shields.' },
+        { tr: 'Diferansiyel sinyaller için eşleştirilmiş (matched) yerleşim.', en: 'Matched layout for differential signals.' },
+        { tr: 'İyileştirilmiş yönlendirme, her bağlantıda çift via.', en: 'Optimised routing, with two vias everywhere.' },
+        { tr: 'Decap doldurma (filler) hücreleri.', en: 'Decap filler.' },
+        { tr: 'Akıma göre kendini değiştiren EM-farkındalıklı (EM-aware) yerleşim.', en: 'EM-aware layouts that adapt to the current.' },
+      ] },
+      { kind: 'paragraph', text: {
+        tr: 'Motor tarafında ise asıl haber yapısal: GOAL ("Generator Of Analog Layout") sıfırdan, Rust ile yeniden yazıldı. Aşağıdaki figür duyurunun bildirdiği karşılaştırmayı taşır: V1’e kıyasla on kat hızlanma; bir yerleşimin üretimi artık onlarca ile yüzlerce milisaniye arasındaki bir sürede bitiyor. Bu hız, yerleşimi tek bir "son adım" olmaktan çıkarıp tasarım döngüsünün içinde tekrarlanabilir bir işleme dönüştürüyor: her denemenin maliyeti o kadar düşük ki yerleşim bir kere yürütülen bir sonuç değil, koşar gibi verilen bir yanıt oluyor.',
+        en: 'The bigger news is structural, on the engine side: GOAL ("Generator Of Analog Layout") has been rewritten from scratch, in Rust. The figure below carries the comparison the announcement reports: a speed-up of ten times over V1, with one layout now completing in tens to hundreds of milliseconds. At that cost, layout stops being a one-shot final step and becomes a repeatable part of the design loop: each attempt is cheap enough that layout is an answer you can ask for routinely, not a result you run once.',
+      } },
+      { kind: 'figure', figure: {
+        basis: 'modelled',
+        value: 10,
+        unit: 'ratio',
+        model: 'GOAL v2 ÷ GOAL v1, layout generation time (SkyCadEda, GOAL v2 announcement)',
+        source: null,
+      }, caption: {
+        tr: 'V1’e kıyasla yerleşim üretim hızının kaç katına çıktığına dair duyuru rakamı; geliştirme ekibinin bildirdiği karşılaştırmadır, bağımsız bir ölçüm değildir.',
+        en: 'The announcement’s figure for how much faster layout generation became versus V1; as reported by the development team, not an independent measurement.',
+      } },
+      { kind: 'paragraph', text: {
+        tr: 'Duyuru demosunda EM/IR sonuçlarının da gösterildiği belirtiliyor ve mimarinin temel kararı burada: her özellik yapılandırılabilir. Yarım hücrelerin kullanılıp kullanılmayacağı, guard ring yoğunluğu, diferansiyel eşleştirme, via sayısı, decap doldurması, en-boy oranı — bunlar motorun dayattığı varsayılanlar değil, kullanıcının verdiği kararlar. Bir otomasyon aracında bu görünürlük, aracın neyi garanti edip neyi bilmediğini okumayı mümkün kılar.',
+        en: 'The demo also shows EM/IR results, and the architectural decision behind them is the same one this catalogue runs on: every feature is configurable. Whether half-cells are used, guard-ring density, differential matching, via count, decap fill, aspect ratio — these are decisions the user states, not defaults the engine imposes. In an automation tool that visibility is what makes it possible to read what the tool guarantees and what it does not.',
+      } },
+      { kind: 'quote', text: {
+        tr: '8-bit SAR ADC: çalışmalar sürüyor. DRC temiz; üst seviyede LVS eşleşmiş.',
+        en: 'The 8-bit SAR ADC, work in progress. DRC clean, top-level LVS matched.',
+      }, attribution: {
+        tr: 'SkyCadEda duyurusundan (çeviri) — kaynak: skycadeda.github.io/blog/layout-automation-v2',
+        en: 'From the SkyCadEda announcement (translated) — source: skycadeda.github.io/blog/layout-automation-v2',
+      } },
+      { kind: 'heading', text: {
+        tr: 'Sıradaki adım: IP düzeyinde otomasyon',
+        en: 'Next: automation at the IP level',
+      } },
+      { kind: 'paragraph', text: {
+        tr: 'Duyurunun son bölümü, otomasyonun hücre düzeyinden IP düzeyine taşınacağını söylüyor ve başlangıç noktası bir 8–12 bit SAR ADC. Bugünün çalışma sürümü 8 bitlik ADC’dir: dijital kısıt DRC temiz, üst seviyede LVS eşleşmiş. Yerleşimin kendi düzeni de duyuruda tarif edilir: solda kapasitif DAC dizisi ve anahtarları, sağda SAR lojiği, ortada karşılaştırıcı ve referans, altta decap sıraları — hepsi birlikte yönlendirilmiş.',
+        en: 'The closing section of the announcement moves automation from the cell level to the IP level, and the entry point is an 8–12-bit SAR ADC. Today’s working version is the 8-bit one: the digital side is DRC-clean, with LVS matched at the top level. The announcement also describes the layout itself: the capacitor DAC array and its switches on the left, SAR logic on the right, comparator and reference in the middle, decap rows along the bottom — all routed together.',
+      } },
+      { kind: 'callout', tone: 'note', text: {
+        tr: 'Bu yazı bir duyuru özetidir, katalog verisi değildir: buradaki hız ve yetenek ifadeleri, SkyCadEda ekibinin kendi metninde bildirdiği haliyle aktarılmıştır ve bağımsız bir değerlendirme değildir. Teknik sorular için duyuru metnine bakın: skycadeda.github.io/blog/layout-automation-v2 (satış: sales@skycadeda.com).',
+        en: 'This note summarises an announcement; it is not catalogue data. The speed and capability statements here are carried as their authors published them and are not an independent evaluation. For technical questions, see the announcement itself: skycadeda.github.io/blog/layout-automation-v2 (sales: sales@skycadeda.com).',
+      } },
+    ],
+  },
+
+  /* ------------------------------------------------------------------------ */
+  {
     slug: 'olcul-modell-farki',
     title: {
       tr: 'Ölçülen ve modellenen',
