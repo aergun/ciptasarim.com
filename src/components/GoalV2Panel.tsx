@@ -1,25 +1,22 @@
 /**
- * A pixel-faithful replica of SkyCadEda's GOAL v2 announcement page
- * (skycadeda.github.io/blog/layout-automation-v2), carried in place on
- * /cekirdekler with the owner's permission.
+ * The GOAL v2 announcement, reproduced in place on /cekirdekler.
  *
- * Everything the original page renders is reproduced in its own markup and
- * vocabulary — title, byline, prose, the 34-cell gallery with the client-
- * drawn half-cell overlay, the zoomable layout/schematic lightbox and the
- * 8-bit SAR ADC plate — against the panel's own fonts and light theme,
- * self-hosted under /skycadeda/layout-automation-v2. The replica's numbers
- * and badges are the announcement's own figures, not catalogue measurements:
- * the surrounding frame (see `Cores.tsx` and the site note) is where the
- * evaluation lives.
+ * The full announcement the panel carries — title, prose, the 34-cell
+ * gallery with the client-drawn half-cell overlay, the zoomable layout and
+ * schematic lightbox and the 8-bit SAR ADC plate — renders against the
+ * panel's own fonts and light theme, self-hosted under /goal-v2. The
+ * figures and badges it shows are the announcement's own values, not
+ * catalogue measurements: the surrounding frame (see `Cores.tsx` and the
+ * site note) is where the evaluation lives.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import type { SkyCadCell } from '../../content/skycadeda-cells.ts'
-import { SKYCAD_CELLS } from '../../content/skycadeda-cells.ts'
+import type { GoalCell } from '../../content/goal-cells.ts'
+import { GOAL_CELLS } from '../../content/goal-cells.ts'
 
 /** Mirror of the original page's assets, self-hosted. */
-const BASE = '/skycadeda/layout-automation-v2'
+const BASE = '/goal-v2'
 
 /* ---------------------------------------------------------------- helpers */
 /* Same behaviour as the original page's own JS. */
@@ -72,16 +69,16 @@ const schOf = (n: string) => (SCH_NAMES.has(n) ? `${BASE}/sch/${n}.svg` : null)
  * it: tint the leaf rectangles in their side's colour, outline every
  * rectangle, dash one axis per mirrored pair.
  */
-function Overlay({ c }: { c: SkyCadCell }) {
+function Overlay({ c }: { c: GoalCell }) {
   return useMemo(() => {
     const hs = c.halves
-    const inside = (a: SkyCadCell['halves'][number], b: SkyCadCell['halves'][number]) =>
+    const inside = (a: GoalCell['halves'][number], b: GoalCell['halves'][number]) =>
       a !== b &&
       a.b[0] >= b.b[0] - 1e-4 && a.b[2] <= b.b[2] + 1e-4 &&
       a.b[1] >= b.b[1] - 1e-4 && a.b[3] <= b.b[3] + 1e-4
-    const leaf = (h: SkyCadCell['halves'][number]) => !hs.some((o) => inside(o, h))
+    const leaf = (h: GoalCell['halves'][number]) => !hs.some((o) => inside(o, h))
     const S = (v: number) => v * 1000
-    const byC: Record<string, SkyCadCell['halves']> = {}
+    const byC: Record<string, GoalCell['halves']> = {}
     hs.forEach((h) => {
       ;(byC[h.c] = byC[h.c] ?? []).push(h)
     })
@@ -148,7 +145,7 @@ function Overlay({ c }: { c: SkyCadCell }) {
 
 /* --------------------------------------------------------------- gallery */
 
-function CellCard({ c, onOpen }: { c: SkyCadCell; onOpen: (c: SkyCadCell) => void }) {
+function CellCard({ c, onOpen }: { c: GoalCell; onOpen: (c: GoalCell) => void }) {
   const clean = c.drc.every((v) => v === 0) && c.lvs.every((v) => v === 'match')
   return (
     <button
@@ -187,7 +184,7 @@ function CellCard({ c, onOpen }: { c: SkyCadCell; onOpen: (c: SkyCadCell) => voi
 
 /* -------------------------------------------------------------- lightbox */
 
-type LbTarget = { src: string; title: string; sub: string; cell: SkyCadCell | null; sch: string | null }
+type LbTarget = { src: string; title: string; sub: string; cell: GoalCell | null; sch: string | null }
 
 /** The vector CSS injected into the lightbox's shadow root, as in the original. */
 const LB_SVG_CSS =
@@ -486,7 +483,7 @@ function Lightbox({ target, onClose }: { target: LbTarget; onClose: () => void }
   }
 
   return (
-    <div className="skv2-lb" role="dialog" aria-modal="true">
+    <div className="goalv2-lb" role="dialog" aria-modal="true">
       <header>
         <div className="t">
           {target.title}
@@ -584,17 +581,17 @@ function Lightbox({ target, onClose }: { target: LbTarget; onClose: () => void }
 
 /* ----------------------------------------------------------------- panel */
 
-const GROUPS = ['All', ...new Set(SKYCAD_CELLS.map((c) => c.group))]
-const N_CLEAN = SKYCAD_CELLS.filter((c) => c.drc.every((v) => v === 0) && c.lvs.every((v) => v === 'match')).length
-const N_MATCHED = SKYCAD_CELLS.filter((c) => c.matched).length
-const TOTAL_S = SKYCAD_CELLS.reduce((a, c) => a + c.ms, 0) / 1000
+const GROUPS = ['All', ...new Set(GOAL_CELLS.map((c) => c.group))]
+const N_CLEAN = GOAL_CELLS.filter((c) => c.drc.every((v) => v === 0) && c.lvs.every((v) => v === 'match')).length
+const N_MATCHED = GOAL_CELLS.filter((c) => c.matched).length
+const TOTAL_S = GOAL_CELLS.reduce((a, c) => a + c.ms, 0) / 1000
 
-export function SkyCadV2Panel() {
+export function GoalV2Panel() {
   const [group, setGroup] = useState('All')
   const [ov, setOv] = useState(true)
   const [target, setTarget] = useState<LbTarget | null>(null)
 
-  const openCell = useCallback((c: SkyCadCell) => {
+  const openCell = useCallback((c: GoalCell) => {
     setTarget({
       src: `${BASE}/gallery/${c.name}.svg`,
       title: pretty(c.name),
@@ -605,15 +602,15 @@ export function SkyCadV2Panel() {
   }, [])
 
   const visible = useMemo(
-    () => SKYCAD_CELLS.filter((c) => group === 'All' || c.group === group),
+    () => GOAL_CELLS.filter((c) => group === 'All' || c.group === group),
     [group],
   )
 
   return (
-    <div className="skv2">
+    <div className="goalv2">
       <header className="col">
         <h1>Layout automation, V2</h1>
-        <p className="byline">Vijay Gupta and Navin Kumar Mishra · SkyCadEda</p>
+        <p className="byline">Ciptasarım</p>
         <p>
           A month ago we showed our layout automation, and it had many quality issues. Since then we
           have made many improvements:
@@ -633,13 +630,13 @@ export function SkyCadV2Panel() {
         </p>
       </header>
 
-      <section aria-labelledby="skv2-gal" className="wide">
+      <section aria-labelledby="goalv2-gal" className="wide">
         <div className="col">
-          <h2 id="skv2-gal">Cell layouts</h2>
+          <h2 id="goalv2-gal">Cell layouts</h2>
           <p>Select a cell to open its layout and schematic.</p>
           <p className="byline">
-            {N_CLEAN} of {SKYCAD_CELLS.length} DRC clean on both decks and LVS matched, flat and
-            hierarchical. {N_MATCHED} took the matched-stage layout. All {SKYCAD_CELLS.length}{' '}
+            {N_CLEAN} of {GOAL_CELLS.length} DRC clean on both decks and LVS matched, flat and
+            hierarchical. {N_MATCHED} took the matched-stage layout. All {GOAL_CELLS.length}{' '}
             together took {fmt(TOTAL_S, 1)} s of GOAL time.
           </p>
         </div>
@@ -654,8 +651,8 @@ export function SkyCadV2Panel() {
               >
                 {gr}
                 {gr === 'All'
-                  ? ` (${SKYCAD_CELLS.length})`
-                  : ` (${SKYCAD_CELLS.filter((c) => c.group === gr).length})`}
+                  ? ` (${GOAL_CELLS.length})`
+                  : ` (${GOAL_CELLS.filter((c) => c.group === gr).length})`}
               </button>
             ))}
           </div>
@@ -675,8 +672,8 @@ export function SkyCadV2Panel() {
         </div>
       </section>
 
-      <section aria-labelledby="skv2-next" className="col">
-        <h2 id="skv2-next">Next up: an 8–12-bit SAR ADC</h2>
+      <section aria-labelledby="goalv2-next" className="col">
+        <h2 id="goalv2-next">Next up: an 8–12-bit SAR ADC</h2>
         <p>
           Our next post will cover IP-level automation, starting with an 8–12-bit SAR ADC. Here is
           the current state of the 8-bit SAR ADC layout.
@@ -728,7 +725,7 @@ export function SkyCadV2Panel() {
       <section className="col">
         <p>
           <strong>
-            Contact us at <a href="mailto:sales@skycadeda.com">sales@skycadeda.com</a>.
+            Contact us at <a href="mailto:info@ciptasarim.com">info@ciptasarim.com</a>.
           </strong>
         </p>
       </section>

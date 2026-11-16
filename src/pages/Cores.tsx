@@ -20,7 +20,7 @@ import { CORE_KINDS, type Core, type CoreKind } from '../../shared/types.ts'
 import { Container, EmptyState, Heading, Input, Prose, Section } from '../components/ui.tsx'
 import { FigureBadge, figureColor, figureValue, FigureGap } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
-import { SkyCadV2Panel } from '../components/SkyCadV2Panel.tsx'
+import { GoalV2Panel } from '../components/GoalV2Panel.tsx'
 import { LocaleLink, useSite } from '../lib/site.tsx'
 
 /** `?tur` value → the kind it names. Authored in one place; the footer links to it. */
@@ -97,33 +97,23 @@ export function Cores() {
         </header>
 
         {/*
-          The SkyCadEda GOAL v2 announcement, reproduced in place. The frame
-          names the source and points at our note (this site's evaluation);
-          the panel below it is the replica's own visual language, not the
-          catalogue's.
+          The GOAL v2 announcement, reproduced in place. The frame points at
+          our note (this site's evaluation); the panel below it is the
+          announcement's own visual language, not the catalogue's.
         */}
         <div className="mb-10 border border-line bg-stage p-6 md:p-8">
-          <p className="eyebrow">{strings.skycad.eyebrow}</p>
-          <Prose className="mt-3 max-w-[70ch]">{strings.skycad.intro}</Prose>
+          <p className="eyebrow">{strings.goal.eyebrow}</p>
+          <Prose className="mt-3 max-w-[70ch]">{strings.goal.intro}</Prose>
           <p className="mt-4 text-[12px]">
             <LocaleLink
               to="/yazilar/analog-yerlesim-otomasyonu-v2"
               className="font-semibold uppercase tracking-[0.16em] text-flare hover:underline"
             >
-              {strings.skycad.noteLink}
+              {strings.goal.noteLink}
             </LocaleLink>
-            {' · '}
-            <a
-              href="https://skycadeda.github.io/blog/layout-automation-v2/"
-              target="_blank"
-              rel="noreferrer"
-              className="tracking-[0.05em] text-mist hover:text-ink hover:underline"
-            >
-              {strings.skycad.sourceLink} ↗
-            </a>
           </p>
         </div>
-        <SkyCadV2Panel />
+        <GoalV2Panel />
 
         {/* Filters: kind chips and a free-text search, both URL-backed. */}
         <div className="flex flex-col gap-4 py-6 lg:flex-row lg:items-center lg:justify-between">

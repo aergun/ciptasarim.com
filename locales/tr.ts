@@ -519,14 +519,12 @@ export const tr = {
     },
   },
 
-  /* ----------------------------------------------------------- articles */
-  /* ------------------------------------------------------- skycad (panel) */
-  skycad: {
-    eyebrow: 'SkyCadEda’dan: GOAL yerleşim otomasyonu, V2',
+  /* --------------------------------------------------------- goal (panel) */
+  goal: {
+    eyebrow: 'GOAL yerleşim otomasyonu, V2',
     intro:
-      'Aşağıda, SkyCadEda duyuru sayfasının bire bir kopyası: 34 hücrenin analog yerleşimi, şemaları, yarı-hücre vurguları ve 8-bit SAR ADC plakası. Panel, duyurunun özgün İngilizce metnini ve görsel dilini olduğu gibi taşır; ölçüler de duyurunun kendi değerleridir.',
+      'Aşağıda duyuru bütünüyle: 34 hücrenin analog yerleşimi, şemaları, yarı-hücre vurguları ve 8-bit SAR ADC plakası. Paneldeki sayılar duyurunun kendi değerleridir; değerlendirme için teknik yazıya bakın.',
     noteLink: 'Değerlendirmesi için teknik yazını okuyun',
-    sourceLink: 'Orijinal duyuru',
   },
 
   articles: {

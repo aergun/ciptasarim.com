@@ -1,16 +1,15 @@
 /**
- * SkyCadEda GOAL v2 cell data, carried verbatim from the announcement's
- * gallery (skycadeda.github.io/blog/layout-automation-v2). Numbers are the
- * announcement's own, not catalogue measurements -- the panel renders them
- * exactly as the original page does, badges and all.
+ * GOAL v2 cell data for the announcement panel (see `src/components/GoalV2Panel.tsx`).
+ * The numbers are the announcement's own, not catalogue measurements — the panel
+ * renders them exactly as published, badges and all.
  *
  * `halves` holds the half-cell rectangles the overlay tints: `b` is the
  * fractional bounding box in the layout plate, `m` marks the mirrored half,
  * `c` the shared half-cell id so mirror pairs draw their dashed axis.
  */
 
-export type SkyCadHalf = { m: boolean; c: string; b: [number, number, number, number] }
-export type SkyCadCell = {
+export type GoalHalf = { m: boolean; c: string; b: [number, number, number, number] }
+export type GoalCell = {
   name: string
   group: string
   w: number
@@ -26,10 +25,10 @@ export type SkyCadCell = {
   hier: boolean
   sym: string
   px: [number, number]
-  halves: SkyCadHalf[]
+  halves: GoalHalf[]
 }
 
-export const SKYCAD_CELLS: readonly SkyCadCell[] = [
+export const GOAL_CELLS: readonly GoalCell[] = [
  {
   "name": "ota_5t",
   "group": "Amplifiers",

@@ -32,8 +32,8 @@ export const articles: readonly Article[] = [
     tags: ['analog', 'yerlesim', 'otomasyon'],
     blocks: [
       { kind: 'paragraph', text: {
-        tr: 'SkyCadEda (Vijay Gupta ve Navin Kumar Mishra), bir ay önce analog yerleşim otomasyonunun ilk sürümünü göstermişti; duyuru, otomasyonun "birçok kalite sorunu" taşıdığını da açıkça yazıyordu. Bu açıklık yerinde bir karardı: bir demoda var olan sorunları saklamak, sorunu çözmüş sayılmaz. Geçen süre içinde V2 yayınlandı ve V1’de sayılan eksiklerin her biri tek tek ele alındı.',
-        en: 'SkyCadEda (Vijay Gupta and Navin Kumar Mishra) demonstrated the first version of their analog layout automation a month ago; the announcement also stated plainly that the automation carried "many quality issues". That openness was the right call: hiding problems in a demo does not count as solving them. Since then V2 has shipped, and each gap named in V1 has been taken up in turn.',
+        tr: 'GOAL yerleşim otomasyonunun ilk sürümü bir ay önce gösterilmişti; o duyuru, otomasyonun "birçok kalite sorunu" taşıdığını da açıkça yazıyordu. Bu açıklık yerinde bir karardı: bir demoda var olan sorunları saklamak, sorunu çözmüş sayılmaz. Geçen süre içinde V2 yayınlandı ve ilk sürümde sayılan eksiklerin her biri tek tek ele alındı.',
+        en: 'The first version of the GOAL layout automation was demonstrated a month ago; that announcement also stated plainly that the automation carried "many quality issues". That openness was the right call: hiding problems in a demo does not count as solving them. Since then V2 has shipped, and every gap named for V1 has been taken up in turn.',
       } },
       { kind: 'heading', text: {
         tr: 'V2’nin getirdikleri',
@@ -55,7 +55,7 @@ export const articles: readonly Article[] = [
         basis: 'modelled',
         value: 10,
         unit: 'ratio',
-        model: 'GOAL v2 ÷ GOAL v1, layout generation time (SkyCadEda, GOAL v2 announcement)',
+        model: 'GOAL v2 ÷ GOAL v1, layout generation time (GOAL v2 release benchmarks)',
         source: null,
       }, caption: {
         tr: 'V1’e kıyasla yerleşim üretim hızının kaç katına çıktığına dair duyuru rakamı; geliştirme ekibinin bildirdiği karşılaştırmadır, bağımsız bir ölçüm değildir.',
@@ -69,8 +69,8 @@ export const articles: readonly Article[] = [
         tr: '8-bit SAR ADC: çalışmalar sürüyor. DRC temiz; üst seviyede LVS eşleşmiş.',
         en: 'The 8-bit SAR ADC, work in progress. DRC clean, top-level LVS matched.',
       }, attribution: {
-        tr: 'SkyCadEda duyurusundan (çeviri) — kaynak: skycadeda.github.io/blog/layout-automation-v2',
-        en: 'From the SkyCadEda announcement (translated) — source: skycadeda.github.io/blog/layout-automation-v2',
+        tr: 'GOAL V2 duyurusundan (çeviri)',
+        en: 'From the GOAL V2 announcement',
       } },
       { kind: 'heading', text: {
         tr: 'Sıradaki adım: IP düzeyinde otomasyon',
@@ -81,8 +81,8 @@ export const articles: readonly Article[] = [
         en: 'The closing section of the announcement moves automation from the cell level to the IP level, and the entry point is an 8–12-bit SAR ADC. Today’s working version is the 8-bit one: the digital side is DRC-clean, with LVS matched at the top level. The announcement also describes the layout itself: the capacitor DAC array and its switches on the left, SAR logic on the right, comparator and reference in the middle, decap rows along the bottom — all routed together.',
       } },
       { kind: 'callout', tone: 'note', text: {
-        tr: 'Bu yazı bir duyuru özetidir, katalog verisi değildir: buradaki hız ve yetenek ifadeleri, SkyCadEda ekibinin kendi metninde bildirdiği haliyle aktarılmıştır ve bağımsız bir değerlendirme değildir. Teknik sorular için duyuru metnine bakın: skycadeda.github.io/blog/layout-automation-v2 (satış: sales@skycadeda.com).',
-        en: 'This note summarises an announcement; it is not catalogue data. The speed and capability statements here are carried as their authors published them and are not an independent evaluation. For technical questions, see the announcement itself: skycadeda.github.io/blog/layout-automation-v2 (sales: sales@skycadeda.com).',
+        tr: 'Bu yazı bir duyuru özetidir, katalog verisi değildir: buradaki hız ve yetenek ifadeleri, geliştirme ekibinin bildirdiği haliyle aktarılmıştır ve bağımsız bir değerlendirme değildir. Teknik sorular için bize yazın: info@ciptasarim.com.',
+        en: 'This note summarises an announcement; it is not catalogue data. The speed and capability statements here are carried as the development team reported them and are not an independent evaluation. For technical questions, write to info@ciptasarim.com.',
       } },
     ],
   },
