@@ -46,7 +46,7 @@ export function CodeBlock({
             type="button"
             onClick={copy}
             aria-label={strings.common.copy}
-            className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.18em] text-mist transition-colors hover:text-ink"
+            className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.18em] text-mist transition-colors hover:text-ink"
           >
             {copied ? `✓ ${strings.common.copied}` : strings.common.copy.toUpperCase()}
           </button>
@@ -58,7 +58,7 @@ export function CodeBlock({
       <pre tabIndex={0} className="overflow-x-auto px-4 py-3 font-mono text-[12px] leading-relaxed text-mist">
         <code>{code}</code>
       </pre>
-      {hint ? <p className="border-t border-line px-4 py-2 text-[11px] text-mist/70">{hint}</p> : null}
+      {hint ? <p className="border-t border-line px-4 py-2 text-[11px] text-mist">{hint}</p> : null}
     </figure>
   )
 }

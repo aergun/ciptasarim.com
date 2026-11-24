@@ -139,7 +139,7 @@ export function WaferScene() {
       <figcaption className="mt-3 flex flex-col gap-2">
         <div className="flex flex-wrap gap-x-5 gap-y-1.5">
           {legend.map((entry) => (
-            <span key={entry.label} className="flex items-center gap-2 font-mono text-[11px] tracking-wide text-mist">
+            <span key={entry.label} className="flex items-center gap-2 font-mono text-[12px] tracking-wide text-mist">
               <span aria-hidden className={`inline-block h-2.5 w-2.5 rounded-[2px] border ${entry.chip}`} />
               {entry.label}
             </span>

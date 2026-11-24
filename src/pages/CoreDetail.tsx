@@ -249,7 +249,7 @@ function CoreView({
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <Heading as="h2" size="display-sm">{strings.cores.deliverables}</Heading>
             <div className="flex items-center gap-3">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
                 {strings.licences.tier}
               </span>
               <TierSelect tier={tier} onTier={setTier} strings={strings} />
@@ -276,7 +276,7 @@ function CoreView({
 
               <div className="mt-6 flex flex-wrap items-end gap-4">
                 <div className="min-w-56">
-                  <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+                  <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
                     {bundleName ? strings.cores.deliverables : strings.licences.tier}
                   </span>
                   <Select
@@ -403,7 +403,7 @@ function PortTable({
           </span>
           <div className="min-w-0">
             {port.description ? <p className="text-[13px] leading-relaxed text-mist">{t(port.description)}</p> : null}
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-mist">
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-mist">
               {strings.portKinds[port.kind]} · {strings.portDirections[port.direction]}
               {port.standard ? ` · ${port.standard}` : ''}
             </p>
@@ -435,7 +435,7 @@ function DocumentTable({
     <div className="overflow-x-auto">
       <table className="w-full border-y border-line text-left tabular">
         <thead>
-          <tr className="border-b border-line text-[10px] uppercase tracking-[0.2em] text-mist">
+          <tr className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-mist">
             <th scope="col" className="py-3 pr-4 font-semibold">
               {strings.cores.documents}
             </th>
@@ -503,7 +503,7 @@ function ProvenanceLegend() {
   const { strings } = useSite()
   return (
     <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-4">
-      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
         {strings.basis.legendTitle}
       </span>
       <FigureBadge figure={BASIS_FIGURES.measured} />

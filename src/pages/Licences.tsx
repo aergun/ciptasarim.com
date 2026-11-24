@@ -138,7 +138,7 @@ function TierList({
 }) {
   return (
     <div>
-      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{title}</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{title}</p>
       <ul className="mt-3 space-y-2">
         {items.map((item, index) => (
           <li key={index} className="text-[13px] leading-relaxed text-mist">

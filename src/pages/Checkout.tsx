@@ -118,8 +118,8 @@ export function Checkout() {
       {placed ? (
         <Section className="pb-0">
           <div className="border border-proven/40 bg-proven/[0.04] px-6 py-8 text-proven">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em]">{strings.checkout.awaitingPayment}</p>
-            <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.24em]">{strings.checkout.orderNumber}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em]">{strings.checkout.awaitingPayment}</p>
+            <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.24em]">{strings.checkout.orderNumber}</p>
             <p className="mt-1 font-mono text-[clamp(1.4rem,3vw,2rem)] leading-none tracking-[-0.02em] tabular">
               {placed.reference}
             </p>
@@ -205,7 +205,7 @@ function OrderSummary({
 
   return (
     <div>
-      <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-mist">{strings.checkout.orderSummary}</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-mist">{strings.checkout.orderSummary}</p>
       <ul className="mt-4 divide-y divide-line border-y border-line">
         {lines.map((line) => (
           <li key={`${line.coreSlug}-${line.bundle}-${line.tier}`} className="flex flex-wrap items-baseline justify-between gap-4 py-4">
@@ -223,7 +223,7 @@ function OrderSummary({
         ))}
       </ul>
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-4">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{strings.cart.subtotal}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{strings.cart.subtotal}</p>
         <p className="font-mono text-[15px] text-ink tabular">
           {subtotal !== null ? formatCurrency(subtotal, locale) : strings.licences.quoteOnly}
         </p>

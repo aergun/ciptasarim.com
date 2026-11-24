@@ -186,7 +186,7 @@ export function Contact({ quote = false }: { quote?: boolean }) {
               <Heading as="h2">{contact.success}</Heading>
               <Prose className="mt-4">{contact.successBody}</Prose>
               <div className="mt-8">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-mist">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-mist">
                   {contact.reference}
                 </p>
                 <p className="mt-2 font-mono text-[26px] tabular text-ink">{reference}</p>

@@ -62,7 +62,7 @@ export function Pricing() {
           <div className="mt-6 overflow-x-auto">
             <table className="w-full min-w-[40rem] border-y border-line text-left align-baseline">
               <thead>
-                <tr className="border-b border-line text-[10px] uppercase tracking-[0.2em] text-mist">
+                <tr className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-mist">
                   <th scope="col" className="py-3 pr-4 font-semibold">
                     {pricing.core}
                   </th>

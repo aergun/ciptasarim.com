@@ -232,7 +232,7 @@ function OrderCard({ order, onWithdrawn }: { order: Order; onWithdrawn: () => vo
 
       <table className="w-full text-left text-[13px]">
         <thead>
-          <tr className="border-b border-line text-[10px] uppercase tracking-[0.2em] text-mist">
+          <tr className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-mist">
             <th className="px-6 py-3 font-semibold">{strings.cart.item}</th>
             <th className="px-6 py-3 font-semibold">{strings.cart.licence}</th>
             <th className="px-6 py-3 text-right font-semibold">{strings.cart.unitPrice}</th>
@@ -260,7 +260,7 @@ function OrderCard({ order, onWithdrawn }: { order: Order; onWithdrawn: () => vo
         {order.subtotalUsd !== null && order.items.length > 0 ? (
           <tfoot>
             <tr>
-              <td colSpan={2} className="px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+              <td colSpan={2} className="px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
                 {strings.cart.subtotal}
               </td>
               <td className="px-6 py-3 text-right font-mono text-[15px] text-ink tabular">

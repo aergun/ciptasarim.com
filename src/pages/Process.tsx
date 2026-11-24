@@ -89,7 +89,7 @@ export function ProcessPage() {
           <div className="overflow-x-auto">
             <table className="w-full min-w-[72rem] border-y border-line text-left align-top">
               <thead>
-                <tr className="border-b border-line text-[10px] uppercase tracking-[0.2em] text-mist">
+                <tr className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-mist">
                   <th scope="col" className="sticky left-0 bg-paper py-3 pr-4 font-semibold">
                     {strings.cores.node}
                   </th>
@@ -161,7 +161,7 @@ function ProvenanceLegend() {
   const { strings } = useSite()
   return (
     <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-4">
-      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
         {strings.basis.legendTitle}
       </span>
       <FigureBadge figure={BASIS_FIGURES.measured} />

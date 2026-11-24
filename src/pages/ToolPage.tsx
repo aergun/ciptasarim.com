@@ -241,7 +241,7 @@ export function ToolPage() {
                   {results.map((result) => (
                     <li key={result.id} className="py-5">
                       <div className="flex flex-wrap items-baseline justify-between gap-4">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
                           {t(result.label)}
                         </p>
                         <p className={`font-mono text-[22px] tabular ${basisClass(result.basis)}`}>

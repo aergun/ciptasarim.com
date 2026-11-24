@@ -71,7 +71,7 @@ export function VideoHero({ title, body, hint, ctas }: VideoHeroProps) {
           re-enables them. */}
       <section className="pointer-events-none absolute inset-0 z-20 flex flex-col items-start justify-end px-5 pb-28 sm:justify-center sm:px-10 sm:pb-0 lg:px-20">
         <div className="max-w-[42rem]">
-          <h1 className="rise font-sans text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-ink [animation-delay:180ms] sm:text-6xl lg:text-7xl">
+          <h1 className="rise font-sans text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-ink [animation-delay:180ms] sm:text-6xl">
             {heroTitleParts(title).map((part, index) =>
               /* Plain italic, no colour: gold marks *structure* and flare the
                  action accents — an emphasised word earns its emphasis from

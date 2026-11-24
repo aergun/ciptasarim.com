@@ -137,7 +137,7 @@ function NodeComparison({
       <div className="overflow-x-auto">
         <table className="w-full min-w-[48rem] border-y border-line text-left tabular">
           <thead>
-            <tr className="border-b border-line text-[10px] uppercase tracking-[0.2em] text-mist">
+            <tr className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-mist">
               <th scope="col" aria-label={strings.cores.spec} />
               {group.map((core) => (
                 <th key={core.slug} scope="col" className="py-3 pr-6 font-mono text-[11px] text-ink">
@@ -151,7 +151,7 @@ function NodeComparison({
           <tbody className="divide-y divide-line">
             {FIELDS_BY_KIND[kind].map((field) => (
               <tr key={field.id} className="align-baseline">
-                <th scope="row" className="py-3 pr-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+                <th scope="row" className="py-3 pr-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
                   {strings.specFields[field.id]}
                 </th>
                 {group.map((core) => {
@@ -166,7 +166,7 @@ function NodeComparison({
               </tr>
             ))}
             <tr className="align-baseline">
-              <th scope="row" className="py-3 pr-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">
+              <th scope="row" className="py-3 pr-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
                 {strings.cores.licence}
               </th>
               {group.map((core) => {

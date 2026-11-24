@@ -50,7 +50,7 @@ export function Demos() {
                   : 'border-line text-mist hover:border-gold/40 hover:text-ink'
               }`}
             >
-              <span aria-hidden className="mr-2 text-mist/70">{String(index + 1).padStart(2, '0')}</span>
+              <span aria-hidden className="mr-2 text-mist/95">{String(index + 1).padStart(2, '0')}</span>
               {t(demo.tab)}
             </button>
           )

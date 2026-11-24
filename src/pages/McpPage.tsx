@@ -63,13 +63,13 @@ function EvidenceList({ entries }: { entries: readonly { claim: T; conditions: T
           <p className="font-mono text-[15px] text-ink tabular">{t(entry.claim)}</p>
           <dl className="mt-2 space-y-1.5 text-[12px] leading-relaxed sm:grid sm:grid-cols-[8rem_1fr] sm:gap-x-5 sm:space-y-0">
             <div>
-              <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist sm:pt-px">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist sm:pt-px">
                 {strings.mcp.proofConditionsLabel}
               </dt>
               <dd className="mt-1 text-mist sm:col-start-2 sm:row-start-1 sm:mt-0">{t(entry.conditions)}</dd>
             </div>
             <div>
-              <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist sm:pt-px">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist sm:pt-px">
                 {strings.mcp.proofSourceLabel}
               </dt>
               <dd className="mt-1 text-mist sm:col-start-2 sm:row-start-2 sm:mt-0">{t(entry.cite)}</dd>
@@ -189,15 +189,15 @@ function McpArchitecture() {
   const titleRow = (label: string, note: string) => (
     <div className="mb-3">
       <p className="text-[13px] font-semibold text-ink">{label}</p>
-      <p className="mt-0.5 font-mono text-[10px] text-mist">{note}</p>
+      <p className="mt-0.5 font-mono text-[12px] text-mist">{note}</p>
     </div>
   )
 
   const conduit = ({ label, note }: { label: string; note: string }) => (
     <div aria-hidden className="conduit flex flex-col items-center justify-center gap-1 px-4 py-2 text-center">
-      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">{label}</span>
-      <span className="font-mono text-[10px] text-mist">{note}</span>
-      <span className="text-[16px] leading-none text-gold">→</span>
+      <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#241407]">{label}</span>
+      <span className="font-mono text-[11px] text-[#33200d]">{note}</span>
+      <span className="text-[16px] leading-none text-[#241407]">→</span>
     </div>
   )
 
@@ -205,7 +205,7 @@ function McpArchitecture() {
     <div className="grid gap-0 lg:grid-cols-[1fr_auto_1fr_auto_1.2fr] lg:items-stretch lg:gap-0">
       <Column>
         {titleRow(s.archLocalTitle, s.archLocalNote)}
-        <div className="rounded-md border border-line/70 bg-paper/40 px-3 py-3 font-mono text-[11px] leading-relaxed text-mist">
+        <div className="rounded-md bg-paper/40 px-3 py-3 font-mono text-[11px] leading-relaxed text-mist">
           <p className="text-gold">agent →</p>
           <p>stdio · IDE plugin</p>
           <p className="mt-1 text-mist">mcp_config: eda-mcp</p>
@@ -213,15 +213,15 @@ function McpArchitecture() {
       </Column>
 
       <div aria-hidden className="conduit hidden items-center justify-center px-3 lg:flex lg:flex-col">
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">stdio</span>
-        <span className="text-[16px] leading-none text-gold">→</span>
+        <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#241407]">stdio</span>
+        <span className="text-[16px] leading-none text-[#241407]">→</span>
       </div>
 
       <Column>
         {titleRow(s.archServerTitle, s.archServerNote)}
         <div className="flex flex-wrap gap-1.5">
           {moduleChips.map((chip) => (
-            <span key={chip} className="rounded border border-line bg-paper/40 px-2 py-1 font-mono text-[10px] text-ink">
+            <span key={chip} className="rounded border border-line bg-paper/40 px-2 py-1 font-mono text-[11px] text-ink">
               {chip}
             </span>
           ))}
@@ -232,13 +232,13 @@ function McpArchitecture() {
         {conduit({ label: s.archSshTitle, note: s.archSshNote })}
       </div>
       {/* Compact connector for stacked layouts — the same statement, one line. */}
-      <div className="flex items-center justify-center border-y border-line bg-paper/40 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-gold lg:hidden">
+      <div className="flex items-center justify-center border-y border-line bg-paper/40 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-gold lg:hidden">
         {s.archSshTitle} — {s.archSshNote}
       </div>
 
       <Column>
         {titleRow(s.archRemoteTitle, s.archRemoteNote)}
-        <ul className="space-y-1.5 font-mono text-[11px] leading-relaxed text-mist">
+        <ul className="space-y-1.5 font-mono text-[12px] leading-relaxed text-mist">
           {clusterRows.map((row) => (
             <li key={row.key} className="flex gap-2">
               <span aria-hidden className="text-gold">
@@ -318,8 +318,8 @@ function McpFlowCards() {
         <Reveal key={stage.n} delay={index * 90} className="panel p-5">
           <p className="font-mono text-[11px] text-gold tabular">{String(stage.n).padStart(2, '0')}</p>
           <p className="mt-1 text-[15px] font-semibold text-ink">{t(stage.title)}</p>
-          <p className="mt-1.5 font-mono text-[11px] text-mist">{t(stage.tool)}</p>
-          <p className="mt-2 text-[13px] leading-relaxed text-mist">{t(stage.detail)}</p>
+          <p className="mt-1.5 font-mono text-[12px] text-pretty text-mist">{t(stage.tool)}</p>
+          <p className="mt-2 max-w-[56ch] text-pretty text-[13px] leading-relaxed text-mist">{t(stage.detail)}</p>
         </Reveal>
       ))}
     </div>
@@ -348,7 +348,7 @@ export function McpTeaser() {
               </div>
             </div>
             <div className="min-w-0 flex-1">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{s.proofTitle}</p>
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{s.proofTitle}</p>
               <EvidenceList entries={mcpTeaserEvidence()} />
             </div>
           </div>
@@ -373,7 +373,7 @@ export function McpPage() {
       <Container className="pb-14 pt-14 md:pb-20 md:pt-20">
         <PageHeader eyebrow={s.pageEyebrow} title={s.pageTitle} lede={<Prose className="!max-w-[62ch]">{s.pageLead}</Prose>} />
         <div className="mt-8 max-w-[44rem]">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{s.installLabel}</p>
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{s.installLabel}</p>
           <CodeBlock code={mcpInstallOneLiner} lang="bash" />
           <p className="mt-3 text-[12px] leading-relaxed text-mist">{s.installNote}</p>
         </div>
@@ -421,7 +421,7 @@ export function McpPage() {
           <Reveal className="mt-8 overflow-x-auto" tabIndex={0} role="region" ariaLabel={s.matrixTitle}>
             <table className="w-full min-w-[40rem] border-collapse text-left">
               <thead>
-                <tr className="border-b border-line font-mono text-[10px] uppercase tracking-[0.18em] text-mist">
+                <tr className="border-b border-line font-mono text-[11px] uppercase tracking-[0.18em] text-mist">
                   <th scope="col" className="py-2 pr-4">{s.matrixModuleCol}</th>
                   <th scope="col" className="py-2 pr-4">{s.matrixActionsCol}</th>
                   <th scope="col" className="py-2">{s.matrixDescCol}</th>
@@ -434,7 +434,7 @@ export function McpPage() {
                       {tool.name}
                     </th>
                     <td className="py-3 pr-4 font-mono text-[12px] leading-relaxed text-mist">{tool.actions}</td>
-                    <td className="py-3 text-[13px] leading-relaxed text-mist">{t(tool.desc)}</td>
+                    <td className="max-w-[56ch] py-3 text-[13px] leading-relaxed text-mist">{t(tool.desc)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -459,7 +459,7 @@ export function McpPage() {
             {mcpGuards.map((guard, index) => (
               <Reveal key={index} delay={index * 80} className="panel p-6">
                 <p className="text-[14px] font-semibold text-ink">{t(guard.title)}</p>
-                <p className="mt-2 text-[13px] leading-relaxed text-mist">{t(guard.body)}</p>
+                <p className="mt-2 max-w-[56ch] text-pretty text-[13px] leading-relaxed text-mist">{t(guard.body)}</p>
               </Reveal>
             ))}
           </div>
@@ -471,7 +471,7 @@ export function McpPage() {
         <Container>
           <div className="flex flex-wrap items-center gap-4">
             <Eyebrow>{s.replayEyebrow}</Eyebrow>
-            <span className="rounded-full border border-flare/50 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-flare">
+            <span className="rounded-full border border-flare/50 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-flare">
               {s.illustrative}
             </span>
           </div>
@@ -510,7 +510,7 @@ export function McpPage() {
           <Prose className="mt-4">{s.getStartedBody}</Prose>
           <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[20rem_1fr]">
             <div>
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{s.requirementsTitle}</p>
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{s.requirementsTitle}</p>
               <ul className="space-y-2 text-[13px] leading-relaxed text-mist">
                 {Object.values(s.requirements).map((requirement) => (
                   <li key={requirement} className="flex gap-2.5">
@@ -523,7 +523,7 @@ export function McpPage() {
               </ul>
             </div>
             <div className="space-y-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{s.snippetsTitle}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{s.snippetsTitle}</p>
               {mcpSnippets.map((snippet) => (
                 <div key={snippet.name}>
                   <p className="mb-2 font-mono text-[12px] text-ink">
@@ -557,16 +557,16 @@ export function McpPage() {
             >
               {s.docsCta} ↗
             </a>
-            <ButtonLink to="/iletisim" variant="ghost" className="!text-mist">
+            <ButtonLink to="/iletisim" variant="secondary">
               {s.talkCta}
             </ButtonLink>
           </div>
 
           <div className="mt-12 grid gap-6 border-t border-line pt-8 md:grid-cols-3">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">{s.upstreamTitle}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">{s.upstreamTitle}</p>
               <p className="mt-2 text-[12px] leading-relaxed text-mist">{t(mcpUpstream.credit)}</p>
-              <p className="mt-2 font-mono text-[11px] text-mist">
+              <p className="mt-2 font-mono text-[12px] text-mist">
                 <a href={mcpUpstream.repo} target="_blank" rel="noreferrer" className="underline decoration-line underline-offset-4 hover:text-ink">
                   {mcpUpstream.repo}
                 </a>
@@ -575,12 +575,12 @@ export function McpPage() {
               </p>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">{s.noticeTrademarkTitle}</p>
-              <p className="mt-2 text-[12px] leading-relaxed text-mist">{t(mcpTrademarkNotice)}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">{s.noticeTrademarkTitle}</p>
+              <p className="mt-2 text-pretty text-[12px] leading-relaxed text-mist">{t(mcpTrademarkNotice)}</p>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">{s.noticePdkTitle}</p>
-              <p className="mt-2 text-[12px] leading-relaxed text-mist">{t(mcpPdkNotice)}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">{s.noticePdkTitle}</p>
+              <p className="mt-2 text-pretty text-[12px] leading-relaxed text-mist">{t(mcpPdkNotice)}</p>
             </div>
           </div>
         </Container>

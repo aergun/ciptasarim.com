@@ -101,7 +101,7 @@ export function Home() {
                 <p className="mt-6 text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-[1.22] tracking-[-0.01em] text-ink">
                   {home.visionStatement}
                 </p>
-                <p className="mt-4 text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-[1.22] tracking-[-0.01em] text-gold">
+                <p className="mt-4 text-[clamp(1.7rem,3.4vw,2.6rem)] font-light leading-[1.22] tracking-[-0.01em] text-mist">
                   {home.visionClause}
                 </p>
 
@@ -147,7 +147,7 @@ export function Home() {
             {legend.map((entry) => (
               <div key={entry.key} className="border border-line bg-paper p-6">
                 {badges[entry.key]}
-                <p className={`mt-4 font-mono text-[13px] leading-relaxed ${entry.tone}`}>{entry.body}</p>
+                <p className={`mt-4 font-mono text-[13px] leading-relaxed text-pretty ${entry.tone}`}>{entry.body}</p>
               </div>
             ))}
           </div>
@@ -215,7 +215,7 @@ export function Home() {
                 className="group bg-ink p-6 transition-colors hover:bg-ink-soft"
               >
                 <p className="font-mono text-[13px] tracking-wide text-paper">{t(tool.title)}</p>
-                <p className="mt-2 text-[13px] leading-relaxed text-paper/60">{t(tool.summary)}</p>
+                <p className="mt-2 max-w-[60ch] text-pretty text-[13px] leading-relaxed text-paper/75">{t(tool.summary)}</p>
               </LocaleLink>
             ))}
           </div>

@@ -43,7 +43,7 @@ export function Architecture() {
           {label}
         </span>
       </div>
-      <p className="mt-2 max-w-[14rem] text-[11px] leading-relaxed text-mist">{caption}</p>
+      <p className="mt-2 max-w-[14rem] text-pretty text-[12px] leading-relaxed text-mist">{caption}</p>
     </div>
   )
 
@@ -98,7 +98,7 @@ export function Architecture() {
             <span aria-hidden className="h-[7px] w-[7px] rounded-full bg-proven animate-pulseDot shadow-[0_0_8px_currentColor]" />
             <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-ink">{archFoundry.title}</span>
           </div>
-          <p className="max-w-md text-[12px] leading-relaxed text-mist">{archFoundry.caption}</p>
+          <p className="max-w-md text-pretty text-[12px] leading-relaxed text-mist">{archFoundry.caption}</p>
         </div>
       </div>
 
@@ -114,7 +114,7 @@ export function Architecture() {
                 <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-ink">
                   {String(index + 1).padStart(2, '0')} · {node.label}
                 </span>
-                <span className="mt-1 text-center text-[11px] leading-relaxed text-mist">{node.caption}</span>
+                <span className="mt-1 text-center text-pretty text-[12px] leading-relaxed text-mist">{node.caption}</span>
               </div>
               {index < nodes.length - 1 ? <div aria-hidden className="mx-auto h-5 w-px conduit" /> : null}
             </li>
@@ -134,7 +134,7 @@ export function Architecture() {
           </KnowledgePanel>
           <div className="rounded-xl border border-line bg-gradient-to-b from-[#140b12] to-[#0d070b] px-4 py-3">
             <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-ink">{archFoundry.title}</span>
-            <p className="mt-1 text-[11px] leading-relaxed text-mist">{archFoundry.caption}</p>
+            <p className="mt-1 text-pretty text-[12px] leading-relaxed text-mist">{archFoundry.caption}</p>
           </div>
         </div>
       </div>
@@ -148,7 +148,7 @@ export function Architecture() {
               <span aria-hidden>↺</span>
               {loop.title}
             </p>
-            <p className="mt-2 text-[12px] leading-relaxed text-mist">{loop.caption}</p>
+            <p className="mt-2 text-pretty text-[12px] leading-relaxed text-mist">{loop.caption}</p>
           </div>
         ))}
       </div>
@@ -161,7 +161,7 @@ function KnowledgePanel({ title, caption, children }: { title: string; caption: 
   return (
     <div className="panel w-full max-w-sm px-5 py-4 text-left">
       <p className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-ink">{title}</p>
-      <p className="mt-1.5 text-[12px] leading-relaxed text-mist">{caption}</p>
+      <p className="mt-1.5 text-pretty text-[12px] leading-relaxed text-mist">{caption}</p>
       {children}
     </div>
   )
@@ -171,7 +171,7 @@ function KnowledgePanel({ title, caption, children }: { title: string; caption: 
     a semaphore. The tones mirror `figure.tsx`'s colour register. */
 function BasisChip({ tone, label }: { tone: string; label: string }) {
   return (
-    <span className={`rounded-full border bg-[#08040A]/70 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] ${tone}`}>
+    <span className={`rounded-full border bg-[#08040A]/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] ${tone}`}>
       {label}
     </span>
   )

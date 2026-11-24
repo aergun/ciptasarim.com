@@ -62,14 +62,14 @@ export function Heading({
   size?: keyof typeof HEADING_SIZES
 }) {
   return (
-    <Tag className={`${HEADING_SIZES[size ?? Tag]} text-ink ${className}`}>{children}</Tag>
+    <Tag className={`${HEADING_SIZES[size ?? Tag]} text-balance text-ink ${className}`}>{children}</Tag>
   )
 }
 
 /** Body copy. `prose` applies the measure constraint that long text needs. */
 export function Prose({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`max-w-[62ch] text-[15px] leading-[1.75] text-mist ${className}`}>{children}</div>
+    <div className={`max-w-[62ch] text-[15px] leading-[1.75] text-mist text-pretty ${className}`}>{children}</div>
   )
 }
 
@@ -262,7 +262,7 @@ export function Field({
 }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.24em] text-mist">
+      <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.24em] text-mist">
         {label}
       </span>
       {children}
@@ -276,7 +276,7 @@ export function Field({
 }
 
 const INPUT_STYLES =
-  'w-full rounded-lg border border-line bg-ink/[0.03] px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-mist/60 focus:border-gold'
+  'w-full rounded-lg border border-line bg-ink/[0.03] px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-mist/85 focus:border-gold'
 
 /*
  * The form controls forward their refs.
@@ -321,7 +321,7 @@ export function SpecTable({
     <dl className={`divide-y divide-line border-y border-line ${className}`}>
       {rows.map((row, index) => (
         <div key={index} className="flex items-baseline justify-between gap-6 py-3">
-          <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{row.label}</dt>
+          <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{row.label}</dt>
           <dd className="text-right font-mono text-[13px] text-ink tabular">{row.value}</dd>
         </div>
       ))}
@@ -334,7 +334,7 @@ export function Stat({ value, label, className = '' }: { value: ReactNode; label
   return (
     <div className={className}>
       <p className="font-mono text-[clamp(1.6rem,3vw,2.4rem)] leading-none tracking-[-0.02em] text-ink tabular">{value}</p>
-      <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-mist">{label}</p>
+      <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-mist">{label}</p>
     </div>
   )
 }
@@ -361,7 +361,7 @@ export function Badge({
   }
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] ${tones[tone]} ${className}`}
+      className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${tones[tone]} ${className}`}
     >
       {children}
     </span>
@@ -371,7 +371,7 @@ export function Badge({
 export function Tag({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full bg-stage px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-mist ${className}`}
+      className={`inline-flex items-center rounded-full bg-stage px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-mist ${className}`}
     >
       {children}
     </span>

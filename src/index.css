@@ -141,7 +141,7 @@
    * eyebrow is structure, not a caveat.
    */
   .eyebrow {
-    @apply text-[10px] font-semibold uppercase tracking-[0.24em] text-gold;
+    @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-gold;
   }
 
   /* The quiet horizontal separator; `Rule` renders it. */

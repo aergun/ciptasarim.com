@@ -169,7 +169,7 @@ export const en: Mirror<TrShape> = {
     demosBody:
       'The site’s flow, replayed as four runs: the record, the calculator, the gap and the delivery. Each run pauses at the gate where a decision is needed — approve and continue.',
     demosReplay: 'Replay',
-    demosLive: 'live',
+    demosLive: 'Illustrative',
 
     /* ---- Vision: the manifesto, the principles and the wafer scene. ----*/
     visionEyebrow: 'Vision',
@@ -203,6 +203,9 @@ export const en: Mirror<TrShape> = {
   cores: {
     title: 'Cores',
     subtitle: 'Four kinds of IP, four incompatible specification models.',
+    // Mirrors tr.ts cores.pendingNotice — keep the two in lockstep.
+    pendingNotice:
+      'Every core in this catalogue is still in characterisation: any value without a published measurement is listed as a gap badge that carries its own reason.',
     kind: 'Kind',
     family: 'Family',
     node: 'Process node',
@@ -540,7 +543,7 @@ export const en: Mirror<TrShape> = {
   mcp: {
     /* Home teaser */
     teaserEyebrow: 'EDA MCP',
-    teaserTitle: 'Agents drive real EDA tools; the engineer is at the gate',
+    teaserTitle: 'From schematic to PEX, with evidence for every step',
     teaserBody:
       'EDA_MCP connects local agents — Claude Code, Cursor and the like — to Cadence Virtuoso, Siemens Eldo and Calibre on your remote Linux cluster. It builds the schematic, sizes the devices, exports the netlist, simulates and files the evidence of every verification step. Critical steps pass through engineer-approved gates.',
     teaserCta: 'Open the EDA MCP page',

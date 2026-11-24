@@ -18,7 +18,7 @@ import { entryPriceFrom } from '../../shared/pricing.ts'
 import { fold, formatCurrency, type Locale } from '../../shared/i18n.ts'
 import { CORE_KINDS, type Core, type CoreKind } from '../../shared/types.ts'
 import { Container, EmptyState, Heading, Input, Prose, Section } from '../components/ui.tsx'
-import { FigureBadge, figureColor, figureValue, FigureGap } from '../components/figure.tsx'
+import { FigureBadge, figureColor, figureValue, FigureGap, BASIS_FIGURES } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
 import { GoalV2Panel } from '../components/GoalV2Panel.tsx'
 import { LocaleLink, useSite } from '../lib/site.tsx'
@@ -94,6 +94,21 @@ export function Cores() {
         <header className="animate-rise pb-10">
           <Heading as="h1">{strings.cores.title}</Heading>
           <Prose className="mt-4">{strings.cores.subtitle}</Prose>
+          {/* The catalogue's global data state, stated once at the frame
+              instead of synthesised from five gap rows; the three badge
+              glosses are the legend the rows below lean on (from the home
+              legend's strings, so the language cannot drift). */}
+          <p className="mt-4 max-w-[62ch] text-[13px] leading-relaxed text-mist">
+            {strings.cores.pendingNotice}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+            {(['measured', 'modelled', 'uncharacterised'] as const).map((key) => (
+              <span key={key} className="flex items-center gap-2.5 text-[12px] text-mist">
+                <FigureBadge figure={BASIS_FIGURES[key]} />
+                {strings.basis[`${key}Long`]}
+              </span>
+            ))}
+          </div>
         </header>
 
         {/*
@@ -103,7 +118,7 @@ export function Cores() {
         */}
         <div className="mb-10 border border-line bg-stage p-6 md:p-8">
           <p className="eyebrow">{strings.goal.eyebrow}</p>
-          <Prose className="mt-3 max-w-[70ch]">{strings.goal.intro}</Prose>
+          <Prose className="mt-3 max-w-[56ch]">{strings.goal.intro}</Prose>
           <p className="mt-4 text-[12px]">
             <LocaleLink
               to="/yazilar/analog-yerlesim-otomasyonu-v2"

@@ -81,7 +81,7 @@ export function Cart() {
 
         <div className="mt-10 border-t border-line pt-8">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{strings.cart.subtotal}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{strings.cart.subtotal}</p>
             {subtotal !== null ? (
               <p className="font-mono text-[clamp(1.6rem,3vw,2.4rem)] leading-none tracking-[-0.02em] text-ink tabular">
                 {formatCurrency(subtotal, locale)}

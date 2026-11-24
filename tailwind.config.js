@@ -89,7 +89,7 @@ export default {
       fontSize: {
         'display-sm': ['clamp(2.1rem, 5vw, 3.1rem)', { lineHeight: '1.03' }],
         display: ['clamp(2.6rem, 6.2vw, 4.6rem)', { lineHeight: '1.01' }],
-        'display-lg': ['clamp(3rem, 8vw, 6.4rem)', { lineHeight: '0.97' }],
+        'display-lg': ['clamp(2.6rem, 7vw, 4.2rem)', { lineHeight: '0.97' }],
       },
       letterSpacing: {
         widest: '0.32em',

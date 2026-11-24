@@ -163,7 +163,7 @@ export function SpecFigureCell({ cell, className = '' }: { cell: SpecCell; class
   return (
     <div className={`flex items-baseline justify-between gap-6 py-3 border-b border-line last:border-b-0 ${className}`}>
       <dt className="min-w-0">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-mist">{t(cell.label)}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">{t(cell.label)}</p>
         {cell.note ? <p className="mt-1 text-[11px] leading-snug normal-case tracking-normal text-mist">{t(cell.note)}</p> : null}
       </dt>
       <dd className="text-right shrink-0">
@@ -176,17 +176,17 @@ export function SpecFigureCell({ cell, className = '' }: { cell: SpecCell; class
           <FigureBadge figure={figure} />
         </div>
         {figure.basis === 'measured' ? (
-          <p className="mt-1 font-mono text-[9px] text-mist">
+          <p className="mt-1 font-mono text-[11px] text-mist">
             {strings.basis.conditions}: {figure.conditions}
           </p>
         ) : null}
         {figure.basis === 'measured' ? (
-          <p className="font-mono text-[9px] text-mist">
+          <p className="font-mono text-[11px] text-mist">
             {strings.basis.source}: {figure.source}
           </p>
         ) : null}
         {figure.basis === 'modelled' ? (
-          <p className="mt-1 font-mono text-[9px] text-mist">
+          <p className="mt-1 font-mono text-[11px] text-mist">
             {strings.basis.model}: {figure.model}
             {figure.source ? ` · ${strings.basis.source}: ${figure.source}` : ''}
           </p>

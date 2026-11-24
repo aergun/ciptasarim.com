@@ -203,7 +203,7 @@ export function RunTerminal({
       ? 'animate-pulseDot border-gold/60 bg-gold/10 text-gold'
       : state.reached
         ? 'border-proven/40 text-proven'
-        : 'border-line text-mist/60'
+        : 'border-line text-mist/85'
 
   const lineRows = (lines: RunLine[], visibleCount: number) =>
     lines.slice(0, visibleCount).map((line, index) => {
@@ -226,7 +226,7 @@ export function RunTerminal({
             {demo.host}@ciptasarim — {t(demo.scriptTitle)}
           </span>
         </div>
-        <span className="shrink-0 rounded-full border border-gold/30 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-gold">
+        <span className="shrink-0 rounded-full border border-gold/30 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">
           {live}
         </span>
       </div>
@@ -241,7 +241,7 @@ export function RunTerminal({
               choice so the record of the decision stays on screen. */}
           {gateShown && demo.gate ? (
             <div className="panel-hot mt-4 rounded-xl p-4">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
                 {t(demo.gate.prompt)}
               </p>
               <p className="mt-2 text-[13px] leading-relaxed text-ink">{t(demo.gate.question)}</p>
@@ -260,7 +260,7 @@ export function RunTerminal({
                         isChosen
                           ? 'border-gold/60 bg-gold/10 text-ink'
                           : isOtherChosen
-                            ? 'border-line/60 text-mist/50'
+                            ? 'border-line/60 text-mist/85'
                             : 'border-line text-mist hover:border-gold/50 hover:text-ink'
                       }`}
                     >
@@ -301,11 +301,11 @@ export function RunTerminal({
               <li key={index} className="flex items-center gap-3 font-mono text-[11px] tracking-wide">
                 <span
                   aria-hidden
-                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[9px] ${currentTone(slot)}`}
+                  className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[12px] ${currentTone(slot)}`}
                 >
                   {index + 1}
                 </span>
-                <span className={slot.current ? 'text-ink' : slot.reached ? 'text-mist' : 'text-mist/50'}>
+                <span className={slot.current ? 'text-ink' : slot.reached ? 'text-mist' : 'text-mist/85'}>
                   {slot.label}
                 </span>
               </li>
@@ -320,7 +320,7 @@ export function RunTerminal({
           type="button"
           onClick={() => setPlaying((p) => !p)}
           disabled={done || (gateShown && chosen == null)}
-          className="text-[10px] font-semibold uppercase tracking-[0.18em] text-mist transition-colors hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
+          className="text-[11px] font-semibold uppercase tracking-[0.18em] text-mist transition-colors hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
         >
           {playing ? '❚❚' : '▶'}
         </button>
@@ -330,7 +330,7 @@ export function RunTerminal({
         <button
           type="button"
           onClick={replay}
-          className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold transition-colors hover:text-ink"
+          className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold transition-colors hover:text-ink"
         >
           ↻ {replayLabel}
         </button>

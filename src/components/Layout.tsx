@@ -94,7 +94,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 an aria-label that dropped the descriptor line failed the
                 label-in-name rule the Lighthouse run caught. */}
             <span className="text-[15px] font-semibold tracking-tight text-ink">{site.name}</span>
-            <span className="text-[9px] font-medium uppercase tracking-[0.24em] text-mist">{site.descriptor}</span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.24em] text-mist">{site.descriptor}</span>
           </LocaleLink>
 
           <nav aria-label="Primary" className="hidden items-center gap-6 xl:flex">
@@ -127,7 +127,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
               {strings.nav.cart}
               {lines.length > 0 ? (
-                <span className="ml-1.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-flare px-1 font-mono text-[9px] leading-none text-paper">
+                <span className="ml-1.5 inline-flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-flare px-1 font-mono text-[11px] leading-none text-paper">
                   {lines.length}
                 </span>
               ) : null}
@@ -196,7 +196,7 @@ function LanguageButton({
       type="button"
       onClick={onClick}
       aria-pressed={current}
-      className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center border px-2 py-1 text-[10px] font-semibold tracking-wide transition-colors ${
+      className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center border px-2 py-1 text-[11px] font-semibold tracking-wide transition-colors ${
         current ? 'border-ink bg-ink text-paper' : 'border-line text-mist hover:border-ink hover:text-ink'
       }`}
     >

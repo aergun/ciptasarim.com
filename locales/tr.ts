@@ -183,7 +183,7 @@ export const tr = {
     demosBody:
       'Sitenin akışı dört turda oynatılır: kayıt, hesap, boşluk ve teslim. Her tur, bir kararın gerektiği kapıda durur; onaylayın ve devam edin.',
     demosReplay: 'Tekrar oynat',
-    demosLive: 'canlı',
+    demosLive: 'İllüstratif',
 
     /* ---- Vision: the manifesto, the principles and the wafer scene. ----*/
     visionEyebrow: 'Vizyon',
@@ -217,6 +217,11 @@ export const tr = {
   cores: {
     title: 'Çekirdekler',
     subtitle: 'Dört IP türü, dört ayrı spesifikasyon modeliyle.',
+    /* Catalogue-level statement of the global data state: the shells are
+       pending characterisation, said once here instead of five times in
+       the rows. Badge glosses come from `basis.*Long`. */
+    pendingNotice:
+      'Katalogdaki çekirdeklerin tamamı karakterizasyon aşamasında: ölçümü henüz yayınlanmamış her değer, kendi gerekçesini taşıyan bir boşluk rozetiyle listelenir.',
     kind: 'Tür',
     family: 'Aile',
     node: 'Teknoloji düğümü',
@@ -579,7 +584,7 @@ export const tr = {
   mcp: {
     /* Home teaser */
     teaserEyebrow: 'EDA MCP',
-    teaserTitle: 'Ajanlar gerçek EDA araçlarını sürer; kapıda mühendis',
+    teaserTitle: 'Şemadan PEX’e, her adımın kanıtıyla',
     teaserBody:
       'EDA_MCP, Claude Code ve Cursor gibi yerel ajanları, uzak Linux kümenizdeki Cadence Virtuoso, Siemens Eldo ve Calibre’ye bağlar. Şemayı kurar, boyutlandırır, netlist’i dışa yazar, benzetir ve her doğrulama adımının kanıtını dosyalar. Kritik adımlar mühendis onaylı kapılardan geçer.',
     teaserCta: 'EDA MCP sayfasını aç',
