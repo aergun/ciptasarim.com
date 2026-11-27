@@ -19,6 +19,7 @@ import { Demos } from '../components/Demos.tsx'
 import { WaferScene } from '../components/WaferScene.tsx'
 import { McpTeaser } from './McpPage.tsx'
 import { Container, Eyebrow, Heading, Prose, Section, InvertedSection, Stat, ButtonLink } from '../components/ui.tsx'
+import { vlsiStudio } from '../../content/vlsi-studio.ts'
 import { FigureBadge, figureColor, figureValue, FigureGap, BASIS_FIGURES } from '../components/figure.tsx'
 import { CoreImage } from '../components/CoreImage.tsx'
 import { cores } from '../../content/cores.ts'
@@ -79,6 +80,40 @@ export function Home() {
       {/* The EDA_MCP teaser — the addendum's centerpiece claim, stated as its
           proof points and linked to the dedicated page; the catalogue follows. */}
       <McpTeaser />
+
+      {/* VLSI Studio — the one external tool, spotlighted beside the agent
+          story. The capability list is the tool's own jargon as identifiers;
+          it is never translated, the same rule the /mcp page's tool names
+          follow. The intro copy lives HERE, not on the studio page, which the
+          owner chose to keep silent (2026-11-27). */}
+      <Section id="vlsi-studio" className="scroll-mt-16">
+        <Container>
+          <Reveal>
+            <Eyebrow>{strings.tools.externalTool}</Eyebrow>
+            <div className="mt-4 flex flex-col gap-8 lg:flex-row lg:items-start">
+              <div className="max-w-[34rem]">
+                <Heading as="h2">VLSI Studio</Heading>
+                <Prose className="mt-4">{home.studioBody}</Prose>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <ButtonLink to="/hesaplayicilar/vlsi-studio">{strings.tools.viewStudio}</ButtonLink>
+                </div>
+              </div>
+              <div className="min-w-0 flex-1 border border-line bg-paper p-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
+                  {strings.tools.embedded} · v{vlsiStudio.version} · {vlsiStudio.host}
+                </p>
+                <ul className="mt-3 divide-y divide-line">
+                  {['CMOS Layout', 'Schematic', 'RTL→GDS', 'DRC / Sign-off', 'LVS', 'SPICE'].map((capability) => (
+                    <li key={capability} className="py-3 font-mono text-[13px] uppercase tracking-[0.14em] text-ink">
+                      {capability}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
 
       {/* A strip of the three counts that describe the catalogue. */}
       <Container className="py-16 md:py-20">

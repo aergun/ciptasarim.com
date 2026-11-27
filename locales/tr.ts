@@ -211,6 +211,10 @@ export const tr = {
     waferHint: 'Sürükleyerek döndürün',
     waferLegend: { pads: 'Pad halkası', rows: 'Standart hücre sıraları', macro: 'Makro bölgeleri', core: 'Çekirdek bölgesi' },
     waferCaption: 'Ölçekli bir yerleşim değildir — yalnızca bölgeleri gösterir.',
+
+    /* ---- VLSI Studio teaser: the one external tool, on the home page. ---*/
+    studioBody:
+      'Geliştiricisinin eeenhub.com sitesinde yayımladığı, tarayıcıda çalışan bir VLSI tasarım stüdyosu: CMOS IC yerleşimi, şema besteci, RTL→GDS akışı, DRC/imza kontrolü, LVS ve SPICE. Bu sitede kendi sayfasında gömülü, aynen kendi sitesinde sunulduğu hâliyle çalışır.',
   },
 
   /* -------------------------------------------------------------- cores */

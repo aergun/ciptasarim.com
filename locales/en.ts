@@ -197,6 +197,10 @@ export const en: Mirror<TrShape> = {
     waferHint: 'Drag to turn',
     waferLegend: { pads: 'Pad ring', rows: 'Standard-cell rows', macro: 'Macro regions', core: 'Core region' },
     waferCaption: 'Not a scaled placement — regions only.',
+
+    /* ---- VLSI Studio teaser: the one external tool, on the home page. ---*/
+    studioBody:
+      'A browser-based VLSI design studio published by its developer on eeenhub.com: CMOS IC layout, a schematic composer, the RTL→GDS flow, DRC/sign-off, LVS and SPICE. On this site it runs embedded on its own page, exactly as it is served there.',
   },
 
   /* -------------------------------------------------------------- cores */
