@@ -41,6 +41,7 @@ const CoreDetail = lazy(() => import('./pages/CoreDetail.tsx').then((m) => ({ de
 const Compare = lazy(() => import('./pages/Compare.tsx').then((m) => ({ default: m.Compare })))
 const Tools = lazy(() => import('./pages/Tools.tsx').then((m) => ({ default: m.Tools })))
 const ToolPage = lazy(() => import('./pages/ToolPage.tsx').then((m) => ({ default: m.ToolPage })))
+const VlsiStudio = lazy(() => import('./pages/VlsiStudio.tsx').then((m) => ({ default: m.VlsiStudio })))
 const ProcessPage = lazy(() => import('./pages/Process.tsx').then((m) => ({ default: m.ProcessPage })))
 const Licences = lazy(() => import('./pages/Licences.tsx').then((m) => ({ default: m.Licences })))
 const Pricing = lazy(() => import('./pages/Pricing.tsx').then((m) => ({ default: m.Pricing })))
@@ -70,6 +71,11 @@ const ROUTES = [
   { path: '/cekirdekler/karsilastir', element: <Compare /> },
   { path: '/cekirdekler/:slug', element: <CoreDetail /> },
   { path: '/hesaplayicilar', element: <Tools /> },
+  // The static tool route — kept adjacent to the :slug catch-all it outranks
+  // (react-router ranks static segments above dynamic ones). toolForSlug(
+  // 'vlsi-studio') is null — it is NOT a tools.ts record — so ToolPage must
+  // never see this URL.
+  { path: '/hesaplayicilar/vlsi-studio', element: <VlsiStudio /> },
   { path: '/hesaplayicilar/:slug', element: <ToolPage /> },
   { path: '/teknoloji', element: <ProcessPage /> },
   { path: '/lisanslar', element: <Licences /> },

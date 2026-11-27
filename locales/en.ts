@@ -455,6 +455,12 @@ export const en: Mirror<TrShape> = {
     methodologyBody:
       'The model, its sources and the range over which it holds are given below. Change an assumption and the result changes with it.',
     byNode: 'Results by node',
+    /* The one external, non-calculator entry under /hesaplayicilar. */
+    externalTool: 'External tool',
+    openOnSource: 'Open on eeenhub.com',
+    embedded: 'Embedded application',
+    viewStudio: 'Open the studio page',
+    scopeNote: 'Scope',
   },
 
   /* ------------------------------------------------------------- about */

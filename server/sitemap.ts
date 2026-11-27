@@ -27,6 +27,7 @@ const staticPages: readonly Entry[] = [
   { path: '/cekirdekler' },
   { path: '/cekirdekler/karsilastir' },
   { path: '/hesaplayicilar' },
+  { path: '/hesaplayicilar/vlsi-studio' },
   { path: '/teknoloji' },
   { path: '/lisanslar' },
   { path: '/fiyatlandirma' },

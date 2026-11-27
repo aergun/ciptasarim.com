@@ -39,6 +39,12 @@ export function Tools() {
     en: 'Every calculator’s assumptions, validity range and limits are written above its results, on its own page. Read that note before you use the tool — judge the model first, never the result alone.',
   }
 
+  /** The index's one non-calculator entry: an external app, not a tools.ts record. */
+  const studioStrip = {
+    tr: 'CMOS IC yerleşimi, şema besteci, RTL→GDS, DRC/imza kontrolü, LVS ve SPICE. Bu kartlardaki hesaplayıcı sözleşmesinin dışında, eeenhub.com üzerinde yaşayan, sayfasında gömülü çalışan bir dış araç.',
+    en: 'CMOS IC layout, a schematic composer, the RTL→GDS flow, DRC/sign-off, LVS and SPICE. Outside the calculators’ contract on these cards — an external tool that lives on eeenhub.com and runs embedded in its own page.',
+  }
+
   return (
     <article>
       <Section className="pb-0 pt-14">
@@ -91,6 +97,25 @@ export function Tools() {
               </li>
             ))}
           </ul>
+
+          {/* The one tool here that is not a calculator: an external hosted
+              application, linked to its own page on this site rather than a
+              dispatcher-backed slug. Deliberately outside the <ul> above — it
+              is not part of the tools.ts list this index enumerates. */}
+          <div className="mt-6 border border-line bg-paper p-6 md:flex md:items-center md:justify-between md:gap-8">
+            <div>
+              <p className="font-mono text-[13px] tracking-wide text-flare">{strings.tools.externalTool}</p>
+              <Heading as="h3" className="mt-2">
+                VLSI Studio
+              </Heading>
+              <Prose className="mt-3 max-w-prose">{t(studioStrip)}</Prose>
+            </div>
+            <div className="mt-6 md:mt-0 md:shrink-0">
+              <ButtonLink to="/hesaplayicilar/vlsi-studio" variant="secondary">
+                {strings.tools.viewStudio}
+              </ButtonLink>
+            </div>
+          </div>
         </Container>
       </Section>
 

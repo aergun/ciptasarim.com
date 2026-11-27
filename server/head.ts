@@ -31,6 +31,7 @@ import { articleBySlug } from '../content/articles.ts'
 import { coreFor } from '../content/cores.ts'
 import { mcpUpstream } from '../content/mcp.ts'
 import { site } from '../content/site.ts'
+import { vlsiStudio } from '../content/vlsi-studio.ts'
 import { localeBundle } from '../locales/index.ts'
 import type { Locale } from '../shared/i18n.ts'
 
@@ -102,6 +103,28 @@ function pageMeta(
 
   // A slug whose record was removed falls through to the site defaults below:
   // `coreFor` returns null and every deep link still gets a correct head.
+  // The one external, non-calculator entry under /hesaplayicilar. Meta comes
+  // from the tool record; the WebApplication node stays factual — name, URL
+  // and the version observed on the tool's own page. No author, no ratings,
+  // no offers: those would be claims this repo cannot source.
+  if (p === '/hesaplayicilar/vlsi-studio') {
+    return {
+      title: `${vlsiStudio.meta.title[locale]} — ${strings.meta.siteName}`,
+      description: vlsiStudio.meta.description[locale],
+      ogType: 'website',
+      jsonLd: [
+        {
+          '@type': 'WebApplication',
+          name: vlsiStudio.name,
+          applicationCategory: 'DesignApplication',
+          operatingSystem: 'Web',
+          url: vlsiStudio.url,
+          softwareVersion: vlsiStudio.version,
+        },
+      ],
+    }
+  }
+
   const core = p.match(/^\/cekirdekler\/([^/]+)$/)
   if (core) {
     const record = coreFor(decodeURIComponent(core[1] ?? ''))

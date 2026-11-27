@@ -247,6 +247,31 @@ export function ButtonLink({
   )
 }
 
+/**
+ * A button that leaves the site. The site's outward rule in component form:
+ * a real anchor, new tab, `noreferrer`, same visual language as `ButtonLink`
+ * but no router involvement.
+ */
+export function ExternalButtonLink({
+  children,
+  href,
+  variant = 'primary',
+  inverted = false,
+  className = '',
+}: {
+  children: ReactNode
+  href: string
+  variant?: ButtonVariant
+  inverted?: boolean
+  className?: string
+}) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={buttonClass(variant, inverted, className)}>
+      {children}
+    </a>
+  )
+}
+
 export function Field({
   label,
   hint,

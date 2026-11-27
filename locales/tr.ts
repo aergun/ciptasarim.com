@@ -489,6 +489,12 @@ export const tr = {
     methodologyBody:
       'Model, kaynakları ve geçerli olduğu aralıklar aşağıda verilmiştir. Varsayım değiştirilirse sonuç değişir.',
     byNode: 'Düğüme göre sonuçlar',
+    /* The one external, non-calculator entry under /hesaplayicilar. */
+    externalTool: 'Dış araç',
+    openOnSource: 'eeenhub.com üzerinde aç',
+    embedded: 'Gömülü uygulama',
+    viewStudio: 'Stüdyo sayfasını aç',
+    scopeNote: 'Kapsam',
   },
 
   /* ------------------------------------------------------------- about */
