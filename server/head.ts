@@ -275,7 +275,16 @@ export function renderHead(pathname: string, html: string, css: string | null = 
 
   let out = html
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(title)}</title>`)
-    .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeAttr(description)}" />`)
+    // The template writes the description as a three-line tag (commented
+    // meta, then name/content on their own lines); the historical one-line
+    // regex never matched, so every page silently served the site-default
+    // description. This pattern accepts layout whitespace, and the
+    // function-form replacement keeps an author's `$&` from being read as a
+    // regex-substitution token.
+    .replace(
+      /<meta\s+name="description"\s+content="[^"]*"\s*\/>/,
+      () => `<meta name="description" content="${escapeAttr(description)}" />`,
+    )
     .replace(
       /(?:[ \t]*<link rel="alternate" hreflang="[^"]*" href="[^"]*" \/>[ \t]*\n)+/,
       () => `    ${alternates}\n\n`,
