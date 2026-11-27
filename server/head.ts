@@ -104,9 +104,10 @@ function pageMeta(
   // A slug whose record was removed falls through to the site defaults below:
   // `coreFor` returns null and every deep link still gets a correct head.
   // The one external, non-calculator entry under /hesaplayicilar. Meta comes
-  // from the tool record; the WebApplication node stays factual — name, URL
-  // and the version observed on the tool's own page. No author, no ratings,
-  // no offers: those would be claims this repo cannot source.
+  // from the tool record; the WebApplication node stays factual — name and the
+  // version observed on the tool's own page. No `url`: the app's origin is
+  // engineering (the frame's src), not published metadata. No author, no
+  // ratings, no offers: those would be claims this repo cannot source.
   if (p === '/hesaplayicilar/vlsi-studio') {
     return {
       title: `${vlsiStudio.meta.title[locale]} — ${strings.meta.siteName}`,
@@ -118,7 +119,6 @@ function pageMeta(
           name: vlsiStudio.name,
           applicationCategory: 'DesignApplication',
           operatingSystem: 'Web',
-          url: vlsiStudio.url,
           softwareVersion: vlsiStudio.version,
         },
       ],

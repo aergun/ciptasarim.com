@@ -100,7 +100,7 @@ export function Home() {
               </div>
               <div className="min-w-0 flex-1 border border-line bg-paper p-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-mist">
-                  {strings.tools.embedded} · v{vlsiStudio.version} · {vlsiStudio.host}
+                  {strings.tools.embedded} · v{vlsiStudio.version}
                 </p>
                 <ul className="mt-3 divide-y divide-line">
                   {['CMOS Layout', 'Schematic', 'RTL→GDS', 'DRC / Sign-off', 'LVS', 'SPICE'].map((capability) => (

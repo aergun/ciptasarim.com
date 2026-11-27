@@ -41,8 +41,8 @@ export function Tools() {
 
   /** The index's one non-calculator entry: an external app, not a tools.ts record. */
   const studioStrip = {
-    tr: 'CMOS IC yerleşimi, şema besteci, RTL→GDS, DRC/imza kontrolü, LVS ve SPICE. Bu kartlardaki hesaplayıcı sözleşmesinin dışında, eeenhub.com üzerinde yaşayan, sayfasında gömülü çalışan bir dış araç.',
-    en: 'CMOS IC layout, a schematic composer, the RTL→GDS flow, DRC/sign-off, LVS and SPICE. Outside the calculators’ contract on these cards — an external tool that lives on eeenhub.com and runs embedded in its own page.',
+    tr: 'CMOS IC yerleşimi, şema besteci, RTL→GDS, DRC/imza kontrolü, LVS ve SPICE. Bu kartlardaki hesaplayıcı sözleşmesinin dışında, geliştiricisinin kendi sitesinde yaşayan, sayfasında gömülü çalışan bir dış araç.',
+    en: 'CMOS IC layout, a schematic composer, the RTL→GDS flow, DRC/sign-off, LVS and SPICE. Outside the calculators’ contract on these cards — an external tool that lives on its developer’s own site and runs embedded in its own page.',
   }
 
   return (

@@ -8,15 +8,15 @@
  * declared inputs and results on this side, a dispatcher in
  * `shared/engineering.ts` on the other, with the `EngineeringNotice` above the
  * results. VLSI Studio is an external hosted application — its models, rule
- * decks and results live on eeenhub.com, and this repo can honour none of that
- * contract for it. So the page stands outside it, and says so in its closing
- * note: the calculators' promise (assumptions written above the results) is
+ * decks and results live on the tool's own site, and this repo can honour none
+ * of that contract for it. So the page stands outside it, and says so in its
+ * closing note: the calculators' promise (assumptions written above the results) is
  * described here as belonging to the calculators, never claimed for this tool.
  *
  * ## The embed, and the page's silence
  *
  * The frame loads the app's own URL — nothing is copied into this repo, no
- * build step is added, and the app's cookies and storage are eeenhub.com's.
+ * build step is added, and the app's cookies and storage are its origin's.
  * `loading="lazy"` keeps its bytes off the initial page load; it only fetches
  * when the frame nears the viewport, the same discipline as the /mcp demo
  * video. At the owner's choosing (2026-11-27) this page carries no intro copy:
@@ -33,13 +33,13 @@ export function VlsiStudio() {
   const { strings, t } = useSite()
 
   const frameTitle = {
-    tr: `VLSI Studio ${vlsiStudio.version} — eeenhub.com tarafından sunulan canlı uygulama`,
-    en: `VLSI Studio ${vlsiStudio.version} — the live application, served by eeenhub.com`,
+    tr: `VLSI Studio ${vlsiStudio.version} — kendi kaynağından sunulan canlı uygulama`,
+    en: `VLSI Studio ${vlsiStudio.version} — the live application, served from its own origin`,
   }
 
   const caption = {
-    tr: `Canlı uygulama: VLSI Studio ${vlsiStudio.version}, ${vlsiStudio.host} tarafından sunulur.`,
-    en: `Live application: VLSI Studio ${vlsiStudio.version}, served by ${vlsiStudio.host}.`,
+    tr: `Canlı uygulama: VLSI Studio ${vlsiStudio.version}, kendi kaynağından sunulur.`,
+    en: `Live application: VLSI Studio ${vlsiStudio.version}, served from its own origin.`,
   }
 
   const scope = {
@@ -48,8 +48,8 @@ export function VlsiStudio() {
   }
 
   const frameNote = {
-    tr: 'Gömülü uygulama kodunu eeenhub.com alanından yükler: çerezleri, yerel depolaması ve kullanım koşulları o alanındır; bir düzenleme oturumunuz site hesaplarından bağımsızdır. Bu tür bir düzenleyici küçük ekranda zor kullanılır; tam deneyim için masaüstü bilgisayar önerilir.',
-    en: 'The embedded application loads its code from eeenhub.com: its cookies, local storage and terms of use belong to that origin, and a design session is independent of your site accounts. An editor of this kind is hard on a small screen; a desktop computer is recommended for the full experience.',
+    tr: 'Gömülü uygulama, kodunu kendi alanından yükler: çerezleri, yerel depolaması ve kullanım koşulları o alana aittir; bir düzenleme oturumunuz site hesaplarından bağımsızdır. Bu tür bir düzenleyici küçük ekranda zor kullanılır; tam deneyim için masaüstü bilgisayar önerilir.',
+    en: 'The embedded application loads its code from its own origin: its cookies, local storage and terms of use belong to that origin, and a design session is independent of your site accounts. An editor of this kind is hard on a small screen; a desktop computer is recommended for the full experience.',
   }
 
   return (

@@ -200,7 +200,7 @@ export const en: Mirror<TrShape> = {
 
     /* ---- VLSI Studio teaser: the one external tool, on the home page. ---*/
     studioBody:
-      'A browser-based VLSI design studio published by its developer on eeenhub.com: CMOS IC layout, a schematic composer, the RTL→GDS flow, DRC/sign-off, LVS and SPICE. On this site it runs embedded on its own page, exactly as it is served there.',
+      'A browser-based VLSI design studio published by its developer: CMOS IC layout, a schematic composer, the RTL→GDS flow, DRC/sign-off, LVS and SPICE. On this site it runs embedded on its own page, exactly as it is served there.',
   },
 
   /* -------------------------------------------------------------- cores */
@@ -461,7 +461,6 @@ export const en: Mirror<TrShape> = {
     byNode: 'Results by node',
     /* The one external, non-calculator entry under /hesaplayicilar. */
     externalTool: 'External tool',
-    openOnSource: 'Open on eeenhub.com',
     embedded: 'Embedded application',
     viewStudio: 'Open the studio page',
     scopeNote: 'Scope',

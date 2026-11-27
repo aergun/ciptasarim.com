@@ -214,7 +214,7 @@ export const tr = {
 
     /* ---- VLSI Studio teaser: the one external tool, on the home page. ---*/
     studioBody:
-      'Geliştiricisinin eeenhub.com sitesinde yayımladığı, tarayıcıda çalışan bir VLSI tasarım stüdyosu: CMOS IC yerleşimi, şema besteci, RTL→GDS akışı, DRC/imza kontrolü, LVS ve SPICE. Bu sitede kendi sayfasında gömülü, aynen kendi sitesinde sunulduğu hâliyle çalışır.',
+      'Geliştiricisinin kendi sitesinde yayımladığı, tarayıcıda çalışan bir VLSI tasarım stüdyosu: CMOS IC yerleşimi, şema besteci, RTL→GDS akışı, DRC/imza kontrolü, LVS ve SPICE. Bu sitede kendi sayfasında gömülü, aynen kendi sitesinde sunulduğu hâliyle çalışır.',
   },
 
   /* -------------------------------------------------------------- cores */
@@ -495,7 +495,6 @@ export const tr = {
     byNode: 'Düğüme göre sonuçlar',
     /* The one external, non-calculator entry under /hesaplayicilar. */
     externalTool: 'Dış araç',
-    openOnSource: 'eeenhub.com üzerinde aç',
     embedded: 'Gömülü uygulama',
     viewStudio: 'Stüdyo sayfasını aç',
     scopeNote: 'Kapsam',
